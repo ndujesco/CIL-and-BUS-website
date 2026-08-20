@@ -92,20 +92,46 @@ for Claude Artifacts).
 
 ## Features
 
+- **Each bank is its own page** with its own URL — `#cil-pq`, `#bus-new`,
+  `#cil-pq/results` — so the browser Back button works and a quiz can be bookmarked
+- **A stationary action bar.** Prev / Next / Jump sit in a sticky bar at the foot of the
+  screen. Revealing an answer does not move them, and does not scroll the page: measured
+  at 0px of movement, with no horizontal overflow down to a 320px viewport
 - **Instant feedback** — shade an option, the reasoning appears underneath
 - **Exam mode** — sit a bank straight through, marks withheld until you finish
-- **Topic filter** and **shuffle**, plus a per-topic score breakdown weakest-first
+- **Jump panel** — the full answer sheet, topic filter, shuffle and reset, in a slide-up
+  sheet rather than a sidebar competing with the question
+- **Per-topic score breakdown**, weakest first, plus a review of everything you missed
 - **Progress saves** to `localStorage`, with an in-memory fallback if storage is blocked
-- **Keyboard** — `A`–`E` to shade, `←` `→` to move, `Enter` for next, `S` shuffle, `M` mode, `Esc` home
+- **Keyboard** — `A`–`E` to shade, `←` `→` to move, `Enter` for next, `J` for the jump
+  panel, `Esc` to close it or go home
 - Light and dark themes, following the system by default
 
-## A caution on the answers
+## Where the answers come from
 
-The **CIL 524 answers come from a marked student script, not an official marking
-scheme.** The **BUS 440 paper carries no answer key at all** — those 120 answers were
-worked from the course materials, and the arithmetic is shown for every numeric one.
+**Every answer is worked from the 2025/26 course materials** — Classes 1–9 and the three
+slide decks for CIL 524, and the six lecturer blocks of the course outline for BUS 440.
+Each explanation names the class or slide it rests on.
 
-Seven questions across the two papers are defective as printed (duplicated options, a
-stem that contradicts its own choices, an answer the lecture notes disagree with).
-Those carry a **"check this"** note setting out the conflict rather than silently
-picking a side. Verify anything that matters against your lecturer.
+The CIL paper came with a **marked student script. It is not a source here and was not
+used at any point.** Where it disagreed with the lecture notes, the notes win and the
+difference is spelt out in a "check this" note. The clearest case is Q2, where the script
+answered "All of the above" for what makes a simple contract valid; Class 1 is explicit
+that a simple contract may be oral or inferred from conduct and needs only consideration,
+so this bank answers (d).
+
+The BUS 440 paper carries no answer key at all. Those 120 answers are likewise worked from
+the materials, and the arithmetic is shown for every numeric one.
+
+Seven questions across the two papers are defective as printed — duplicated options, a
+stem that contradicts its own choices, an answer no option supports. Those carry a
+**"check this"** note setting out the conflict rather than silently picking a side.
+Verify anything that matters against your lecturer.
+
+## Typography
+
+Three families, all from Google Fonts:
+
+- **Familjen Grotesk** — headings, the wordmark, question numbers
+- **Finlandica** — question stems, options, body copy
+- **Spline Sans Mono** — labels, counters, option letters, worked calculations

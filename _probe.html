@@ -1,0 +1,32 @@
+<!doctype html><html><head><meta charset="utf-8"><title>pending</title><style>
+html,body{margin:0}iframe{width:390px;height:820px;border:0;display:block}
+</style></head><body><iframe id="f" src="index.html"></iframe>
+<script>
+window.onerror=function(m){document.title="JS ERROR: "+m;};
+var out=[];
+setTimeout(function(){
+  var w=document.getElementById('f').contentWindow, d=w.document, de=d.documentElement;
+  w.location.hash='#cil-pq';
+  setTimeout(function(){
+    function box(sel){var e=d.querySelector(sel);if(!e)return null;var r=e.getBoundingClientRect();
+      return {t:Math.round(r.top),l:Math.round(r.left),w:Math.round(r.width)};}
+    var nextBefore=box('#next'), barBefore=box('.qfoot'), scrollBefore=w.scrollY;
+    var ovBefore=de.scrollWidth-de.clientWidth;
+    d.querySelectorAll('.opt')[0].click();
+    setTimeout(function(){
+      var nextAfter=box('#next'), barAfter=box('.qfoot');
+      var ovAfter=de.scrollWidth-de.clientWidth;
+      out.push('NEXT top '+nextBefore.t+'->'+nextAfter.t+' ('+(nextAfter.t-nextBefore.t)+'px shift)');
+      out.push('BAR  top '+barBefore.t+'->'+barAfter.t);
+      out.push('scrollY '+scrollBefore+'->'+w.scrollY);
+      out.push('h-overflow '+ovBefore+'->'+ovAfter+'px');
+      // widest offender if any
+      var worst=null,m=0;
+      d.querySelectorAll('*').forEach(function(n){var r=n.getBoundingClientRect();
+        if(r.right>de.clientWidth+1&&r.right-de.clientWidth>m){m=r.right-de.clientWidth;worst=n;}});
+      out.push('widest overflow: '+(worst?('.'+String(worst.className).split(' ')[0]+' +'+Math.round(m)+'px'):'none'));
+      document.title=out.join(' | ');
+    },200);
+  },400);
+},500);
+</script></body></html>
