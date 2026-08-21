@@ -1304,6 +1304,10 @@ var SUB = {"0":"₀","1":"₁","2":"₂","3":"₃","4":"₄","5":"₅","6":"₆"
            "n":"ₙ","i":"ᵢ","+":"₊","-":"₋","−":"₋","(":"₍",")":"₎"};
 var OPCHARS = "+-−*/=<>,;:!|()[]±×÷≈≤≥≠→⋅∑√";
 
+function texEsc(s){ return String(s).replace(/[&<>\"]/g,function(c){
+  return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];
+}); }
+
 function texScan(src){
   var t = [], i = 0, s = String(src).replace(/\{,\}/g, ","), m;
   while(i < s.length){
@@ -1353,10 +1357,10 @@ function texAtom(ts, i){
   if(t.k === "{"){ var g = texSeq(ts, i + 1, true); a = { m:mrow(g.m), p:g.p, i:g.i }; }
   else if(t.k === "num")  a = { m:"<mn>" + t.v + "</mn>", p:t.v, i:i + 1 };
   else if(t.k === "id")   a = { m:"<mi>" + t.v + "</mi>", p:t.v, i:i + 1 };
-  else if(t.k === "rm")   a = { m:'<mi mathvariant="normal">' + esc(t.v) + "</mi>", p:t.v, i:i + 1 };
-  else if(t.k === "op")   a = { m:"<mo>" + esc(t.v) + "</mo>", p:t.v, i:i + 1 };
-  else if(t.k === "txt")  a = { m:"<mtext>" + esc(t.v) + "</mtext>", p:t.v, i:i + 1 };
-  else if(t.k === "text") a = { m:"<mtext>" + (t.bold ? "<b>" + esc(t.v) + "</b>" : esc(t.v)) + "</mtext>",
+  else if(t.k === "rm")   a = { m:'<mi mathvariant="normal">' + texEsc(t.v) + "</mi>", p:t.v, i:i + 1 };
+  else if(t.k === "op")   a = { m:"<mo>" + texEsc(t.v) + "</mo>", p:t.v, i:i + 1 };
+  else if(t.k === "txt")  a = { m:"<mtext>" + texEsc(t.v) + "</mtext>", p:t.v, i:i + 1 };
+  else if(t.k === "text") a = { m:"<mtext>" + (t.bold ? "<b>" + texEsc(t.v) + "</b>" : texEsc(t.v)) + "</mtext>",
                                 p:t.v, i:i + 1 };
   else if(t.k === "cmd"){
     var c = t.v, x, y;
@@ -1393,13 +1397,13 @@ function texAtom(ts, i){
     } else if(c === "!"){
       a = { m:'<mspace width="-0.17em"/>', p:"", i:i + 1 };
     } else if(c === "%" || c === "$" || c === "#" || c === "&" || c === "{" || c === "}"){
-      a = { m:"<mtext>" + esc(c) + "</mtext>", p:c, i:i + 1 };
+      a = { m:"<mtext>" + texEsc(c) + "</mtext>", p:c, i:i + 1 };
     } else if(TEX_OP[c]){
-      a = { m:"<mo>" + esc(TEX_OP[c]) + "</mo>", p:TEX_OP[c], i:i + 1 };
+      a = { m:"<mo>" + texEsc(TEX_OP[c]) + "</mo>", p:TEX_OP[c], i:i + 1 };
     } else if(TEX_ID[c]){
       a = { m:"<mi>" + TEX_ID[c] + "</mi>", p:TEX_ID[c], i:i + 1 };
     } else {
-      a = { m:'<mi mathvariant="normal">' + esc(c) + "</mi>", p:c, i:i + 1 };
+      a = { m:'<mi mathvariant="normal">' + texEsc(c) + "</mi>", p:c, i:i + 1 };
     }
   }
   else return null;
@@ -1484,16 +1488,16 @@ function mtex(tex, display){
   var r = texParse(tex);
   if(mathSupported())
     return '<math' + (display ? ' display="block"' : "") + ">" + r.m + "</math>";
-  return '<span class="eqtxt">' + esc(r.p) + "</span>";
+  return '<span class="eqtxt">' + texEsc(r.p) + "</span>";
 }
 
 /* prose with $…$ islands in it */
 function mtxt(s){
   s = String(s);
   var parts = s.split("$");
-  if(parts.length % 2 === 0) return esc(s);          /* unbalanced: leave it alone */
+  if(parts.length % 2 === 0) return texEsc(s);       /* unbalanced: leave it alone */
   return parts.map(function(part, i){
-    return i % 2 ? mtex(part, false) : esc(part);
+    return i % 2 ? mtex(part, false) : texEsc(part);
   }).join("");
 }
 (function(){
