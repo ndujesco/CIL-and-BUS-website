@@ -176,16 +176,16 @@ function drawQuestion(){
     var tag = st==="ok" ? '<span class="tag">Correct</span>'
             : st==="no" ? '<span class="tag">Your answer</span>' : '';
     return '<button class="opt" data-st="'+st+'" data-pick="'+oi+'"'+(reveal?' disabled':'')+'>'
-      + '<span class="bub">'+LET[oi]+'</span><span class="txt">'+esc(text)+'</span>'+tag+'</button>';
+      + '<span class="bub">'+LET[oi]+'</span><span class="txt">'+mtxt(text)+'</span>'+tag+'</button>';
   }).join("");
 
   var why = "";
   if(reveal){
     why = '<div class="why"><span class="eyebrow">'
       + (pick===q.a ? "Correct" : "The answer is "+LET[q.a]) + '</span>'
-      + '<p>'+esc(q.w)+'</p>'
-      + (q.calc ? '<div class="calc">'+esc(q.calc)+'</div>' : '')
-      + (q.flag ? '<div class="flag"><b>Check this</b>'+esc(q.flag)+'</div>' : '')
+      + '<p>'+mtxt(q.w)+'</p>'
+      + (q.calc ? '<div class="calc">'+mtex(q.calc, true)+'</div>' : '')
+      + (q.flag ? '<div class="flag"><b>Check this</b>'+mtxt(q.flag)+'</div>' : '')
       + '</div>';
   }
 
@@ -193,7 +193,7 @@ function drawQuestion(){
     + '<div class="qhead"><span class="qnum">'+(qi+1)+'</span>'
     + '<span class="qtopic">'+esc(q.t)+'</span>'
     + '<span class="qsrc">'+esc(q.s || "")+'</span></div>'
-    + '<div class="stem">'+esc(q.q)+'</div>'
+    + '<div class="stem">'+mtxt(q.q)+'</div>'
     + '<div class="opts" id="opts">'+opts+'</div>' + why + '</article>';
 
   document.getElementById("opts").onclick = function(e){
@@ -318,10 +318,10 @@ function renderResults(){
         + '<span class="sc">'+d.r+'/'+d.n+'</span></div>'; }).join("");
 
   var review = misses.slice(0,60).map(function(m){
-    return '<div class="rv"><div class="q"><b>'+(m.i+1)+'.</b> '+esc(m.q.q)+'</div>'
-      + '<div class="a yours"><span class="m">You</span><span>'+LET[m.p]+' &middot; '+esc(m.q.o[m.p])+'</span></div>'
-      + '<div class="a right"><span class="m">Answer</span><span>'+LET[m.q.a]+' &middot; '+esc(m.q.o[m.q.a])+'</span></div>'
-      + '<div class="a"><span class="m">Why</span><span>'+esc(m.q.w)+'</span></div></div>'; }).join("");
+    return '<div class="rv"><div class="q"><b>'+(m.i+1)+'.</b> '+mtxt(m.q.q)+'</div>'
+      + '<div class="a yours"><span class="m">You</span><span>'+LET[m.p]+' &middot; '+mtxt(m.q.o[m.p])+'</span></div>'
+      + '<div class="a right"><span class="m">Answer</span><span>'+LET[m.q.a]+' &middot; '+mtxt(m.q.o[m.q.a])+'</span></div>'
+      + '<div class="a"><span class="m">Why</span><span>'+mtxt(m.q.w)+'</span></div></div>'; }).join("");
 
   app.innerHTML = '<div class="qpage">'
     + '<div class="qbar"><div class="qbar-in">'

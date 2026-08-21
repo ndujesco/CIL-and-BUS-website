@@ -10,7 +10,7 @@ cd "$(dirname "$0")"
   cat src/page.html
   echo '<script>'
   echo 'var BANKS = {};'
-  cat src/bank-cil-pq.js src/bank-bus-pq.js src/bank-cil-new.js src/bank-bus-new.js src/app.js
+  cat src/bank-cil-pq.js src/bank-bus-pq.js src/bank-cil-new.js src/bank-bus-new.js src/math.js src/app.js
   echo '</script>'
 } > artifact.html
 

@@ -194,9 +194,16 @@ footer p{margin:0; max-width:74ch; line-height:1.6;}
 
 .why{border-top:1px solid var(--rule); padding:19px 28px 21px; background:var(--sunk);}
 .why p{margin:8px 0 0; color:var(--ink2); font-size:16px; line-height:1.6;}
-.why .calc{margin-top:13px; padding:10px 13px; background:var(--paper); border:1px solid var(--rule);
-  border-radius:3px; font-family:"Spline Sans Mono",ui-monospace,Menlo,monospace;
-  font-size:13px; color:var(--ink); overflow-x:auto; white-space:nowrap;}
+.why .calc{margin-top:13px; padding:11px 14px; background:var(--paper); border:1px solid var(--rule);
+  border-radius:3px; color:var(--ink); overflow-x:auto;}
+
+/* set maths in a maths face: real fraction bars, radicals and scripts */
+math{font-family:"STIX Two Math","Cambria Math","Latin Modern Math","TeX Gyre Termes Math",
+  Georgia,"Times New Roman",serif; font-size:1.04em; line-height:1;}
+math[display="block"]{margin:0; font-size:1.15em;}
+.opt math, .stem math{font-size:1em;}
+.eqtxt{font-family:"Spline Sans Mono",ui-monospace,Menlo,monospace; font-size:.94em;
+  white-space:nowrap;}
 .why .flag{margin-top:13px; padding:12px 14px; background:var(--flag-bg);
   border-left:2.5px solid var(--flag); font-size:15px; color:var(--ink2); line-height:1.55;}
 .why .flag b{color:var(--flag); font-family:"Spline Sans Mono",ui-monospace,Menlo,monospace;
