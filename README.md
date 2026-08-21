@@ -69,6 +69,7 @@ src/bank-bus-pq.js     BUS 440 past questions
 src/bank-cil-new.js    CIL 524 practice questions
 src/bank-bus-new.js    BUS 440 practice questions
 src/materials.js       the 18 course documents (generated, see below)
+src/links.js           outside references, for what the materials do not cover
 ```
 
 Then rebuild:
@@ -85,7 +86,9 @@ for Claude Artifacts).
 ```js
 {
   t: "Formation",                  // topic; drives the filter and score breakdown
-  s: "Class 3",                    // source line shown top-right of the card
+  s: "Class 3",                    // source; " · " separated. A piece naming a document
+                                   // (Class 3, Block 5, Slide 1.2) or a key of LINKS
+                                   // becomes a link, anything else stays as text
   q: "Contracts under seal are…",  // the stem
   o: ["Express Contracts", "…"],   // options, rendered A B C D E
   a: 2,                            // index of the correct option (0-based)
@@ -106,12 +109,30 @@ than as files to download. Eighteen documents, about 50,000 words:
 | CIL 524 | 3 | The lecture decks: Introduction, Formation of Contract, Terms of Contract |
 | BUS 440 | 6 | One per lecturer block, stitched from that block's sources |
 
-**Every question's source line is a link.** Answer a question and the class, deck or
-block it rests on is offered underneath it by name; clicking opens the document over
-the question, so the place you had reached in the bank is still there behind it. The
-same documents have their own URLs (`#notes/cil-class-3`, `#notes/bus-block-6`) for
-reading straight through. 298 of the 418 questions carry a live reference; the other
-120 are the BUS past paper, whose source line names the paper, not a document.
+**Every question's source line is a link, and all 418 are sourced.** Answer a question
+and what the answer was worked from is offered underneath it by name; clicking opens
+the document over the question, so the place you had reached in the bank is still there
+behind it. The same documents have their own URLs (`#notes/cil-class-3`,
+`#notes/bus-block-6`) for reading straight through, and the misses listed on the results
+page carry the same citation.
+
+The two past papers are sourced the same way. Each CIL question names its class or deck.
+Each BUS question now names its paper **and** the lecturer block the answer rests on —
+`Examination · Block 3` — worked out question by question from where the wording actually
+appears in the materials, not from the topic label.
+
+Twenty-five of those source lines point off the site instead, because the 2024/25 paper
+examined things the 2025/26 materials do not carry: organisational change and resistance
+to it, organisational conflict, the internal and external environment of business,
+Garvin's dimensions of quality, ABC analysis, safety stock, acceptance sampling and
+crashing a schedule. Those open a page on the web, marked with the site it goes to and
+an arrow. They live in `src/links.js`; every URL there was checked. Add to that file
+rather than inventing a link inside a question, and keep the key identical to the label
+used in the question's `s:` field.
+
+What is still plain text on a source line is the paper a question came from
+(`Examination`, `Continuous assessment`) and the names beside a live reference — the
+lecturer, or the theorist a question is about, like `Block 4 · Mintzberg`.
 
 Nothing that only repeats another source is included:
 

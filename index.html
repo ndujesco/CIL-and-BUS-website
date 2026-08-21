@@ -181,7 +181,7 @@ footer p{margin:0; max-width:74ch; line-height:1.6;}
   letter-spacing:.09em; text-transform:uppercase; color:var(--ink3); margin-left:auto;
   text-align:right; max-width:44%;}
 .qsrc .ref{color:var(--ink2); border-bottom:1px solid var(--rule); padding:0 0 1px;
-  font:inherit; letter-spacing:inherit; text-transform:inherit;}
+  font:inherit; letter-spacing:inherit; text-transform:inherit; text-decoration:none;}
 .qsrc .ref:hover{color:var(--accent); border-color:var(--accent-edge);}
 .stem{padding:13px 28px 20px; font-size:19px; line-height:1.5; text-wrap:pretty;}
 
@@ -239,6 +239,12 @@ math[display="block"]{margin:0; font-size:1.15em;}
 .cite:hover .nm{color:var(--paper);}
 .whence .plain{font-family:"Spline Sans Mono",ui-monospace,Menlo,monospace; font-size:11px;
   letter-spacing:.06em; color:var(--ink3);}
+.cite.ext{border-color:var(--rule); background:var(--paper); text-decoration:none;}
+.cite.ext .tag{color:var(--ink3); text-transform:none; letter-spacing:.04em;}
+.cite.ext .nm{color:var(--ink);}
+.cite.ext::after{content:"\2197"; flex:none; align-self:center; color:var(--ink3); font-size:12px;}
+.cite.ext:hover{background:var(--sunk); border-color:var(--ink3);}
+.cite.ext:hover .nm,.cite.ext:hover .tag,.cite.ext:hover::after{color:var(--ink);}
 
 /* sticky action bar: Next never moves */
 .qfoot{position:sticky; bottom:0; z-index:30; background:var(--paper); box-shadow:var(--lift);}
@@ -318,6 +324,7 @@ math[display="block"]{margin:0; font-size:1.15em;}
 .rv .a .m{font-family:"Spline Sans Mono",ui-monospace,Menlo,monospace; font-size:9px;
   letter-spacing:.12em; text-transform:uppercase; flex:none; width:52px; padding-top:3px;}
 .rv .a.yours .m{color:var(--no);} .rv .a.right .m{color:var(--ok);}
+.rv .whence{margin-top:12px; padding-top:11px; border-top:1px solid var(--rule2);}
 .rv .a.right span{color:var(--ink);}
 
 /* ─── materials ──────────────────────────────────────────────────── */
@@ -483,6 +490,7 @@ table.outline td.who{white-space:nowrap; color:var(--ink); font-size:14.5px;}
   .doc{padding:28px 0 44px;}
   .prose{font-size:16.5px;}
   .cite .nm{display:none;}
+  .cite.ext .nm{display:inline;} .cite.ext .tag{display:none;}
 }
 @media (max-width:380px){ .mark{font-size:12.5px;} .btn{padding:10px 10px; letter-spacing:.05em;} }
 @media (prefers-reduced-motion:reduce){ *{transition:none !important; animation:none !important;} }
@@ -670,263 +678,263 @@ BANKS["bus-pq"] = {
   meta: "120 questions · answers worked from the course materials",
   q: [
 /* ── CONTINUOUS ASSESSMENT · 30 questions ────────────────────────────── */
-{t:"Project management",s:"Continuous assessment",q:"One of these is not a characteristic of a project",o:["It involves routine tasks","The activities are related","It involves some associated risk","It has both beginning and end point"],a:0,
+{t:"Project management",s:"Continuous assessment · Block 6",q:"One of these is not a characteristic of a project",o:["It involves routine tasks","The activities are related","It involves some associated risk","It has both beginning and end point"],a:0,
  w:"A project is unique and non-repetitive: that is precisely what separates it from an organisation’s routine operations."},
-{t:"Project control",s:"Continuous assessment",q:"The step in the project control process should begin with",o:["Establishing the baseline plan","Setting the endline data","Collecting data on performance","Start the project"],a:0,
+{t:"Project control",s:"Continuous assessment · Block 6",q:"The step in the project control process should begin with",o:["Establishing the baseline plan","Setting the endline data","Collecting data on performance","Start the project"],a:0,
  w:"The four control steps are: set a baseline plan, measure progress and performance, compare results against the plan, then take action. The baseline is what everything else is measured against."},
-{t:"Project management",s:"Continuous assessment",q:"Project management assists in achieving the following objectives except",o:["To determine the level of resources needed for the job","To determine the cost of the project","To eliminate uncertainty","To meet quantity standards"],a:3,
+{t:"Project management",s:"Continuous assessment · Block 6",q:"Project management assists in achieving the following objectives except",o:["To determine the level of resources needed for the job","To determine the cost of the project","To eliminate uncertainty","To meet quantity standards"],a:3,
  w:"Project management exists to meet technical, cost and time constraints: quality standards, not quantity standards. The other three are listed objectives, including reducing or eliminating associated risk and uncertainty."},
-{t:"Project planning",s:"Continuous assessment",q:"At what stage should the project manager estimate the cost and risk of the project?",o:["Scheduling","Planning","Controlling","Appraisal"],a:1,
+{t:"Project planning",s:"Continuous assessment · Block 6",q:"At what stage should the project manager estimate the cost and risk of the project?",o:["Scheduling","Planning","Controlling","Appraisal"],a:1,
  w:"Project planning provides the details of work, resources, time and budget. Its steps include estimating cost and duration and developing the resource budget."},
-{t:"Project evaluation",s:"Continuous assessment",q:"Which of these methods does not take into consideration of time value of money?",o:["Accounting rate of return","Net present value","Profitability index","Internal rate of return"],a:0,
+{t:"Project evaluation",s:"Continuous assessment · Block 6",q:"Which of these methods does not take into consideration of time value of money?",o:["Accounting rate of return","Net present value","Profitability index","Internal rate of return"],a:0,
  w:"ARR and payback period are the traditional methods and both ignore the time value of money. NPV, IRR and PI are the scientific methods, all built on discounting."},
-{t:"Management",s:"Continuous assessment",q:"The following statements are true of management except",o:["Management applies to any kind of organization","It applies to managers at all organizational levels","The aim of all managers is to create a surplus","None of the above"],a:3,
+{t:"Management",s:"Continuous assessment · Block 2",q:"The following statements are true of management except",o:["Management applies to any kind of organization","It applies to managers at all organizational levels","The aim of all managers is to create a surplus","None of the above"],a:3,
  w:"All three statements are true: management is universal, operates at every level, and aims at surplus. So there is no exception, which is what ‘None of the above’ records."},
-{t:"Management functions",s:"Continuous assessment",q:"One of the following is not a direct function of managers",o:["Outsourcing","Planning","Staffing","Controlling"],a:0,
+{t:"Management functions",s:"Continuous assessment · Block 2",q:"One of the following is not a direct function of managers",o:["Outsourcing","Planning","Staffing","Controlling"],a:0,
  w:"The five functions are planning, organizing, staffing, directing and controlling. Outsourcing is a sourcing decision, not a function of management."},
-{t:"Management",s:"Continuous assessment",q:"Managing is concerned mostly with",o:["Productivity which implies efficiency and effectiveness","Executing the agenda of external interests","Producing goods and services for the poor","Donating corporate assets to the community as corporate social responsibility"],a:0,
+{t:"Management",s:"Continuous assessment · Block 2",q:"Managing is concerned mostly with",o:["Productivity which implies efficiency and effectiveness","Executing the agenda of external interests","Producing goods and services for the poor","Donating corporate assets to the community as corporate social responsibility"],a:0,
  w:"Efficiency is doing things right; effectiveness is doing the right things. Productivity is the ratio of outputs to inputs and combines both."},
-{t:"Leadership",s:"Continuous assessment",q:"Leadership is the same as",o:["Influence process","Management","Authority and responsibility","Wielding power"],a:0,
+{t:"Leadership",s:"Continuous assessment · Block 4",q:"Leadership is the same as",o:["Influence process","Management","Authority and responsibility","Wielding power"],a:0,
  w:"Leadership is an influence process that motivates and inspires people towards a common goal. Management, by contrast, is associated with planning, organizing, budgeting and controlling."},
-{t:"Leadership",s:"Continuous assessment",q:"A good leader should be able to accept responsibility for",o:["Creating cliques within an organization","Achievement of group goals","Ensure that workers put in little efforts for maximum pay","Eliminating any form of opposition"],a:1,
+{t:"Leadership",s:"Continuous assessment · Block 4",q:"A good leader should be able to accept responsibility for",o:["Creating cliques within an organization","Achievement of group goals","Ensure that workers put in little efforts for maximum pay","Eliminating any form of opposition"],a:1,
  w:"A leader sets direction and drives the group towards shared goals, and carries accountability for whether those goals are met."},
-{t:"TQM tools",s:"Continuous assessment",q:"Which tool is used to identify the root causes of a problem in TQM?",o:["Scatter diagram","Fishbone diagram","Histogram","Flowchart"],a:1,
+{t:"TQM tools",s:"Continuous assessment · Block 3",q:"Which tool is used to identify the root causes of a problem in TQM?",o:["Scatter diagram","Fishbone diagram","Histogram","Flowchart"],a:1,
  w:"The fishbone or cause-and-effect diagram, developed by Ishikawa in 1943, systematically investigates all potential causes producing a single effect."},
-{t:"TQM tools",s:"Continuous assessment",q:"In TQM, process mapping is mainly used to:",o:["Recruit new employees","Understand workflows and bottlenecks","Increase product prices","Reduce workforce size"],a:1,
+{t:"TQM tools",s:"Continuous assessment · Block 3",q:"In TQM, process mapping is mainly used to:",o:["Recruit new employees","Understand workflows and bottlenecks","Increase product prices","Reduce workforce size"],a:1,
  w:"Mapping a process exposes where the work actually goes. The lecture example is a logistics firm mapping order fulfilment, finding bottlenecks and cutting lead times."},
-{t:"TQM tools",s:"Continuous assessment",q:"A histogram in quality management is used to:",o:["Examine relationships between variables","Display data distribution patterns","Measure employee performance","Show supply chain relationships"],a:1,
+{t:"TQM tools",s:"Continuous assessment · Block 3",q:"A histogram in quality management is used to:",o:["Examine relationships between variables","Display data distribution patterns","Measure employee performance","Show supply chain relationships"],a:1,
  w:"A histogram is a bar chart of a frequency distribution; it shows both the shape of the data and the amount of variation in a process. Relationships between two variables are the scatter diagram’s job."},
-{t:"TQM",s:"Continuous assessment",q:"The role of leadership in TQM primarily involves:",o:["Cutting costs only","Setting a vision for quality and supporting initiatives","Monitoring competitors","Isolating decision-making from employees"],a:1,
+{t:"TQM",s:"Continuous assessment · Block 3",q:"The role of leadership in TQM primarily involves:",o:["Cutting costs only","Setting a vision for quality and supporting initiatives","Monitoring competitors","Isolating decision-making from employees"],a:1,
  w:"Leadership commitment is the first dimension of TQM. Leaders set the quality vision, allocate resources for training and recognise quality improvement."},
-{t:"TQM",s:"Continuous assessment",q:"Which of these is NOT typically a principle of TQM?",o:["Supplier relationship management","Employee involvement","Short-term profit maximization","Continuous training and education"],a:2,
+{t:"TQM",s:"Continuous assessment · Block 3",q:"Which of these is NOT typically a principle of TQM?",o:["Supplier relationship management","Employee involvement","Short-term profit maximization","Continuous training and education"],a:2,
  w:"TQM is a long-run philosophy. Short-term focus over long-term goals is listed among the obstacles to implementing TQM, not among its principles."},
-{t:"TQM",s:"Continuous assessment",q:"In TQM, customer value is defined as:",o:["The profit margin of a product","The worth perceived by the customer","The production cost of a product","The employee’s opinion of the product"],a:1,
+{t:"TQM",s:"Continuous assessment · Block 3",q:"In TQM, customer value is defined as:",o:["The profit margin of a product","The worth perceived by the customer","The production cost of a product","The employee’s opinion of the product"],a:1,
  w:"TQM is customer-defined throughout: quality is judged by whether a reasonable customer finds the product acceptable, not by internal cost or opinion."},
-{t:"Quality",s:"Continuous assessment",q:"What does QA and QC stand for?",o:["Quality Assurance and Queuing Control","Quality Adjustment and Quality completion","Quality Assurance and Quality control","Quality Adjustment and Queuing control"],a:2,
+{t:"Quality",s:"Continuous assessment · Block 3",q:"What does QA and QC stand for?",o:["Quality Assurance and Queuing Control","Quality Adjustment and Quality completion","Quality Assurance and Quality control","Quality Adjustment and Queuing control"],a:2,
  w:"Quality Assurance prevents defects by building the process correctly; Quality Control detects them by checking the output."},
-{t:"Quality",s:"Continuous assessment",q:"What is QA?",o:["It is the measurement of degree to which a product satisfies the need","Any systematic process used to ensure quality in the process","Process of identifying defects","It is a corrective tool"],a:1,
+{t:"Quality",s:"Continuous assessment · Block 3",q:"What is QA?",o:["It is the measurement of degree to which a product satisfies the need","Any systematic process used to ensure quality in the process","Process of identifying defects","It is a corrective tool"],a:1,
  w:"QA is process-oriented and proactive. Identifying defects and correcting them is QC, which is product-oriented and reactive."},
-{t:"SPC",s:"Continuous assessment",q:"Which of the following is NOT a source of process variation?",o:["Variations in materials used.","Variations in equipment performance.","Consistent application of standard operating procedures.","Variations in operator performance"],a:2,
+{t:"SPC",s:"Continuous assessment · Block 5",q:"Which of the following is NOT a source of process variation?",o:["Variations in materials used.","Variations in equipment performance.","Consistent application of standard operating procedures.","Variations in operator performance"],a:2,
  w:"Materials, equipment and operators are all sources of variation. Applying SOPs consistently is what reduces variation; it is the cure, not the cause."},
-{t:"SPC",s:"Continuous assessment",q:"What is the purpose of using control charts in process control?",o:["To identify and eliminate special cause variation.","To track the overall performance of a process.","To compare process performance against customer requirements.","All of the above"],a:3,
+{t:"SPC",s:"Continuous assessment · Block 5",q:"What is the purpose of using control charts in process control?",o:["To identify and eliminate special cause variation.","To track the overall performance of a process.","To compare process performance against customer requirements.","All of the above"],a:3,
  w:"A control chart does all three: it separates special-cause from common-cause variation, tracks the process over time, and sets performance against limits."},
-{t:"TQM tools",s:"Continuous assessment",q:"What is the purpose of a Pareto chart?",o:["To track the performance of a process over time","To identify the root cause of defects","To determine the cost of defects","To identify the most significant sources of defects"],a:3,
+{t:"TQM tools",s:"Continuous assessment · Block 3",q:"What is the purpose of a Pareto chart?",o:["To track the performance of a process over time","To identify the root cause of defects","To determine the cost of defects","To identify the most significant sources of defects"],a:3,
  w:"Pareto analysis is a special histogram that prioritises: the 80/20 rule says roughly 80% of outcomes come from 20% of causes, so you attack the vital few first."},
-{t:"TQM tools",s:"Continuous assessment",q:"What is the purpose of a Fishbone diagram?",o:["To track the performance of a process over time","To identify the root cause of defects","To determine the cost of defects","To identify the most significant sources of defects"],a:1,
+{t:"TQM tools",s:"Continuous assessment · Block 3",q:"What is the purpose of a Fishbone diagram?",o:["To track the performance of a process over time","To identify the root cause of defects","To determine the cost of defects","To identify the most significant sources of defects"],a:1,
  w:"Pareto tells you which problem to attack; fishbone tells you why that problem happens. Note the contrast with the previous question."},
-{t:"Quality",s:"Continuous assessment",q:"Which of the following is not a type of inspection?",o:["Attribute sampling","Variable sampling","Acceptance sampling","Discrete sampling"],a:3,
+{t:"Quality",s:"Continuous assessment · Block 5 · Acceptance sampling",q:"Which of the following is not a type of inspection?",o:["Attribute sampling","Variable sampling","Acceptance sampling","Discrete sampling"],a:3,
  w:"Quality characteristics are classified into variables and attributes, and acceptance sampling is the standard lot-inspection method. ‘Discrete sampling’ is not an inspection type."},
-{t:"SPC",s:"Continuous assessment",q:"Which of the following is not a type of process control chart?",o:["X-bar chart","Range chart","Histogram chart","p-chart"],a:2,
+{t:"SPC",s:"Continuous assessment · Block 5",q:"Which of the following is not a type of process control chart?",o:["X-bar chart","Range chart","Histogram chart","p-chart"],a:2,
  w:"X-bar, R and p charts are all control charts, plotted against upper and lower control limits. A histogram has no control limits and no time axis."},
-{t:"Inventory",s:"Continuous assessment",q:"Inventories are the ----------- and -------- of any manufacturing organization.",o:["Source, Input","Soul, Lifewire","Success, Failure","Crucial, Critical"],a:1,
+{t:"Inventory",s:"Continuous assessment · Block 1",q:"Inventories are the ----------- and -------- of any manufacturing organization.",o:["Source, Input","Soul, Lifewire","Success, Failure","Crucial, Critical"],a:1,
  w:"Straight from the inventory notes: inventories are the soul and lifewire of any manufacturing organisation, also called stock items."},
-{t:"Inventory",s:"Continuous assessment",q:"One of these is NOT a reason why an organization carries inventories.",o:["To provide a means of obtaining economic lot size and gaining quantity discounts.","To combat incidence of stockouts.","To replace worn-out facilities.","To decouple successive stages of operations."],a:2,
+{t:"Inventory",s:"Continuous assessment · Block 1",q:"One of these is NOT a reason why an organization carries inventories.",o:["To provide a means of obtaining economic lot size and gaining quantity discounts.","To combat incidence of stockouts.","To replace worn-out facilities.","To decouple successive stages of operations."],a:2,
  w:"The six listed reasons are uninterrupted production flow, combating stockouts, scheduling flexibility, decoupling successive stages, hedging against price and delivery uncertainty, and obtaining economic lot size and quantity discounts. Replacing facilities is capital expenditure."},
-{t:"Inventory",s:"Continuous assessment",q:"Carrying costs include all these except:",o:["Set-up costs","Insurance costs","Depreciation costs","Obsolescence costs"],a:0,
+{t:"Inventory",s:"Continuous assessment · Block 1",q:"Carrying costs include all these except:",o:["Set-up costs","Insurance costs","Depreciation costs","Obsolescence costs"],a:0,
  w:"Carrying cost covers storage or rent, storekeepers’ salaries, insurance and security, depreciation and breakage, electricity, taxes, interest and obsolescence. Set-up cost is incurred by the producer at the start of a batch."},
-{t:"Inventory · EOQ",s:"Continuous assessment",q:"Suppose a company demands 50,000 units of an electrode per year. The price per unit of item is ₦10. The cost per order is given as ₦50 while it incurs 15% of unit price as carrying cost. What order lot size will minimize total inventory cost for the company?",o:["1825 units","5,773 units","1826 units","5774 units"],a:2,
+{t:"Inventory · EOQ",s:"Continuous assessment · Block 1",q:"Suppose a company demands 50,000 units of an electrode per year. The price per unit of item is ₦10. The cost per order is given as ₦50 while it incurs 15% of unit price as carrying cost. What order lot size will minimize total inventory cost for the company?",o:["1825 units","5,773 units","1826 units","5774 units"],a:2,
  w:"$H = 15\\% \\times ₦10 = ₦1.50$. Then $\\mathrm{EOQ} = \\sqrt{2DO/H} = \\sqrt{(2 \\times 50{,}000 \\times 50) / 1.5} = \\sqrt{3{,}333{,}333} = 1{,}825.7$. Order quantities round up, so 1,826 units.",
  calc:"\\mathrm{EOQ} = \\sqrt{\\frac{2DO}{H}} = \\sqrt{\\frac{2 \\times 50{,}000 \\times 50}{1.5}} = 1{,}825.7 \\to 1{,}826"},
-{t:"Inventory · Safety stock",s:"Continuous assessment",q:"Which of the following relationships hold true for safety stock?",o:["The greater the risk of running out of stock, the smaller the safety of stock.","The larger the opportunity cost of the funds invested in inventory, the larger the safety stock.","The greater the uncertainty associated with forecasted demand, the smaller the safety stock.","The higher the profit margin per unit, the higher the safety stock necessary."],a:3,
+{t:"Inventory · Safety stock",s:"Continuous assessment · Block 1 · Safety stock",q:"Which of the following relationships hold true for safety stock?",o:["The greater the risk of running out of stock, the smaller the safety of stock.","The larger the opportunity cost of the funds invested in inventory, the larger the safety stock.","The greater the uncertainty associated with forecasted demand, the smaller the safety stock.","The higher the profit margin per unit, the higher the safety stock necessary."],a:3,
  w:"Safety stock trades stockout cost against carrying cost. A high margin means a lost sale hurts more, so you hold more. The other three options each state the relationship backwards."},
-{t:"Inventory",s:"Continuous assessment",q:"If the total investment in stock is limited, then the best order quantity for each item will be",o:["equal to the economic order quantity","equal to the economic order quantity","greater than the EOQ","less than the EOQ"],a:3,
+{t:"Inventory",s:"Continuous assessment · Block 1",q:"If the total investment in stock is limited, then the best order quantity for each item will be",o:["equal to the economic order quantity","equal to the economic order quantity","greater than the EOQ","less than the EOQ"],a:3,
  w:"EOQ assumes no constraints on order size. Once a budget or space constraint binds, the constrained optimum sits below the unconstrained EOQ. (Options (a) and (b) are printed identically.)"},
 /* ── EXAMINATION · 90 questions ──────────────────────────────────────── */
-{t:"Project scheduling",s:"Examination",q:"The critical part of the project is identified at which of these stages?",o:["Scheduling","Planning","Controlling","Appraisal"],a:0,
+{t:"Project scheduling",s:"Examination · Block 6",q:"The critical part of the project is identified at which of these stages?",o:["Scheduling","Planning","Controlling","Appraisal"],a:0,
  w:"Project scheduling builds the timetable and network diagram; one of its steps is establishing the critical parts of the project and giving them attention."},
-{t:"Project appraisal",s:"Examination",q:"Which of these methods is used to analyze how viable and feasible a project is",o:["Project planning","project appraisal","project scheduling","project evaluation"],a:1,
+{t:"Project appraisal",s:"Examination · Block 6",q:"Which of these methods is used to analyze how viable and feasible a project is",o:["Project planning","project appraisal","project scheduling","project evaluation"],a:1,
  w:"Appraisal is the critical examination of a project proposal in totality (market, technical, economic, financial, managerial and environmental) to determine viability before commitment."},
-{t:"Payback period",s:"Examination",q:"A firm invested an initial cost of N100,000 and it is expected that in 7 years he would generate the following cash flows: N30,000; N30,000; N20,000; N30,000; N40,000. What is the payback period?",o:["3 years 8 months","3 years 4 months","4 years 3 months","5 years"],a:0,
+{t:"Payback period",s:"Examination · Block 6",q:"A firm invested an initial cost of N100,000 and it is expected that in 7 years he would generate the following cash flows: N30,000; N30,000; N20,000; N30,000; N40,000. What is the payback period?",o:["3 years 8 months","3 years 4 months","4 years 3 months","5 years"],a:0,
  w:"Cumulative inflows: 30,000 → 60,000 → 80,000 → 110,000. ₦100,000 is recovered during year 4. ₦20,000 of the ₦30,000 year-4 flow is still needed: $\\frac{20}{30}$ of a year = 8 months.",
  calc:"\\mathrm{PBP} = 3 + \\frac{100{,}000 − 80{,}000}{30{,}000} = 3.67\\text{ years} = 3\\text{ years } 8\\text{ months}"},
-{t:"Payback period",s:"Examination",q:"What advice would you give to the project manager regarding the project?",o:["accept it","reject it","suspend it","none of the above"],a:0,
+{t:"Payback period",s:"Examination · Block 6",q:"What advice would you give to the project manager regarding the project?",o:["accept it","reject it","suspend it","none of the above"],a:0,
  w:"The outlay is recovered in 3 years 8 months out of a 7-year horizon. Shorter paybacks are desirable, so the project is accepted."},
-{t:"Project scheduling",s:"Examination",q:"The crashing of a project can be executed during one of these stages",o:["Scheduling","Planning","Controlling","Appraisal"],a:0,
+{t:"Project scheduling",s:"Examination · Block 6 · Critical path method",q:"The crashing of a project can be executed during one of these stages",o:["Scheduling","Planning","Controlling","Appraisal"],a:0,
  w:"Crashing means compressing the timetable by adding resources to critical activities. It operates on the schedule and network, so it belongs to project scheduling."},
-{t:"Project components",s:"Examination",q:"All tangible and intangible products or items that should be provided at a specified time during or at the end of a project is",o:["Project scope","Schedules","Deliverables","Resources"],a:2,
+{t:"Project components",s:"Examination · Block 6",q:"All tangible and intangible products or items that should be provided at a specified time during or at the end of a project is",o:["Project scope","Schedules","Deliverables","Resources"],a:2,
  w:"That is the definition of deliverables. Scope defines the boundary of the work; schedules are the timetable of events."},
-{t:"Project control",s:"Examination",q:"For proactive measures to be put in place, it is ideal to provide a status report of project",o:["weekly","monthly","quarterly","annually"],a:0,
+{t:"Project control",s:"Examination · Block 6",q:"For proactive measures to be put in place, it is ideal to provide a status report of project",o:["weekly","monthly","quarterly","annually"],a:0,
  w:"Status reports should be frequent enough to catch variations early: every one to four weeks, with weekly reporting giving the most room for proactive correction."},
-{t:"Payback period",s:"Examination",q:"Project A has an initial investment of 700,000 and projected cashflows of N225,000 for 5 years. What is the payback period of project A",o:["3.1 years","3.6 years","3.3 years","5 years"],a:0,
+{t:"Payback period",s:"Examination · Block 6",q:"Project A has an initial investment of 700,000 and projected cashflows of N225,000 for 5 years. What is the payback period of project A",o:["3.1 years","3.6 years","3.3 years","5 years"],a:0,
  w:"With level annual cash flows, $\\mathrm{PBP} = \\frac{\\text{initial investment}}{\\text{annual cash flow}} = \\frac{700{,}000}{225{,}000} = 3.11$ years.",
  calc:"\\mathrm{PBP} = \\frac{700{,}000}{225{,}000} = 3.11\\text{ years}"},
-{t:"Payback period",s:"Examination",q:"Project B has an initial investment of 400,000 and projected cashflows of N110,000 for 5 years. What is the payback period of project B",o:["3.1 years","3.6 years","3.3 years","5 years"],a:1,
+{t:"Payback period",s:"Examination · Block 6",q:"Project B has an initial investment of 400,000 and projected cashflows of N110,000 for 5 years. What is the payback period of project B",o:["3.1 years","3.6 years","3.3 years","5 years"],a:1,
  w:"$\\mathrm{PBP} = \\frac{400{,}000}{110{,}000} = 3.64$ years.",
  calc:"\\mathrm{PBP} = \\frac{400{,}000}{110{,}000} = 3.64\\text{ years}"},
-{t:"Project evaluation",s:"Examination",q:"What decision would you advise the project manager to take?",o:["reject both projects","accept both projects","reject project A and accept project B","accept project A and reject project B"],a:1,
+{t:"Project evaluation",s:"Examination · Block 6",q:"What decision would you advise the project manager to take?",o:["reject both projects","accept both projects","reject project A and accept project B","accept project A and reject project B"],a:1,
  w:"Both projects pay back inside their 5-year lives (3.11 and 3.64 years), so on the payback criterion both are acceptable."},
-{t:"Accounting rate of return",s:"Examination",q:"What would be the accounting rate of return for project A?",o:["28%","32%","49%","57%"],a:1,
+{t:"Accounting rate of return",s:"Examination · Block 6",q:"What would be the accounting rate of return for project A?",o:["28%","32%","49%","57%"],a:1,
  w:"$\\mathrm{ARR} = \\frac{\\text{annual cash flow}}{\\text{initial investment}} = \\frac{225{,}000}{700{,}000} = 32.1\\%$.",
  calc:"\\mathrm{ARR} = \\frac{225{,}000}{700{,}000} = 32\\%"},
-{t:"Accounting rate of return",s:"Examination",q:"What would be the accounting rate of return for project B?",o:["28%","32%","49%","57%"],a:0,
+{t:"Accounting rate of return",s:"Examination · Block 6",q:"What would be the accounting rate of return for project B?",o:["28%","32%","49%","57%"],a:0,
  w:"$\\mathrm{ARR} = \\frac{110{,}000}{400{,}000} = 27.5\\%$, which rounds to 28%.",
  calc:"\\mathrm{ARR} = \\frac{110{,}000}{400{,}000} = 27.5\\% \\approx 28\\%"},
-{t:"Project evaluation",s:"Examination",q:"In order to know if to continue, discontinue or adjust a project, one of these must be done",o:["Project appraisal","Project controlling","Project evaluation","Project scheduling"],a:2,
+{t:"Project evaluation",s:"Examination · Block 6",q:"In order to know if to continue, discontinue or adjust a project, one of these must be done",o:["Project appraisal","Project controlling","Project evaluation","Project scheduling"],a:2,
  w:"Evaluation compares baseline data with endline data across the life of the project to judge how far the objectives were achieved, and therefore whether to continue, adjust or discontinue."},
-{t:"Project control",s:"Examination",q:"The process involved in project control involves the following steps except",o:["setting endline data","measuring progress and performance","comparing plan against actual performance","update where deviation exist"],a:0,
+{t:"Project control",s:"Examination · Block 6",q:"The process involved in project control involves the following steps except",o:["setting endline data","measuring progress and performance","comparing plan against actual performance","update where deviation exist"],a:0,
  w:"Control begins with a baseline plan, not endline data. Endline data belongs to evaluation, where it is compared against the baseline."},
-{t:"Accounting rate of return",s:"Examination",q:"Project A has N20,000 as initial investment and an annual cashflow of N10,000 while project B has N30,000 as initial investment and an annual cashflow of N5,000. What is the accounting rate of return for project A?",o:["17%","25%","33%","50%"],a:3,
+{t:"Accounting rate of return",s:"Examination · Block 6",q:"Project A has N20,000 as initial investment and an annual cashflow of N10,000 while project B has N30,000 as initial investment and an annual cashflow of N5,000. What is the accounting rate of return for project A?",o:["17%","25%","33%","50%"],a:3,
  w:"$\\mathrm{ARR} = \\frac{10{,}000}{20{,}000} = 0.5 = 50\\%$.",
  calc:"\\mathrm{ARR} = \\frac{10{,}000}{20{,}000} = 50\\%"},
-{t:"Accounting rate of return",s:"Examination",q:"What is the accounting rate of return for project B?",o:["17%","25%","33%","50%"],a:0,
+{t:"Accounting rate of return",s:"Examination · Block 6",q:"What is the accounting rate of return for project B?",o:["17%","25%","33%","50%"],a:0,
  w:"$\\mathrm{ARR} = \\frac{5{,}000}{30{,}000} = 0.167 = 16.7\\%$, which rounds to 17%.",
  calc:"\\mathrm{ARR} = \\frac{5{,}000}{30{,}000} = 16.7\\% \\approx 17\\%"},
-{t:"Project evaluation",s:"Examination",q:"What appropriate decision can be taken by the project manager?",o:["accept both projects","reject both projects","accept only project A","accept only project B"],a:2,
+{t:"Project evaluation",s:"Examination · Block 6",q:"What appropriate decision can be taken by the project manager?",o:["accept both projects","reject both projects","accept only project A","accept only project B"],a:2,
  w:"Where two projects are compared, accept the one with the higher ARR provided it beats the company target. 50% comfortably exceeds 17%."},
-{t:"Project evaluation",s:"Examination",q:"The worth of an investment in a project can be determined by one of these methods",o:["payback Period","profitability index","internal rate of return","net present value"],a:3,
+{t:"Project evaluation",s:"Examination · Block 6",q:"The worth of an investment in a project can be determined by one of these methods",o:["payback Period","profitability index","internal rate of return","net present value"],a:3,
  w:"NPV discounts all net cash inflows at the desired rate of return, so it measures the value the project adds in today’s money. Payback ignores the time value of money entirely."},
-{t:"Management",s:"Examination",q:"Management can best be described as",o:["The act of selling","Managing your own business","Getting things done through and with people","Doing the right things always"],a:2,
+{t:"Management",s:"Examination · Block 2",q:"Management can best be described as",o:["The act of selling","Managing your own business","Getting things done through and with people","Doing the right things always"],a:2,
  w:"Mary Parker Follett’s definition: management is the art of getting things done through people. It is the definition the course notes lead with."},
-{t:"Leadership",s:"Examination",q:"The following are the characteristics of a good leader except",o:["Intelligence","Aggressiveness","Administrative skills","Resistance to inputs from subordinates"],a:3,
+{t:"Leadership",s:"Examination · Block 4",q:"The following are the characteristics of a good leader except",o:["Intelligence","Aggressiveness","Administrative skills","Resistance to inputs from subordinates"],a:3,
  w:"Effective communication means listening actively and creating an environment where team members feel comfortable sharing ideas. Shutting out subordinates is the opposite."},
-{t:"Managerial skills",s:"Examination",q:"The major managerial skills required for success by managers are",o:["Human skills","Demonstration skills","Technical skills","Conceptual skills"],a:0,
+{t:"Managerial skills",s:"Examination · Block 4",q:"The major managerial skills required for success by managers are",o:["Human skills","Demonstration skills","Technical skills","Conceptual skills"],a:0,
  w:"Katz identified three: technical, human and conceptual. Human skill is the one that matters at every level, since management is getting things done through other people.",
  flag:"Defective as printed: technical and conceptual skills are equally part of Katz’s three, and only ‘demonstration skills’ is genuinely not. Know all three."},
-{t:"Business environment",s:"Examination",q:"The internal environment of business includes the following except",o:["Human resources department","Socio-cultural","Research and Development","Finance"],a:1,
+{t:"Business environment",s:"Examination · Business environment",q:"The internal environment of business includes the following except",o:["Human resources department","Socio-cultural","Research and Development","Finance"],a:1,
  w:"Socio-cultural dynamics sit in the external environment alongside economic, political and legal factors. Departments such as HR, R&D and Finance are internal."},
-{t:"Business environment",s:"Examination",q:"The role of the Human Resources department is",o:["Managing the external environment of business","Staffing, compensating and motivating employees","Financing the business operations","Reporting to the Managing Director"],a:1,
+{t:"Business environment",s:"Examination · Block 2",q:"The role of the Human Resources department is",o:["Managing the external environment of business","Staffing, compensating and motivating employees","Financing the business operations","Reporting to the Managing Director"],a:1,
  w:"HR carries the staffing function: recruitment, selection, training, performance appraisal, compensation and career development."},
-{t:"Business environment",s:"Examination",q:"A major cause of concern for managers in dealing with threats in the external environment is",o:["The pace of change in the technological environment","The production facilities that need to be replaced","The marketing function","The number of rejects from the factory output"],a:0,
+{t:"Business environment",s:"Examination · Block 2",q:"A major cause of concern for managers in dealing with threats in the external environment is",o:["The pace of change in the technological environment","The production facilities that need to be replaced","The marketing function","The number of rejects from the factory output"],a:0,
  w:"Technological change is external and fast-moving: digital transformation, AI and Industry 4.0 are listed as the contemporary pressures on engineering managers. The other options are internal matters."},
-{t:"Business environment",s:"Examination",q:"The external environment of business is made up of the following except",o:["Research and Development","Economic environment","Socio-cultural dynamics","Political and legal system"],a:0,
+{t:"Business environment",s:"Examination · Business environment",q:"The external environment of business is made up of the following except",o:["Research and Development","Economic environment","Socio-cultural dynamics","Political and legal system"],a:0,
  w:"R&D is an internal department. Economic, socio-cultural and political-legal factors form the external environment."},
-{t:"Communication",s:"Examination",q:"Communication is only effective when there exists",o:["Sender and receiver in the communication process","There is a medium of transmitting the message","There is common understanding between sender and receiver","The communication originates from higher authority"],a:2,
+{t:"Communication",s:"Examination · Block 4",q:"Communication is only effective when there exists",o:["Sender and receiver in the communication process","There is a medium of transmitting the message","There is common understanding between sender and receiver","The communication originates from higher authority"],a:2,
  w:"Effective communication hinges on people understanding your meaning and replying in terms that move the exchange forward. A sender, receiver and medium can all be present and the message still fail."},
-{t:"Communication",s:"Examination",q:"The communication process does not include one of the following",o:["Sender","Receiver","Feedback","Managers"],a:3,
+{t:"Communication",s:"Examination · Block 4",q:"The communication process does not include one of the following",o:["Sender","Receiver","Feedback","Managers"],a:3,
  w:"The process is sender → message → medium → receiver → feedback. ‘Managers’ is a job title, not an element of the process."},
-{t:"Organisational change",s:"Examination",q:"Organizational change may arise from the following except",o:["Technology","Managerial policies","Government actions","Unfriendly customers"],a:3,
+{t:"Organisational change",s:"Examination · Change management",q:"Organizational change may arise from the following except",o:["Technology","Managerial policies","Government actions","Unfriendly customers"],a:3,
  w:"Technology, managerial policy and government action are all recognised drivers of organisational change. Customer temperament is not a driver of change in itself."},
-{t:"Organisational change",s:"Examination",q:"The following strategies can be used to manage organizational change except",o:["Creating an environment of mutual trust","Increasing wages and salaries of every staff","Organizational learning","Adaptiveness"],a:1,
+{t:"Organisational change",s:"Examination · Change management",q:"The following strategies can be used to manage organizational change except",o:["Creating an environment of mutual trust","Increasing wages and salaries of every staff","Organizational learning","Adaptiveness"],a:1,
  w:"Trust, organisational learning and adaptiveness address why people resist change. An across-the-board pay rise buys compliance without addressing the resistance."},
-{t:"Organisational change",s:"Examination",q:"Resistance to change can be caused by",o:["Habits","Lack of communication","Conflict of interest","Adaptiveness"],a:0,
+{t:"Organisational change",s:"Examination · Change management",q:"Resistance to change can be caused by",o:["Habits","Lack of communication","Conflict of interest","Adaptiveness"],a:0,
  w:"Habit is the classic individual source of resistance: people default to the familiar. Adaptiveness is a strategy for managing change, so it is certainly not a cause.",
  flag:"Lack of communication and conflict of interest are also recognised causes; only (d) is clearly wrong. Habit is the standard textbook first answer."},
-{t:"Organisational change",s:"Examination",q:"One of the following is not a major cause of resistance to change",o:["Desire for security","Selective perception","High employee turnover","Habits"],a:2,
+{t:"Organisational change",s:"Examination · Change management",q:"One of the following is not a major cause of resistance to change",o:["Desire for security","Selective perception","High employee turnover","Habits"],a:2,
  w:"Security, selective perception and habit are individual sources of resistance. High turnover is a symptom of organisational problems, not a cause of resistance to change."},
-{t:"Conflict",s:"Examination",q:"Organizational conflict may be described as",o:["Disagreement between organizational members and groups","Fighting between managers and their subordinates","Disagreement between government agencies and shareholders","Lack of communication between shareholders and the unions"],a:0,
+{t:"Conflict",s:"Examination · Organisational conflict",q:"Organizational conflict may be described as",o:["Disagreement between organizational members and groups","Fighting between managers and their subordinates","Disagreement between government agencies and shareholders","Lack of communication between shareholders and the unions"],a:0,
  w:"Conflict is disagreement between members and groups within the organisation. Handling it is the manager’s disturbance-handler role in Mintzberg’s scheme."},
-{t:"Conflict",s:"Examination",q:"Conflict may be caused by all of the following factors except",o:["Sharing of scarce resources","Differences in goals","Lack of interest in leadership style","Nature of work activities"],a:2,
+{t:"Conflict",s:"Examination · Organisational conflict",q:"Conflict may be caused by all of the following factors except",o:["Sharing of scarce resources","Differences in goals","Lack of interest in leadership style","Nature of work activities"],a:2,
  w:"Scarce resources, goal incompatibility and interdependent work activities are the standard structural causes of conflict. Indifference to a leadership style is not one of them."},
-{t:"TQM",s:"Examination",q:"Total Quality Management (TQM) is primarily focused on:",o:["Reducing production costs","Achieving customer satisfaction","Increasing employee salaries","Expanding market size"],a:1,
+{t:"TQM",s:"Examination · Block 3",q:"Total Quality Management (TQM) is primarily focused on:",o:["Reducing production costs","Achieving customer satisfaction","Increasing employee salaries","Expanding market size"],a:1,
  w:"TQM is a management philosophy emphasising continuous improvement across all operations, with the ultimate goal of customer satisfaction. Cost reduction is a benefit, not the aim."},
-{t:"TQM",s:"Examination",q:"The principle of continuous improvement in TQM is also known as:",o:["Lean Production","Kaizen","Benchmarking","Outsourcing"],a:1,
+{t:"TQM",s:"Examination · Block 3",q:"The principle of continuous improvement in TQM is also known as:",o:["Lean Production","Kaizen","Benchmarking","Outsourcing"],a:1,
  w:"Kaizen is the ongoing, incremental effort to improve products, processes and services."},
-{t:"TQM",s:"Examination",q:"Which of the following is a key principle of TQM?",o:["Customer focus","Employee redundancy","Minimizing supplier involvement","Individualistic decision-making"],a:0,
+{t:"TQM",s:"Examination · Block 3",q:"Which of the following is a key principle of TQM?",o:["Customer focus","Employee redundancy","Minimizing supplier involvement","Individualistic decision-making"],a:0,
  w:"Customer focus heads the list of TQM principles. The other three invert real principles: TQM demands employee involvement, supplier relationship management and fact-based collective decision-making."},
-{t:"Six Sigma",s:"Examination",q:"Six Sigma uses which structured approach for problem-solving?",o:["SWOT","DMAIC","PESTLE","KPI"],a:1,
+{t:"Six Sigma",s:"Examination · Block 3",q:"Six Sigma uses which structured approach for problem-solving?",o:["SWOT","DMAIC","PESTLE","KPI"],a:1,
  w:"Define, Measure, Analyse, Improve, Control. SWOT and PESTLE are strategic-analysis frameworks; a KPI is a measure, not a method."},
-{t:"TQM tools",s:"Examination",q:"The “80/20 rule” in Pareto analysis implies that:",o:["80% of profits come from 20% of marketing","80% of outcomes result from 20% of causes","20% of managers handle 80% of resources","80% of defects cannot be controlled"],a:1,
+{t:"TQM tools",s:"Examination · Block 3",q:"The “80/20 rule” in Pareto analysis implies that:",o:["80% of profits come from 20% of marketing","80% of outcomes result from 20% of causes","20% of managers handle 80% of resources","80% of defects cannot be controlled"],a:1,
  w:"A small number of causes produce most of the effects, which is why Pareto analysis is used to prioritise quality problems."},
-{t:"TQM",s:"Examination",q:"Zero defects in TQM refers to:",o:["Producing goods at zero cost","Producing without errors or failures","Completely avoiding suppliers","Producing at zero time"],a:1,
+{t:"TQM",s:"Examination · Block 3",q:"Zero defects in TQM refers to:",o:["Producing goods at zero cost","Producing without errors or failures","Completely avoiding suppliers","Producing at zero time"],a:1,
  w:"Zero defects expresses the TQM maxim: do the right things, right the first time, every time."},
-{t:"TQM",s:"Examination",q:"In TQM, “voice of the customer (VOC)” is used to:",o:["Measure employee satisfaction","Identify customer requirements and expectations","Monitor supplier performance","Set organizational budgets"],a:1,
+{t:"TQM",s:"Examination · Block 3",q:"In TQM, “voice of the customer (VOC)” is used to:",o:["Measure employee satisfaction","Identify customer requirements and expectations","Monitor supplier performance","Set organizational budgets"],a:1,
  w:"VOC is how customer focus is operationalised: surveys, comment cards and feedback analysis that translate expectations into quality requirements."},
-{t:"TQM",s:"Examination",q:"The Plan-Do-Check-Act (PDCA) cycle is a tool for:",o:["Financial analysis","Continuous improvement","Marketing strategy","Customer complaints"],a:1,
+{t:"TQM",s:"Examination · Block 3",q:"The Plan-Do-Check-Act (PDCA) cycle is a tool for:",o:["Financial analysis","Continuous improvement","Marketing strategy","Customer complaints"],a:1,
  w:"PDCA (and its variant PDSA) is the engine of Kaizen: plan a change, run it, check the result, then act to standardise or revise."},
-{t:"TQM",s:"Examination",q:"Benchmarking in TQM is used to:",o:["Compare performance with industry leaders","Increase worker salaries","Evaluate supplier contracts only","Hire external auditors"],a:0,
+{t:"TQM",s:"Examination · Block 3",q:"Benchmarking in TQM is used to:",o:["Compare performance with industry leaders","Increase worker salaries","Evaluate supplier contracts only","Hire external auditors"],a:0,
  w:"Benchmarking measures your performance against industry peers and best practice to identify gaps worth closing."},
-{t:"TQM tools",s:"Examination",q:"Which TQM tool is best for examining the correlation between two variables?",o:["Check sheet","Flowchart","Scatter diagram","Pareto chart"],a:2,
+{t:"TQM tools",s:"Examination · Block 3",q:"Which TQM tool is best for examining the correlation between two variables?",o:["Check sheet","Flowchart","Scatter diagram","Pareto chart"],a:2,
  w:"A scatter diagram plots information in two dimensions to expose the pattern of relationship between two variables."},
-{t:"Lean",s:"Examination",q:"The “Just-in-Time (JIT)” principle in Lean production aims to:",o:["Eliminate suppliers","Produce goods only when needed","Reduce employee training","Produce in large batches"],a:1,
+{t:"Lean",s:"Examination · Block 3",q:"The “Just-in-Time (JIT)” principle in Lean production aims to:",o:["Eliminate suppliers","Produce goods only when needed","Reduce employee training","Produce in large batches"],a:1,
  w:"JIT attacks two of the seven wastes directly, overproduction and excess inventory, by producing only what is needed, when it is needed."},
-{t:"Six Sigma",s:"Examination",q:"In Six Sigma, the acceptable defect rate is:",o:["34 per million opportunities","3.4 per million opportunities","34 per thousand opportunities","340 per million opportunities"],a:1,
+{t:"Six Sigma",s:"Examination · Block 3",q:"In Six Sigma, the acceptable defect rate is:",o:["34 per million opportunities","3.4 per million opportunities","34 per thousand opportunities","340 per million opportunities"],a:1,
  w:"Six sigma capability corresponds to 3.4 defects per million opportunities."},
-{t:"TQM",s:"Examination",q:"Which of these is a benefit of TQM?",o:["Increased customer satisfaction","Higher defects in products","Lower job security","Reduced adaptability"],a:0,
+{t:"TQM",s:"Examination · Block 3",q:"Which of these is a benefit of TQM?",o:["Increased customer satisfaction","Higher defects in products","Lower job security","Reduced adaptability"],a:0,
  w:"The listed benefits are higher customer satisfaction, better quality, greater efficiency, improved morale, competitive advantage and cost reduction. TQM in fact raises job security by strengthening the firm."},
-{t:"TQM tools",s:"Examination",q:"A check sheet in TQM is mainly used for:",o:["Data collection and analysis","Designing processes","Forecasting markets","Employee appraisal"],a:0,
+{t:"TQM tools",s:"Examination · Block 3",q:"A check sheet in TQM is mainly used for:",o:["Data collection and analysis","Designing processes","Forecasting markets","Employee appraisal"],a:0,
  w:"A check sheet is a simple structured form for recording the frequency of specific events during a data collection period."},
-{t:"Quality",s:"Examination",q:"In software quality control, “verification” ensures that:",o:["The product meets customer expectations","The software meets its specifications","Employees are satisfied","The code is written cheaply"],a:1,
+{t:"Quality",s:"Examination · Block 3",q:"In software quality control, “verification” ensures that:",o:["The product meets customer expectations","The software meets its specifications","Employees are satisfied","The code is written cheaply"],a:1,
  w:"Verification asks ‘are we building the product right?’: conformance to specification. Validation asks ‘are we building the right product?’: fitness for the customer’s need."},
-{t:"Quality",s:"Examination",q:"The difference between Quality Assurance (QA) and Quality Control (QC) is that:",o:["QA focuses on preventing defects; QC focuses on detecting defects","QC prevents defects; QA finds them","QA is cheaper than QC","QC is proactive while QA is reactive"],a:0,
+{t:"Quality",s:"Examination · Block 3",q:"The difference between Quality Assurance (QA) and Quality Control (QC) is that:",o:["QA focuses on preventing defects; QC focuses on detecting defects","QC prevents defects; QA finds them","QA is cheaper than QC","QC is proactive while QA is reactive"],a:0,
  w:"QA is process-oriented and proactive; QC is product-oriented and reactive. Options (b) and (d) simply reverse the pair."},
-{t:"Quality",s:"Examination",q:"Which of the following is a quality attribute?",o:["Security","Inflation","Leadership","Training"],a:0,
+{t:"Quality",s:"Examination · Block 3",q:"Which of the following is a quality attribute?",o:["Security","Inflation","Leadership","Training"],a:0,
  w:"Security is a property of the product itself, like reliability, durability and serviceability. Inflation is an environmental factor; leadership and training are organisational inputs."},
-{t:"Quality metrics",s:"Examination",q:"Which quality measure tracks the percentage of products that meet standards without rework?",o:["Defect rate","First-Time Yield (FTY)","Cost of Quality (COQ)","Process cycle time"],a:1,
+{t:"Quality metrics",s:"Examination · Block 3",q:"Which quality measure tracks the percentage of products that meet standards without rework?",o:["Defect rate","First-Time Yield (FTY)","Cost of Quality (COQ)","Process cycle time"],a:1,
  w:"First-Time Yield is the proportion of units passing through a process correctly on the first attempt, with no rework or scrap."},
-{t:"TQM",s:"Examination",q:"A major problem associated with TQM is:",o:["Overemphasis on metrics","Increased market share","Improved competitiveness","Higher customer satisfaction"],a:0,
+{t:"TQM",s:"Examination · Block 3",q:"A major problem associated with TQM is:",o:["Overemphasis on metrics","Increased market share","Improved competitiveness","Higher customer satisfaction"],a:0,
  w:"The other three are benefits, not problems. Measuring everything can crowd out judgement and add bureaucracy, a recognised criticism of TQM in practice."},
-{t:"Lean",s:"Examination",q:"The lean principle of “muda” refers to:",o:["Quality assurance","Waste elimination","Supplier training","Customer surveys"],a:1,
+{t:"Lean",s:"Examination · Block 3",q:"The lean principle of “muda” refers to:",o:["Quality assurance","Waste elimination","Supplier training","Customer surveys"],a:1,
  w:"Muda is the Japanese term for waste. Lean targets seven types: overproduction, waiting, excess inventory, defects, unnecessary transportation, excess motion and overprocessing."},
-{t:"TQM",s:"Examination",q:"Which is an important factor in sustaining TQM improvements?",o:["Standard operating procedures (SOPs)","Increasing product price","Hiring only external consultants","Removing employee training"],a:0,
+{t:"TQM",s:"Examination · Block 3",q:"Which is an important factor in sustaining TQM improvements?",o:["Standard operating procedures (SOPs)","Increasing product price","Hiring only external consultants","Removing employee training"],a:0,
  w:"Improvements are sustained by standardising them. Documented processes and SOPs are what stop a process drifting back to its old behaviour."},
-{t:"Lean",s:"Examination",q:"Value stream mapping in Lean TQM is used to:",o:["Identify value-added and non-value-added activities","Train employees in finance","Determine product prices","Replace suppliers"],a:0,
+{t:"Lean",s:"Examination · Block 3",q:"Value stream mapping in Lean TQM is used to:",o:["Identify value-added and non-value-added activities","Train employees in finance","Determine product prices","Replace suppliers"],a:0,
  w:"Value stream mapping traces a product’s whole flow to separate work the customer would pay for from work that is pure muda."},
-{t:"Quality systems",s:"Examination",q:"One major limitation of standards in TQM is:",o:["They increase consistency","They may be complex and costly to implement","They improve market access","They promote innovation"],a:1,
+{t:"Quality systems",s:"Examination · Block 3",q:"One major limitation of standards in TQM is:",o:["They increase consistency","They may be complex and costly to implement","They improve market access","They promote innovation"],a:1,
  w:"The other three are advantages of standards. Certification to a standard such as ISO 9001 demands documentation, audit and training, real cost and complexity."},
-{t:"Quality",s:"Examination",q:"Continuous Quality Improvement (CQI) is supported by which cycle?",o:["SWOT cycle","PESTLE cycle","PDSA cycle","FMEA cycle"],a:2,
+{t:"Quality",s:"Examination · Block 3",q:"Continuous Quality Improvement (CQI) is supported by which cycle?",o:["SWOT cycle","PESTLE cycle","PDSA cycle","FMEA cycle"],a:2,
  w:"Plan-Do-Study-Act, the Deming variant of PDCA. FMEA is a risk-analysis technique, not an improvement cycle."},
-{t:"SPC",s:"Examination",q:"Which of the following is NOT a benefit of reducing process variation?",o:["Improved product quality.","Increased production efficiency.","Reduced costs.","Increased process complexity"],a:3,
+{t:"SPC",s:"Examination · Block 5",q:"Which of the following is NOT a benefit of reducing process variation?",o:["Improved product quality.","Increased production efficiency.","Reduced costs.","Increased process complexity"],a:3,
  w:"Reducing variation simplifies a process. Added complexity is a cost, not a benefit."},
-{t:"SPC",s:"Examination",q:"Which of the following is a measure of variability?",o:["Mean","Median","Mode","Range"],a:3,
+{t:"SPC",s:"Examination · Block 5",q:"Which of the following is a measure of variability?",o:["Mean","Median","Mode","Range"],a:3,
  w:"Mean, median and mode all describe central tendency. Range, and standard deviation, describe spread, which is what control charts monitor."},
-{t:"Quality",s:"Examination",q:"Which one of these is a dimension of quality?",o:["Performance","Hazard rate","Process Capability","Control limits"],a:0,
+{t:"Quality",s:"Examination · Eight dimensions of quality",q:"Which one of these is a dimension of quality?",o:["Performance","Hazard rate","Process Capability","Control limits"],a:0,
  w:"The dimensions of quality include performance, reliability, durability, serviceability and aesthetics. Process capability and control limits are SPC measures, not dimensions of quality."},
-{t:"Quality",s:"Examination",q:"Performance of a product is ______",o:["how long the product lasts","how easy it is to repair the product","how often the product fails","whether the product is capable of doing the intended job"],a:3,
+{t:"Quality",s:"Examination · Eight dimensions of quality",q:"Performance of a product is ______",o:["how long the product lasts","how easy it is to repair the product","how often the product fails","whether the product is capable of doing the intended job"],a:3,
  w:"Performance is fitness for the intended job. Option (a) is durability, (b) is serviceability and (c) is reliability."},
-{t:"Quality",s:"Examination",q:"Which one of these is not a component of quality?",o:["Reliability","Durability","Acceptance sampling","Serviceability"],a:2,
+{t:"Quality",s:"Examination · Eight dimensions of quality",q:"Which one of these is not a component of quality?",o:["Reliability","Durability","Acceptance sampling","Serviceability"],a:2,
  w:"Reliability, durability and serviceability are components of quality. Acceptance sampling is an inspection method used to check quality."},
-{t:"SPC",s:"Examination",q:"What does reduced variability result in?",o:["Increased failure rate","Decreased reliability","Fewer repair claims","Increased repair costs"],a:2,
+{t:"SPC",s:"Examination · Block 5",q:"What does reduced variability result in?",o:["Increased failure rate","Decreased reliability","Fewer repair claims","Increased repair costs"],a:2,
  w:"Less variation means more units fall inside specification, so fewer fail in service and fewer claims are made. The other options describe the effect of increased variability."},
-{t:"Quality",s:"Examination",q:"Quality of a product is at its lowest when ____ quality component is neglected while it’s manufacturing.",o:["performance","reliability","aesthetics","serviceability"],a:0,
+{t:"Quality",s:"Examination · Eight dimensions of quality",q:"Quality of a product is at its lowest when ____ quality component is neglected while it’s manufacturing.",o:["performance","reliability","aesthetics","serviceability"],a:0,
  w:"If the product cannot do the job it was made for, nothing else about it can rescue its quality. Reliability, aesthetics and serviceability all presuppose that the product works."},
-{t:"SPC",s:"Examination",q:"Quality characteristics are classified into variables and ________",o:["constants","attributes","standards","specifications"],a:1,
+{t:"SPC",s:"Examination · Block 5",q:"Quality characteristics are classified into variables and ________",o:["constants","attributes","standards","specifications"],a:1,
  w:"Variables are measured on a continuous scale (width, weight) and use X-bar and R charts; attributes are counted as conforming or not and use p-charts."},
-{t:"SPC",s:"Examination",q:"What is the main purpose of statistical process control?",o:["Controlling employee performance","Monitoring and controlling a process","Increasing costs","Improving design aesthetics"],a:1,
+{t:"SPC",s:"Examination · Block 5",q:"What is the main purpose of statistical process control?",o:["Controlling employee performance","Monitoring and controlling a process","Increasing costs","Improving design aesthetics"],a:1,
  w:"SPC is the use of statistical techniques to monitor process behaviour, discover issues in internal systems and eliminate unusual variation."},
-{t:"Quality",s:"Examination",q:"Which of the following is a dimension of quality?",o:["Performance","Hazard rate","Process Capability","Control limits"],a:0,
+{t:"Quality",s:"Examination · Eight dimensions of quality",q:"Which of the following is a dimension of quality?",o:["Performance","Hazard rate","Process Capability","Control limits"],a:0,
  w:"A repeat of an earlier question. Performance (whether the product does its intended job) is a dimension of quality."},
-{t:"Quality",s:"Examination",q:"Which of the following option involves material and component control?",o:["Development of standards","Development of specification.","Quality control","Feedback"],a:2,
+{t:"Quality",s:"Examination · Block 5",q:"Which of the following option involves material and component control?",o:["Development of standards","Development of specification.","Quality control","Feedback"],a:2,
  w:"Inspecting incoming materials and components against specification is quality control work, checking conformance of inputs and output."},
-{t:"Quality",s:"Examination",q:"What is the first step of QA?",o:["Development of standards","Identification of customer need","Servicing","Material control"],a:1,
+{t:"Quality",s:"Examination · Block 3",q:"What is the first step of QA?",o:["Development of standards","Identification of customer need","Servicing","Material control"],a:1,
  w:"Quality begins with the customer. You cannot set a specification or a standard until you know what need the product must satisfy."},
-{t:"Quality systems",s:"Examination",q:"What does \"Quality Control\" focus on within a QMS?",o:["Preventing defects from occurring","Ensuring that products or services meet specified requirements","Improving the overall quality management system","Defining the organization's quality policy"],a:1,
+{t:"Quality systems",s:"Examination · Block 3",q:"What does \"Quality Control\" focus on within a QMS?",o:["Preventing defects from occurring","Ensuring that products or services meet specified requirements","Improving the overall quality management system","Defining the organization's quality policy"],a:1,
  w:"QC checks conformance to specified requirements. Prevention is QA, system improvement is continuous improvement, and the quality policy is set by leadership."},
-{t:"Control charts",s:"Examination",q:"LCL for the R chart is given by __________",o:["$D_3\\bar{R}$","$D_2\\bar{R}$","$R − D_3R$","$d_2R$"],a:0,
+{t:"Control charts",s:"Examination · Block 5",q:"LCL for the R chart is given by __________",o:["$D_3\\bar{R}$","$D_2\\bar{R}$","$R − D_3R$","$d_2R$"],a:0,
  w:"For the range chart, $\\mathrm{LCL} = D_3\\bar{R}$ and $\\mathrm{UCL} = D_4\\bar{R}$. With the lecture’s constants ($D_3 = 0$, $D_4 = 2.11$) and $\\bar{R} = 2.6$: LCL = 0 and UCL = 5.486.",
  calc:"\\text{R chart:}\\quad \\mathrm{LCL} = D_3\\bar{R} \\qquad \\mathrm{UCL} = D_4\\bar{R}"},
-{t:"Control charts",s:"Examination",q:"Control limits are __________",o:["Limits defined by customers","Limits driven by the natural variability of the process","Limits driven by the inherent variability of the process","Statistical limits"],a:1,
+{t:"Control charts",s:"Examination · Block 5",q:"Control limits are __________",o:["Limits defined by customers","Limits driven by the natural variability of the process","Limits driven by the inherent variability of the process","Statistical limits"],a:1,
  w:"Control limits come from the process itself, its natural variability, measured by the process standard deviation. Limits defined by the customer are specification limits, which is a different thing entirely.",
  flag:"Options (b) and (c) are near-synonyms as printed. The notes use the phrase ‘natural variability’, which is why (b) is taken."},
-{t:"SPC",s:"Examination",q:"The natural variability of the process is measured by _____________",o:["Process mean","Sample standard deviation","Process standard deviation","Sample mean"],a:2,
+{t:"SPC",s:"Examination · Block 5",q:"The natural variability of the process is measured by _____________",o:["Process mean","Sample standard deviation","Process standard deviation","Sample mean"],a:2,
  w:"Spread, not centre, measures variability, and it is the process standard deviation, not a single sample’s, that describes the process."},
-{t:"Quality",s:"Examination",q:"Which of the following is not a characteristic of quality control?",o:["Prevents defects from occurring","Focuses on the end product","Determines the root cause of defects","Improves the overall process"],a:0,
+{t:"Quality",s:"Examination · Block 3",q:"Which of the following is not a characteristic of quality control?",o:["Prevents defects from occurring","Focuses on the end product","Determines the root cause of defects","Improves the overall process"],a:0,
  w:"Prevention is the defining characteristic of quality assurance. QC focuses on the end product and on finding and fixing what went wrong."},
-{t:"Control charts",s:"Examination",q:"Twenty five engine mounts are sampled each day and found to have an average width of 2 inches with a standard deviation of 0.1 inches. What is the upper control limit?",o:["2.06","4.10","3.02","1.01"],a:0,
+{t:"Control charts",s:"Examination · Block 5 · Block 6",q:"Twenty five engine mounts are sampled each day and found to have an average width of 2 inches with a standard deviation of 0.1 inches. What is the upper control limit?",o:["2.06","4.10","3.02","1.01"],a:0,
  w:"$\\mathrm{UCL} = \\bar{X} + 3\\left(\\frac{\\sigma}{\\sqrt{n}}\\right) = 2 + 3\\left(\\frac{0.1}{\\sqrt{25}}\\right) = 2 + 3(0.02) = 2.06$.",
  calc:"\\mathrm{UCL} = \\bar{X} + 3\\frac{\\sigma}{\\sqrt{n}} = 2 + 3\\left(\\frac{0.1}{5}\\right) = 2.06"},
-{t:"Control charts",s:"Examination",q:"What is the control limit for the above",o:["3","2","2.60","2.10"],a:1,
+{t:"Control charts",s:"Examination · Block 5 · Block 6",q:"What is the control limit for the above",o:["3","2","2.60","2.10"],a:1,
  w:"The centre line of the chart is the process mean itself, 2 inches. The upper and lower control limits sit $3\\sigma/\\sqrt{n}$ either side of it.",
  calc:"\\mathrm{CL} = \\bar{X} = 2"},
-{t:"Control charts",s:"Examination",q:"What is the lower control limit for the above",o:["1.94","1.90","2.84","2.10"],a:0,
+{t:"Control charts",s:"Examination · Block 5 · Block 6",q:"What is the lower control limit for the above",o:["1.94","1.90","2.84","2.10"],a:0,
  w:"$\\mathrm{LCL} = \\bar{X} − 3\\left(\\frac{\\sigma}{\\sqrt{n}}\\right) = 2 − 3(0.02) = 1.94$.",
  calc:"\\mathrm{LCL} = \\bar{X} − 3\\frac{\\sigma}{\\sqrt{n}} = 2 − 3\\left(\\frac{0.1}{5}\\right) = 1.94"},
-{t:"Quality",s:"Examination",q:"Which of the following is not a characteristic of quality control?",o:["Prevents defects from occurring","Focuses on the end product","Determines the root cause of defects","Improves the overall process"],a:0,
+{t:"Quality",s:"Examination · Block 3",q:"Which of the following is not a characteristic of quality control?",o:["Prevents defects from occurring","Focuses on the end product","Determines the root cause of defects","Improves the overall process"],a:0,
  w:"A repeat. Preventing defects before they occur is QA; QC detects them in the output."},
-{t:"TQM tools",s:"Examination",q:"Which of the following is not a tool used in quality control?",o:["Control chart","Pareto chart","Fishbone diagram","Balance sheet"],a:3,
+{t:"TQM tools",s:"Examination · Block 3",q:"Which of the following is not a tool used in quality control?",o:["Control chart","Pareto chart","Fishbone diagram","Balance sheet"],a:3,
  w:"The seven QC tools are check sheets, histograms, Pareto analysis, fishbone diagrams, scatter diagrams, flowcharts and control charts. A balance sheet is a financial statement."},
-{t:"Control charts",s:"Examination",q:"What is the purpose of a control chart?",o:["To track the performance of a process over time","To identify the root cause of defects","To determine the cost of defects","To evaluate customer satisfaction"],a:0,
+{t:"Control charts",s:"Examination · Block 5",q:"What is the purpose of a control chart?",o:["To track the performance of a process over time","To identify the root cause of defects","To determine the cost of defects","To evaluate customer satisfaction"],a:0,
  w:"A control chart plots a process statistic against time between control limits, so drift and out-of-control points show up as they happen."},
-{t:"Inventory",s:"Examination",q:"------------- cost is the price paid for the procurement of items.",o:["Holding","Ordering","Purchase","Shortage"],a:2,
+{t:"Inventory",s:"Examination · Block 1",q:"------------- cost is the price paid for the procurement of items.",o:["Holding","Ordering","Purchase","Shortage"],a:2,
  w:"Total inventory cost = purchase cost + ordering cost + carrying cost + shortage cost. Purchase cost is price × quantity; ordering cost is what it costs to place the order."},
-{t:"Inventory",s:"Examination",q:"Inventory refers to:",o:["Any kind of resource that has economic value and is maintained to fulfil the present and future needs of an organization.","Resources used in the day to day service of the organization.","a only","a and b"],a:3,
+{t:"Inventory",s:"Examination · Block 1",q:"Inventory refers to:",o:["Any kind of resource that has economic value and is maintained to fulfil the present and future needs of an organization.","Resources used in the day to day service of the organization.","a only","a and b"],a:3,
  w:"The notes give both formulations, covering physical, human and financial resources."},
-{t:"Inventory",s:"Examination",q:"Carrying costs include all these except:",o:["Set-up costs","Insurance costs","Depreciation costs","Obsolescence costs"],a:0,
+{t:"Inventory",s:"Examination · Block 1",q:"Carrying costs include all these except:",o:["Set-up costs","Insurance costs","Depreciation costs","Obsolescence costs"],a:0,
  w:"A repeat from the CA. Set-up cost is incurred by the producer when starting a production batch (cleaning, adjusting and adapting machines), not by holding stock."},
-{t:"Inventory · EOQ",s:"Examination",q:"All these are assumptions of the economic order model except:",o:["Known and constant demand.","No constraints on order size.","Backorder is allowed.","Cost of order is fixed."],a:2,
+{t:"Inventory · EOQ",s:"Examination · Block 1",q:"All these are assumptions of the economic order model except:",o:["Known and constant demand.","No constraints on order size.","Backorder is allowed.","Cost of order is fixed."],a:2,
  w:"The six EOQ assumptions are: demand known and constant; lead time zero; backorder NOT allowed; no constraints on order size; order cost fixed; unit price fixed."},
-{t:"Inventory · ABC",s:"Examination",q:"The purpose of the ABC inventory classification is to be able to ------------- the status of every system kept in inventory.",o:["Value","Affirm","Compute","Assess"],a:3,
+{t:"Inventory · ABC",s:"Examination · ABC analysis",q:"The purpose of the ABC inventory classification is to be able to ------------- the status of every system kept in inventory.",o:["Value","Affirm","Compute","Assess"],a:3,
  w:"ABC is a selective control technique: it sorts items by value so management attention is assessed and allocated where the money actually is."},
-{t:"Inventory",s:"Examination",q:"In ------------ costs, as quantity increases, cost increases.",o:["Ordering","Holding","EOQ","All of the above"],a:1,
+{t:"Inventory",s:"Examination · Block 1",q:"In ------------ costs, as quantity increases, cost increases.",o:["Ordering","Holding","EOQ","All of the above"],a:1,
  w:"The holding cost curve slopes upward: the more you keep, the more you pay to keep it. The ordering cost curve slopes downward, since larger orders mean fewer orders per year."},
-{t:"Inventory · ABC",s:"Examination",q:"ABC inventory control focuses on those",o:["Items not readily available","Items which consume less money","Items which have no demand","Items which consume more money"],a:3,
+{t:"Inventory · ABC",s:"Examination · ABC analysis",q:"ABC inventory control focuses on those",o:["Items not readily available","Items which consume less money","Items which have no demand","Items which consume more money"],a:3,
  w:"Class A items are the small number of items accounting for the bulk of inventory value, and they get the tightest control."},
-{t:"Inventory · EOQ",s:"Examination",q:"If orders are placed with size determined by the EOQ, then the reorder costs component is",o:["equal to the holding cost component","greater than the holding cost component","less than the holding cost component","either greater than or less than the holding cost component"],a:0,
+{t:"Inventory · EOQ",s:"Examination · Block 1",q:"If orders are placed with size determined by the EOQ, then the reorder costs component is",o:["equal to the holding cost component","greater than the holding cost component","less than the holding cost component","either greater than or less than the holding cost component"],a:0,
  w:"EOQ is derived at exactly the point where the two curves cross: $\\frac{D}{Q}O = \\frac{Q}{2}H$. Total cost is minimised where ordering cost equals holding cost.",
  calc:"\\text{At EOQ:}\\quad \\frac{D}{Q}O = \\frac{Q}{2}H"},
-{t:"Inventory · EOQ",s:"Examination",q:"The order cost per order of an inventory is ₦400 with an annual carrying cost of ₦10 per unit. The Economic Order quantity (EOQ) for an annual demand of 2000 units is:",o:["400","440","480","500"],a:0,
+{t:"Inventory · EOQ",s:"Examination · Block 1",q:"The order cost per order of an inventory is ₦400 with an annual carrying cost of ₦10 per unit. The Economic Order quantity (EOQ) for an annual demand of 2000 units is:",o:["400","440","480","500"],a:0,
  w:"$\\mathrm{EOQ} = \\sqrt{\\frac{2DO}{H}} = \\sqrt{\\frac{2 \\times 2{,}000 \\times 400}{10}} = \\sqrt{160{,}000} = 400$ units.",
  calc:"\\mathrm{EOQ} = \\sqrt{\\frac{2 \\times 2{,}000 \\times 400}{10}} = \\sqrt{160{,}000} = 400"},
-{t:"Inventory · EOQ",s:"Examination",q:"The demand rate for a particular item is 12,000 units per year. The ordering cost is ₦100 per order and the holding cost is ₦0.80 per item per month. If no shortages are allowed and the replacement is instantaneous, then the Economic Order Quantity is:",o:["1000 units","2000 units","500 units","1000 units"],a:2,
+{t:"Inventory · EOQ",s:"Examination · Block 1",q:"The demand rate for a particular item is 12,000 units per year. The ordering cost is ₦100 per order and the holding cost is ₦0.80 per item per month. If no shortages are allowed and the replacement is instantaneous, then the Economic Order Quantity is:",o:["1000 units","2000 units","500 units","1000 units"],a:2,
  w:"Convert the holding cost to an annual rate first: $₦0.80 \\times 12 = ₦9.60$ per unit per year. Then $\\mathrm{EOQ} = \\sqrt{\\frac{2 \\times 12{,}000 \\times 100}{9.6}} = \\sqrt{250{,}000} = 500$ units. Missing the monthly-to-annual conversion is what produces the 1,000 distractor.",
  calc:"H = 0.80 \\times 12 = ₦9.60\\text{/yr} \\qquad \\mathrm{EOQ} = \\sqrt{\\frac{2 \\times 12{,}000 \\times 100}{9.6}} = 500"}
 ]};
@@ -1447,6 +1455,39 @@ var DOCS = {"cil-deck-1": {"course": "CIL", "ref": "Slide 1.1", "title": "Introd
 var SHELVES = [{"course": "CIL", "code": "CIL 524", "name": "Law of Engineering Contracts", "note": "Nine class notes taken from the 2025/26 lectures, and the three decks Dr Ilobinso taught from.", "groups": [{"label": "Class notes", "ids": ["cil-class-1", "cil-class-2", "cil-class-3", "cil-class-4", "cil-class-5", "cil-class-6", "cil-class-7", "cil-class-8", "cil-class-9"]}, {"label": "Lecture decks", "ids": ["cil-deck-1", "cil-deck-2", "cil-deck-3"]}]}, {"course": "BUS", "code": "BUS 440", "name": "Management for Engineers", "note": "One document per lecturer block, following the course outline. Where a lecturer's notes were handwritten, the transcript stands in for the photographs.", "groups": [{"label": "The six blocks", "ids": ["bus-block-1", "bus-block-2", "bus-block-3", "bus-block-4", "bus-block-5", "bus-block-6"]}]}];
 var REF = {"Slide 1.1": "cil-deck-1", "Slide 1.2": "cil-deck-2", "Slide 1.3": "cil-deck-3", "Class 1": "cil-class-1", "Class 2": "cil-class-2", "Class 3": "cil-class-3", "Class 4": "cil-class-4", "Class 5": "cil-class-5", "Class 6": "cil-class-6", "Class 7": "cil-class-7", "Class 8": "cil-class-8", "Class 9": "cil-class-9", "Block 1": "bus-block-1", "Block 2": "bus-block-2", "Block 3": "bus-block-3", "Block 4": "bus-block-4", "Block 5": "bus-block-5", "Block 6": "bus-block-6"};
 var OUTLINE = "<table class=\"outline\"><tr><th>Block<\/th><th>Course topics<\/th><th>Lecturer<\/th><\/tr><tr><td class=\"bk\"><a href=\"#notes/bus-block-1\">1<\/a><\/td><td><span>Inventory Management<\/span><span>Inventory Control and Techniques<\/span><span>Economic Order Quantity — EOQ<\/span><span>Production planning and control<\/span><span>Levels of production planning<\/span><span>Types of Production planning and Systems<\/span><span>Elements of Production planning and Control<\/span><\/td><td class=\"who\">Dr Glorious Adekoya<\/td><\/tr><tr><td class=\"bk\"><a href=\"#notes/bus-block-2\">2<\/a><\/td><td><span>Course Overview and Introduction<\/span><span>Management: Evolution, Definition, and Functions<\/span><span>Management: Art, Science or Both<\/span><span>Evolution of Management Theories<\/span><span>Management and Administration: Conceptual Clarification<\/span><\/td><td class=\"who\">Dr S. Edegwa<\/td><\/tr><tr><td class=\"bk\"><a href=\"#notes/bus-block-3\">3<\/a><\/td><td><span>Total Quality Management<\/span><span>Dimensions of Total Quality Management — TQM<\/span><span>Total Quality Management Tools<\/span><span>Obstacles to Implementing Total Quality Management<\/span><span>ISO 9000 and other Quality Systems<\/span><\/td><td class=\"who\">Dr O. G. Oyenuga<\/td><\/tr><tr><td class=\"bk\"><a href=\"#notes/bus-block-4\">4<\/a><\/td><td><span>Management and Leadership<\/span><span>Managerial Skills<\/span><span>Managers and Business Environment<\/span><span>Managing Organisational Change<\/span><span>Communication in the Workplace<\/span><span>Conflict in the Workplace<\/span><\/td><td class=\"who\">Dr E. O. Abraham<\/td><\/tr><tr><td class=\"bk\"><a href=\"#notes/bus-block-5\">5<\/a><\/td><td><span>Quality control<\/span><span>Statistical quality control<\/span><span>Variation in process Quality and Sources<\/span><span>Quality systems<\/span><span>Elements and Implementation of Quality Systems<\/span><\/td><td class=\"who\">Dr O. P. Olonade<\/td><\/tr><tr><td class=\"bk\"><a href=\"#notes/bus-block-6\">6<\/a><\/td><td><span>Project management<\/span><span>Stages and Components of Project Management<\/span><span>Project evaluation, appraisal and Control Process<\/span><\/td><td class=\"who\">Miss Mary Isaac<\/td><\/tr><\/table>";
+/* Sources that are not in the course folder.
+
+   A question's source line is a list of labels. A label naming one of the
+   course documents opens it; a label listed here opens a page on the web
+   instead. Two kinds of label end up here:
+
+     · points the 2024/25 BUS paper examined that the 2025/26 materials do
+       not cover — organisational change, conflict, the environment of
+       business, Garvin's dimensions of quality, ABC analysis, safety stock,
+       acceptance sampling, crashing a schedule
+     · the cases and statutes the CIL notes cite by name
+
+   Every URL was checked. Keep each key identical, character for character,
+   to the label used in the question's s: field, or it will not resolve. */
+var LINKS = {
+  /* BUS 440: examined, but not in the six blocks */
+  "Eight dimensions of quality": "https://en.wikipedia.org/wiki/Eight_dimensions_of_quality",
+  "Change management":           "https://en.wikipedia.org/wiki/Change_management",
+  "Organisational conflict":     "https://en.wikipedia.org/wiki/Organizational_conflict",
+  "Business environment":        "https://en.wikipedia.org/wiki/Market_environment",
+  "Acceptance sampling":         "https://en.wikipedia.org/wiki/Acceptance_sampling",
+  "Safety stock":                "https://en.wikipedia.org/wiki/Safety_stock",
+  "ABC analysis":                "https://en.wikipedia.org/wiki/ABC_analysis",
+  "Critical path method":        "https://en.wikipedia.org/wiki/Critical_path_method",
+
+  /* CIL 524: the cases and the Act the classes name */
+  "Stilk v Myrick": "https://en.wikipedia.org/wiki/Stilk_v_Myrick",
+  "Pinnel's case":  "https://en.wikipedia.org/wiki/Pinnel%27s_Case",
+  "S.12": "https://en.wikipedia.org/wiki/Sale_of_Goods_Act_1893",
+  "S.13": "https://en.wikipedia.org/wiki/Sale_of_Goods_Act_1893",
+  "S.14": "https://en.wikipedia.org/wiki/Sale_of_Goods_Act_1893",
+  "S.15": "https://en.wikipedia.org/wiki/Sale_of_Goods_Act_1893"
+};
 /* ─────────────────────────────────────────────────────────────────
    A very small TeX subset, set as MathML.
 
@@ -1780,7 +1821,8 @@ function renderHome(){
     + '<div><h3>Where the answers come from</h3><p>Every answer on both papers is worked from the '
     + '<b>2025/26 course materials</b>: Classes 1&ndash;9 and the slide decks for CIL, the six '
     + 'lecturer blocks for BUS. Every question carries the class, slide or block it rests on, '
-    + 'and that label opens the document itself.</p></div>'
+    + 'and that label opens the document itself. Where the 2024/25 BUS paper strayed outside '
+    + 'them, the label links out to the web instead.</p></div>'
     + '<div><h3>No marking scheme was used</h3><p>The CIL paper came with a marked student script. It is '
     + '<b>not</b> a source here and was not used at any point. Where it disagreed with the lecture '
     + 'notes, the notes win and the difference is spelt out.</p></div>'
@@ -2001,7 +2043,8 @@ function renderResults(){
     return '<div class="rv"><div class="q"><b>'+(m.i+1)+'.</b> '+mtxt(m.q.q)+'</div>'
       + '<div class="a yours"><span class="m">You</span><span>'+LET[m.p]+' &middot; '+mtxt(m.q.o[m.p])+'</span></div>'
       + '<div class="a right"><span class="m">Answer</span><span>'+LET[m.q.a]+' &middot; '+mtxt(m.q.o[m.q.a])+'</span></div>'
-      + '<div class="a"><span class="m">Why</span><span>'+mtxt(m.q.w)+'</span></div></div>'; }).join("");
+      + '<div class="a"><span class="m">Why</span><span>'+mtxt(m.q.w)+'</span></div>'
+      + whenceHTML(m.q)+'</div>'; }).join("");
 
   app.innerHTML = '<div class="qpage">'
     + '<div class="qbar"><div class="qbar-in">'
@@ -2043,24 +2086,39 @@ function refsOf(q){
   return String(q && q.s || "").split("·").map(function(s){ return s.trim(); })
     .filter(function(s){ return s; });
 }
+/* wikipedia.org out of https://en.wikipedia.org/wiki/… , to say where a link goes */
+function siteOf(url){
+  var host = String(url).split("/")[2].replace(/^www\./, "").split(".");
+  return host.length > 2 ? host.slice(1).join(".") : host.join(".");
+}
 function srcHTML(q){
   return refsOf(q).map(function(label){
-    var id = REF[label];
-    return id ? '<button class="ref" data-doc="'+id+'">'+esc(label)+'</button>'
-              : esc(label);
+    if(REF[label]) return '<button class="ref" data-doc="'+REF[label]+'">'+esc(label)+'</button>';
+    if(LINKS[label]) return '<a class="ref" href="'+esc(LINKS[label])
+      + '" target="_blank" rel="noopener noreferrer">'+esc(label)+'</a>';
+    return esc(label);
   }).join(" &middot; ");
 }
-/* The citation offered under a revealed answer. A paper the questions came
-   from ("Examination") is not a document, so it earns no line of its own. */
+/* The citation offered under a revealed answer: the document it was worked
+   from, or a page on the web where the materials do not cover the point. The
+   paper a question came from ("Examination") is neither, and stays as text. */
 function whenceHTML(q){
-  var refs = refsOf(q), any = false;
-  var cites = refs.map(function(label){
-    var d = DOCS[REF[label]];
-    if(!d) return '<span class="plain">'+esc(label)+'</span>';
-    any = true;
-    return '<button class="cite" data-doc="'+REF[label]+'">'
-      + '<span class="tag">'+esc(label)+'</span>'
-      + '<span class="nm">'+esc(d.title)+'</span></button>';
+  var any = false;
+  var cites = refsOf(q).map(function(label){
+    var id = REF[label], url = LINKS[label];
+    if(id){
+      any = true;
+      return '<button class="cite" data-doc="'+id+'">'
+        + '<span class="tag">'+esc(label)+'</span>'
+        + '<span class="nm">'+esc(DOCS[id].title)+'</span></button>';
+    }
+    if(url){
+      any = true;
+      return '<a class="cite ext" href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">'
+        + '<span class="tag">'+esc(siteOf(url))+'</span>'
+        + '<span class="nm">'+esc(label)+'</span></a>';
+    }
+    return '<span class="plain">'+esc(label)+'</span>';
   }).join("");
   return any ? '<div class="whence"><span class="eyebrow">Source</span>'+cites+'</div>' : "";
 }

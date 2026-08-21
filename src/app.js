@@ -110,7 +110,8 @@ function renderHome(){
     + '<div><h3>Where the answers come from</h3><p>Every answer on both papers is worked from the '
     + '<b>2025/26 course materials</b>: Classes 1&ndash;9 and the slide decks for CIL, the six '
     + 'lecturer blocks for BUS. Every question carries the class, slide or block it rests on, '
-    + 'and that label opens the document itself.</p></div>'
+    + 'and that label opens the document itself. Where the 2024/25 BUS paper strayed outside '
+    + 'them, the label links out to the web instead.</p></div>'
     + '<div><h3>No marking scheme was used</h3><p>The CIL paper came with a marked student script. It is '
     + '<b>not</b> a source here and was not used at any point. Where it disagreed with the lecture '
     + 'notes, the notes win and the difference is spelt out.</p></div>'
@@ -331,7 +332,8 @@ function renderResults(){
     return '<div class="rv"><div class="q"><b>'+(m.i+1)+'.</b> '+mtxt(m.q.q)+'</div>'
       + '<div class="a yours"><span class="m">You</span><span>'+LET[m.p]+' &middot; '+mtxt(m.q.o[m.p])+'</span></div>'
       + '<div class="a right"><span class="m">Answer</span><span>'+LET[m.q.a]+' &middot; '+mtxt(m.q.o[m.q.a])+'</span></div>'
-      + '<div class="a"><span class="m">Why</span><span>'+mtxt(m.q.w)+'</span></div></div>'; }).join("");
+      + '<div class="a"><span class="m">Why</span><span>'+mtxt(m.q.w)+'</span></div>'
+      + whenceHTML(m.q)+'</div>'; }).join("");
 
   app.innerHTML = '<div class="qpage">'
     + '<div class="qbar"><div class="qbar-in">'
@@ -373,24 +375,39 @@ function refsOf(q){
   return String(q && q.s || "").split("·").map(function(s){ return s.trim(); })
     .filter(function(s){ return s; });
 }
+/* wikipedia.org out of https://en.wikipedia.org/wiki/… , to say where a link goes */
+function siteOf(url){
+  var host = String(url).split("/")[2].replace(/^www\./, "").split(".");
+  return host.length > 2 ? host.slice(1).join(".") : host.join(".");
+}
 function srcHTML(q){
   return refsOf(q).map(function(label){
-    var id = REF[label];
-    return id ? '<button class="ref" data-doc="'+id+'">'+esc(label)+'</button>'
-              : esc(label);
+    if(REF[label]) return '<button class="ref" data-doc="'+REF[label]+'">'+esc(label)+'</button>';
+    if(LINKS[label]) return '<a class="ref" href="'+esc(LINKS[label])
+      + '" target="_blank" rel="noopener noreferrer">'+esc(label)+'</a>';
+    return esc(label);
   }).join(" &middot; ");
 }
-/* The citation offered under a revealed answer. A paper the questions came
-   from ("Examination") is not a document, so it earns no line of its own. */
+/* The citation offered under a revealed answer: the document it was worked
+   from, or a page on the web where the materials do not cover the point. The
+   paper a question came from ("Examination") is neither, and stays as text. */
 function whenceHTML(q){
-  var refs = refsOf(q), any = false;
-  var cites = refs.map(function(label){
-    var d = DOCS[REF[label]];
-    if(!d) return '<span class="plain">'+esc(label)+'</span>';
-    any = true;
-    return '<button class="cite" data-doc="'+REF[label]+'">'
-      + '<span class="tag">'+esc(label)+'</span>'
-      + '<span class="nm">'+esc(d.title)+'</span></button>';
+  var any = false;
+  var cites = refsOf(q).map(function(label){
+    var id = REF[label], url = LINKS[label];
+    if(id){
+      any = true;
+      return '<button class="cite" data-doc="'+id+'">'
+        + '<span class="tag">'+esc(label)+'</span>'
+        + '<span class="nm">'+esc(DOCS[id].title)+'</span></button>';
+    }
+    if(url){
+      any = true;
+      return '<a class="cite ext" href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">'
+        + '<span class="tag">'+esc(siteOf(url))+'</span>'
+        + '<span class="nm">'+esc(label)+'</span></a>';
+    }
+    return '<span class="plain">'+esc(label)+'</span>';
   }).join("");
   return any ? '<div class="whence"><span class="eyebrow">Source</span>'+cites+'</div>' : "";
 }

@@ -169,7 +169,7 @@ footer p{margin:0; max-width:74ch; line-height:1.6;}
   letter-spacing:.09em; text-transform:uppercase; color:var(--ink3); margin-left:auto;
   text-align:right; max-width:44%;}
 .qsrc .ref{color:var(--ink2); border-bottom:1px solid var(--rule); padding:0 0 1px;
-  font:inherit; letter-spacing:inherit; text-transform:inherit;}
+  font:inherit; letter-spacing:inherit; text-transform:inherit; text-decoration:none;}
 .qsrc .ref:hover{color:var(--accent); border-color:var(--accent-edge);}
 .stem{padding:13px 28px 20px; font-size:19px; line-height:1.5; text-wrap:pretty;}
 
@@ -227,6 +227,12 @@ math[display="block"]{margin:0; font-size:1.15em;}
 .cite:hover .nm{color:var(--paper);}
 .whence .plain{font-family:"Spline Sans Mono",ui-monospace,Menlo,monospace; font-size:11px;
   letter-spacing:.06em; color:var(--ink3);}
+.cite.ext{border-color:var(--rule); background:var(--paper); text-decoration:none;}
+.cite.ext .tag{color:var(--ink3); text-transform:none; letter-spacing:.04em;}
+.cite.ext .nm{color:var(--ink);}
+.cite.ext::after{content:"\2197"; flex:none; align-self:center; color:var(--ink3); font-size:12px;}
+.cite.ext:hover{background:var(--sunk); border-color:var(--ink3);}
+.cite.ext:hover .nm,.cite.ext:hover .tag,.cite.ext:hover::after{color:var(--ink);}
 
 /* sticky action bar: Next never moves */
 .qfoot{position:sticky; bottom:0; z-index:30; background:var(--paper); box-shadow:var(--lift);}
@@ -306,6 +312,7 @@ math[display="block"]{margin:0; font-size:1.15em;}
 .rv .a .m{font-family:"Spline Sans Mono",ui-monospace,Menlo,monospace; font-size:9px;
   letter-spacing:.12em; text-transform:uppercase; flex:none; width:52px; padding-top:3px;}
 .rv .a.yours .m{color:var(--no);} .rv .a.right .m{color:var(--ok);}
+.rv .whence{margin-top:12px; padding-top:11px; border-top:1px solid var(--rule2);}
 .rv .a.right span{color:var(--ink);}
 
 /* ─── materials ──────────────────────────────────────────────────── */
@@ -471,6 +478,7 @@ table.outline td.who{white-space:nowrap; color:var(--ink); font-size:14.5px;}
   .doc{padding:28px 0 44px;}
   .prose{font-size:16.5px;}
   .cite .nm{display:none;}
+  .cite.ext .nm{display:inline;} .cite.ext .tag{display:none;}
 }
 @media (max-width:380px){ .mark{font-size:12.5px;} .btn{padding:10px 10px; letter-spacing:.05em;} }
 @media (prefers-reduced-motion:reduce){ *{transition:none !important; animation:none !important;} }
