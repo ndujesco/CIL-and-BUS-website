@@ -92,19 +92,21 @@ function renderHome(){
     + '<span class="eyebrow">University of Lagos · 400 level engineering</span>'
     + '<h1>Two courses, four question banks, one answer sheet.</h1>'
     + '<p>Every past question from the CIL 524 and BUS 440 papers, worked from the course materials '
-    + 'themselves &mdash; plus fresh questions written in the same style from the 2025/26 lectures, '
+    + 'themselves, plus fresh questions written in the same style from the 2025/26 lectures, '
     + 'slides and class notes. Shade an answer and the reasoning appears underneath.</p>'
     + '<div class="tally"><span><b>'+total+'</b> questions</span><span><b>'+pq+'</b> from past papers</span>'
     + '<span><b>'+(total-pq)+'</b> newly written</span><span><b>2</b> courses</span></div></section>'
     + '<div class="deck">'+cards+'</div>'
     + '<section class="legend">'
     + '<div><h3>Where the answers come from</h3><p>Every answer on both papers is worked from the '
-    + '<b>2025/26 course materials</b> &mdash; Classes 1&ndash;9 and the slide decks for CIL, the six '
-    + 'lecturer blocks for BUS. Each explanation says which class or slide it rests on.</p></div>'
+    + '<b>2025/26 course materials</b>: Classes 1&ndash;9 and the slide decks for CIL, the six '
+    + 'lecturer blocks for BUS. Every CIL question carries the class or slide it rests on; the BUS '
+    + 'practice questions carry the lecturer block, and the BUS past questions the paper they came from.</p></div>'
     + '<div><h3>No marking scheme was used</h3><p>The CIL paper came with a marked student script. It is '
-    + '<b>not</b> a source here and was not used at any point &mdash; where it disagreed with the lecture '
+    + '<b>not</b> a source here and was not used at any point. Where it disagreed with the lecture '
     + 'notes, the notes win and the difference is spelt out.</p></div>'
-    + '<div><h3>Where a question is broken</h3><p>Some questions are defective as printed &mdash; duplicated '
+    + '<div><h3>Where a question is broken</h3><p>Eight questions across the two past papers are '
+    + 'defective as printed: duplicated '
     + 'options, a stem that contradicts its own choices, an answer no option supports. Those carry a '
     + '<b>check this</b> note setting out the conflict rather than quietly picking a side.</p></div>'
     + '<div><h3>Working</h3><p>Answers save as you go. Shuffle to break the order you have memorised, filter '
@@ -112,7 +114,7 @@ function renderHome(){
     + 'you finish.</p></div></section></div>';
 
   document.getElementById("foot-note").textContent =
-    "Built from the CIL 524 and BUS 440 course folders. Past questions are transcribed as printed, including their typographical errors. Answers and explanations are study aids derived from the lecture materials, not an official marking scheme — check anything that matters against your lecturer.";
+    "Built from the CIL 524 and BUS 440 course folders. Past questions are transcribed as printed, including their typographical errors. Answers and explanations are study aids derived from the lecture materials, not an official marking scheme. Check anything that matters against your lecturer.";
 }
 
 function tallyHTML(done, right, wrong){
@@ -251,7 +253,7 @@ function openPanel(){
   var scrim = document.createElement("div"); scrim.className="scrim"; scrim.id="scrim";
   var panel = document.createElement("div"); panel.className="panel"; panel.id="panel";
   panel.innerHTML = '<div class="panel-in">'
-    + '<div class="ph"><span class="eyebrow">Answer sheet &mdash; '+vis.length+' questions</span>'
+    + '<div class="ph"><span class="eyebrow">Answer sheet &middot; '+vis.length+' questions</span>'
     + '<button class="x" id="p-close">Close &times;</button></div>'
     + '<div class="pset">'
     + '<select id="f-topic"><option value="*">All topics</option>'+topics+'</select>'
@@ -303,10 +305,10 @@ function renderResults(){
     if(p===q.a){ right++; byTopic[q.t].r++; } else { wrong++; misses.push({q:q,p:p,i:i}); }
   });
   var answered = right+wrong, pct = answered ? Math.round(right/answered*100) : 0;
-  var verdict = !answered ? "Nothing marked yet — answer some questions and come back."
+  var verdict = !answered ? "Nothing marked yet. Answer some questions and come back."
     : pct>=80 ? "Strong. Work the misses below, then move to the other bank."
     : pct>=60 ? "Solid base. The topic breakdown shows where the marks are leaking."
-    : "Worth a second pass — read the explanations on the misses before you re-run this bank.";
+    : "Worth a second pass. Read the explanations on the misses before you re-run this bank.";
 
   var rows = Object.keys(byTopic).filter(function(t){ return byTopic[t].n; })
     .sort(function(a,c){ return (byTopic[a].r/byTopic[a].n)-(byTopic[c].r/byTopic[c].n); })
@@ -317,14 +319,14 @@ function renderResults(){
 
   var review = misses.slice(0,60).map(function(m){
     return '<div class="rv"><div class="q"><b>'+(m.i+1)+'.</b> '+esc(m.q.q)+'</div>'
-      + '<div class="a yours"><span class="m">You</span><span>'+LET[m.p]+' &mdash; '+esc(m.q.o[m.p])+'</span></div>'
-      + '<div class="a right"><span class="m">Answer</span><span>'+LET[m.q.a]+' &mdash; '+esc(m.q.o[m.q.a])+'</span></div>'
+      + '<div class="a yours"><span class="m">You</span><span>'+LET[m.p]+' &middot; '+esc(m.q.o[m.p])+'</span></div>'
+      + '<div class="a right"><span class="m">Answer</span><span>'+LET[m.q.a]+' &middot; '+esc(m.q.o[m.q.a])+'</span></div>'
       + '<div class="a"><span class="m">Why</span><span>'+esc(m.q.w)+'</span></div></div>'; }).join("");
 
   app.innerHTML = '<div class="qpage">'
     + '<div class="qbar"><div class="qbar-in">'
     + '<button class="exit" data-home>&larr; Banks</button>'
-    + '<span class="name">'+esc(b.title)+' &mdash; result</span></div>'
+    + '<span class="name">'+esc(b.title)+' &middot; result</span></div>'
     + '<div class="qprog"><i style="width:100%"></i></div></div>'
     + '<div class="qbody"><div class="col">'
     + '<section class="result"><span class="eyebrow">Result'
@@ -336,7 +338,7 @@ function renderResults(){
     + '<div class="stat"><div class="v no">'+wrong+'</div><div class="l">Wrong</div></div>'
     + '<div class="stat"><div class="v">'+skipped+'</div><div class="l">Unanswered</div></div>'
     + '<div class="stat"><div class="v">'+vis.length+'</div><div class="l">In this run</div></div></div>'
-    + (rows ? '<span class="eyebrow">By topic &mdash; weakest first</span><div class="bytopic">'+rows+'</div>' : '')
+    + (rows ? '<span class="eyebrow">By topic &middot; weakest first</span><div class="bytopic">'+rows+'</div>' : '')
     + '</section>'
     + (review ? '<span class="eyebrow" style="display:block;margin:30px 0 0">What you missed</span>'
         + '<div class="review">'+review+'</div>' : '')

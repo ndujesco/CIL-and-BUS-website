@@ -1,7 +1,7 @@
 #!/bin/sh
 # Assembles src/* into two outputs:
-#   index.html    — standalone page, deploy this anywhere
-#   artifact.html — same content as a fragment, for Claude Artifacts
+#   index.html: standalone page, deploy this anywhere
+#   artifact.html: same content as a fragment, for Claude Artifacts
 set -e
 cd "$(dirname "$0")"
 
@@ -23,7 +23,7 @@ cd "$(dirname "$0")"
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Shade The Appropriate Answer</title>
-<meta name="description" content="418 worked multiple-choice questions for CIL 524 Law of Engineering Contracts and BUS 440 Management for Engineers — both past papers plus fresh questions from the 2025/26 course materials.">
+<meta name="description" content="418 worked multiple-choice questions for CIL 524 Law of Engineering Contracts and BUS 440 Management for Engineers: both past papers plus fresh questions from the 2025/26 course materials.">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#EDEFEB" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#101315" media="(prefers-color-scheme: dark)">
@@ -31,12 +31,12 @@ cd "$(dirname "$0")"
 </head>
 <body>
 HEAD
-  # strip the fragment's own <title> — it now lives in <head>
+  # strip the fragment's own <title>; it now lives in <head>
   grep -v '^<title>Shade The Appropriate Answer</title>$' artifact.html
   echo '</body>'
   echo '</html>'
 } > index.html
 
 echo "built:"
-echo "  index.html    $(wc -c < index.html | tr -d ' ') bytes  — deploy this"
-echo "  artifact.html $(wc -c < artifact.html | tr -d ' ') bytes  — Claude Artifacts fragment"
+echo "  index.html    $(wc -c < index.html | tr -d ' ') bytes: deploy this"
+echo "  artifact.html $(wc -c < artifact.html | tr -d ' ') bytes: Claude Artifacts fragment"
