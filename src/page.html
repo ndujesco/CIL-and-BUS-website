@@ -168,6 +168,9 @@ footer p{margin:0; max-width:74ch; line-height:1.6;}
 .qsrc{font-family:"Spline Sans Mono",ui-monospace,Menlo,monospace; font-size:10px;
   letter-spacing:.09em; text-transform:uppercase; color:var(--ink3); margin-left:auto;
   text-align:right; max-width:44%;}
+.qsrc .ref{color:var(--ink2); border-bottom:1px solid var(--rule); padding:0 0 1px;
+  font:inherit; letter-spacing:inherit; text-transform:inherit;}
+.qsrc .ref:hover{color:var(--accent); border-color:var(--accent-edge);}
 .stem{padding:13px 28px 20px; font-size:19px; line-height:1.5; text-wrap:pretty;}
 
 .opts{display:flex; flex-direction:column; border-top:1px solid var(--rule2);}
@@ -208,6 +211,22 @@ math[display="block"]{margin:0; font-size:1.15em;}
   border-left:2.5px solid var(--flag); font-size:15px; color:var(--ink2); line-height:1.55;}
 .why .flag b{color:var(--flag); font-family:"Spline Sans Mono",ui-monospace,Menlo,monospace;
   font-size:9.5px; letter-spacing:.13em; text-transform:uppercase; display:block; margin-bottom:5px;}
+
+/* the material each answer rests on, offered to read once the answer is out */
+.whence{margin-top:15px; padding-top:13px; border-top:1px solid var(--rule);
+  display:flex; align-items:center; gap:9px; flex-wrap:wrap;}
+.whence .eyebrow{flex:none;}
+.cite{display:inline-flex; align-items:baseline; gap:8px; max-width:100%;
+  padding:7px 12px; border:1px solid var(--accent-edge); background:var(--accent-bg);
+  border-radius:3px; color:var(--accent); text-align:left; transition:.14s;}
+.cite:hover{background:var(--accent); color:var(--paper); border-color:var(--accent);}
+.cite .tag{font-family:"Spline Sans Mono",ui-monospace,Menlo,monospace; font-size:10px;
+  letter-spacing:.1em; text-transform:uppercase; font-weight:600; flex:none;}
+.cite .nm{font-size:14.5px; line-height:1.3; color:var(--ink2); min-width:0;
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+.cite:hover .nm{color:var(--paper);}
+.whence .plain{font-family:"Spline Sans Mono",ui-monospace,Menlo,monospace; font-size:11px;
+  letter-spacing:.06em; color:var(--ink3);}
 
 /* sticky action bar: Next never moves */
 .qfoot{position:sticky; bottom:0; z-index:30; background:var(--paper); box-shadow:var(--lift);}
@@ -289,6 +308,136 @@ math[display="block"]{margin:0; font-size:1.15em;}
 .rv .a.yours .m{color:var(--no);} .rv .a.right .m{color:var(--ok);}
 .rv .a.right span{color:var(--ink);}
 
+/* ─── materials ──────────────────────────────────────────────────── */
+.libcard{display:flex; align-items:center; gap:22px; width:100%; text-align:left;
+  background:var(--paper); border:1px solid var(--rule); padding:22px 26px;
+  margin:0 0 30px; transition:background .16s;}
+.libcard:hover{background:var(--sunk);}
+.libcard h3{font-size:21px; letter-spacing:-.015em;}
+.libcard p{margin:5px 0 0; color:var(--ink2); font-size:15px; max-width:60ch;}
+.libcard .go{margin-left:auto; flex:none; color:var(--ink3);
+  font-family:"Spline Sans Mono",ui-monospace,Menlo,monospace; font-size:11.5px;
+  letter-spacing:.08em; text-transform:uppercase;}
+.libcard:hover .go{color:var(--ink);}
+
+.shelf{margin:0 0 54px;}
+.shelf .sh{display:flex; align-items:baseline; gap:13px; padding-bottom:12px;
+  border-bottom:1px solid var(--ink); margin-bottom:0;}
+.shelf .sh h2{font-size:23px; letter-spacing:-.02em;}
+.shelf .sh .code{font-family:"Spline Sans Mono",ui-monospace,Menlo,monospace; font-size:11px;
+  font-weight:600; letter-spacing:.1em; color:var(--accent); text-transform:uppercase; flex:none;}
+.shelf .sh .n{margin-left:auto; flex:none; font-family:"Spline Sans Mono",ui-monospace,Menlo,monospace;
+  font-size:11px; color:var(--ink3); letter-spacing:.05em; font-variant-numeric:tabular-nums;}
+.shelf .blurb{color:var(--ink2); font-size:15.5px; margin:13px 0 20px; max-width:70ch;}
+.group{font-family:"Spline Sans Mono",ui-monospace,Menlo,monospace; font-size:10px;
+  letter-spacing:.15em; text-transform:uppercase; color:var(--ink3); margin:24px 0 9px;}
+.docs{border:1px solid var(--rule); background:var(--paper);}
+.docrow{display:flex; align-items:baseline; gap:16px; width:100%; text-align:left;
+  padding:14px 20px; border-bottom:1px solid var(--rule2); transition:background .12s;}
+.docrow:last-child{border-bottom:none;}
+.docrow:hover{background:var(--sunk);}
+.docrow .ref{font-family:"Spline Sans Mono",ui-monospace,Menlo,monospace; font-size:10.5px;
+  letter-spacing:.1em; text-transform:uppercase; color:var(--accent); flex:none; width:82px;}
+.docrow .nm{flex:1; min-width:0; font-size:16.5px; line-height:1.35;}
+.docrow .nm em{display:block; font-style:normal; color:var(--ink3); font-size:13.5px;
+  margin-top:3px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+.docrow .w{flex:none; font-family:"Spline Sans Mono",ui-monospace,Menlo,monospace;
+  font-size:11px; color:var(--ink3); font-variant-numeric:tabular-nums;}
+
+table.outline{width:100%; border-collapse:collapse; margin:6px 0 0; font-size:15px;}
+table.outline th{font-family:"Spline Sans Mono",ui-monospace,Menlo,monospace; font-size:9.5px;
+  letter-spacing:.13em; text-transform:uppercase; color:var(--ink3); font-weight:500;
+  text-align:left; padding:0 14px 8px 0; border-bottom:1px solid var(--rule);}
+table.outline td{padding:12px 14px 12px 0; border-bottom:1px solid var(--rule2);
+  vertical-align:top; color:var(--ink2);}
+table.outline td.bk{width:34px;}
+table.outline td.bk a{font-family:"Familjen Grotesk",Helvetica,Arial,sans-serif; font-size:20px;
+  font-weight:700; color:var(--accent); text-decoration:none;}
+table.outline td span{display:block; line-height:1.45;}
+table.outline td.who{white-space:nowrap; color:var(--ink); font-size:14.5px;}
+@media (max-width:620px){ table.outline td.who{white-space:normal;} }
+
+/* ─── one document ───────────────────────────────────────────────── */
+.doc{max-width:760px; margin:0 auto; padding:40px 0 60px;}
+.doc .dhead{border-bottom:1px solid var(--ink); padding-bottom:20px; margin-bottom:26px;}
+.doc h1{font-size:clamp(28px,4.4vw,40px); line-height:1.1; letter-spacing:-.025em; margin:11px 0 0;}
+.doc .dhead .ref{font:inherit; letter-spacing:inherit; text-transform:inherit;
+  color:var(--ink3); border-bottom:1px solid var(--rule);}
+.doc .dhead .ref:hover{color:var(--accent); border-color:var(--accent-edge);}
+.doc .dmeta{display:flex; gap:16px; flex-wrap:wrap; margin-top:14px;
+  font-family:"Spline Sans Mono",ui-monospace,Menlo,monospace; font-size:11px;
+  color:var(--ink3); letter-spacing:.05em;}
+.doc .dmeta b{color:var(--ink2); font-weight:500;}
+.toc{border:1px solid var(--rule); background:var(--paper); padding:16px 20px; margin-bottom:34px;}
+.toc ul{list-style:none; margin:8px 0 0; padding:0; columns:2; column-gap:26px;}
+@media (max-width:620px){ .toc ul{columns:1;} }
+.toc li{break-inside:avoid; margin:0 0 5px;}
+.toc button{color:var(--ink2); font-size:14.5px; line-height:1.4; text-align:left;
+  padding:0; border-bottom:1px solid transparent; font-family:inherit;}
+.toc button:hover{color:var(--accent); border-color:var(--accent-edge);}
+
+.part{margin-bottom:44px;}
+.part .phead{margin:0 0 18px; padding:14px 18px; background:var(--sunk);
+  border-left:2.5px solid var(--accent);}
+.part .phead h2{font-size:19px; letter-spacing:-.015em;}
+.part .phead p{margin:4px 0 0; color:var(--ink2); font-size:14.5px;}
+.part .phead .file{display:block; margin-top:7px;
+  font-family:"Spline Sans Mono",ui-monospace,Menlo,monospace; font-size:10px;
+  letter-spacing:.08em; color:var(--ink3); word-break:break-all;}
+
+.prose{font-size:17px; line-height:1.62; color:var(--ink2);}
+.prose h2{font-size:22px; letter-spacing:-.02em; color:var(--ink); margin:34px 0 10px;
+  padding-top:16px; border-top:1px solid var(--rule2);}
+.prose h3{font-size:17.5px; letter-spacing:-.01em; color:var(--ink); margin:26px 0 8px;}
+.prose h4{font-family:"Spline Sans Mono",ui-monospace,Menlo,monospace; font-size:11px;
+  letter-spacing:.13em; text-transform:uppercase; color:var(--ink3); margin:22px 0 7px;}
+.prose > :first-child{margin-top:0; border-top:none; padding-top:0;}
+.prose p{margin:0 0 13px; text-wrap:pretty;}
+.prose b{color:var(--ink); font-weight:600;}
+.prose ul,.prose ol{margin:0 0 15px; padding-left:24px;}
+.prose li{margin:0 0 6px;}
+.prose ul{list-style:none; padding-left:19px;}
+.prose ul li{position:relative;}
+.prose ul li::before{content:"—"; position:absolute; left:-19px; color:var(--ink3);}
+.prose ol{list-style:decimal;}
+.prose ol li::marker{font-family:"Spline Sans Mono",ui-monospace,Menlo,monospace;
+  font-size:.86em; color:var(--ink3);}
+.prose blockquote{margin:0 0 15px; padding:11px 16px; border-left:2.5px solid var(--rule);
+  background:var(--paper); color:var(--ink2);}
+.prose code{font-family:"Spline Sans Mono",ui-monospace,Menlo,monospace; font-size:.88em;
+  background:var(--sunk); padding:1px 5px; border-radius:2px; color:var(--ink);}
+.prose pre{font-family:"Spline Sans Mono",ui-monospace,Menlo,monospace; font-size:12.5px;
+  line-height:1.45; background:var(--paper); border:1px solid var(--rule); border-radius:3px;
+  padding:14px 16px; margin:0 0 16px; overflow-x:auto; color:var(--ink);}
+.prose .tw{overflow-x:auto; margin:0 0 16px;}
+.prose table{border-collapse:collapse; font-size:14.5px; min-width:100%;}
+.prose th,.prose td{border:1px solid var(--rule); padding:8px 12px; text-align:left;
+  vertical-align:top;}
+.prose th{background:var(--sunk); color:var(--ink); font-weight:600;
+  font-family:"Familjen Grotesk",Helvetica,Arial,sans-serif; white-space:nowrap;}
+
+.dfoot{display:flex; gap:12px; align-items:center; border-top:1px solid var(--rule);
+  padding-top:20px; margin-top:8px;}
+.dfoot .sp{flex:1;}
+
+/* ─── the reader, opened from a question ─────────────────────────── */
+.panel.reader{max-height:90vh;}
+.reader .panel-in{max-width:840px; padding-top:0;}
+.reader .rh{position:sticky; top:0; z-index:2; background:var(--paper); padding:16px 0 13px;
+  border-bottom:1px solid var(--rule); display:flex; align-items:baseline; gap:12px;
+  margin-bottom:22px;}
+.reader .rh .nm{font-family:"Familjen Grotesk",Helvetica,Arial,sans-serif; font-weight:600;
+  font-size:16px; letter-spacing:-.01em; min-width:0; overflow:hidden;
+  text-overflow:ellipsis; white-space:nowrap;}
+.reader .rh .ref{font-family:"Spline Sans Mono",ui-monospace,Menlo,monospace; font-size:10px;
+  letter-spacing:.11em; text-transform:uppercase; color:var(--accent); flex:none;}
+.reader .rh .acts{margin-left:auto; display:flex; gap:14px; flex:none;}
+.reader .rh a,.reader .rh .x{font-family:"Spline Sans Mono",ui-monospace,Menlo,monospace;
+  font-size:10.5px; letter-spacing:.07em; text-transform:uppercase; color:var(--ink3);
+  text-decoration:none;}
+.reader .rh a:hover,.reader .rh .x:hover{color:var(--ink);}
+@media (max-width:560px){ .reader .rh .acts a{display:none;} }
+
 /* ─── small screens ──────────────────────────────────────────────── */
 @media (max-width:620px){
   body{font-size:17px;}
@@ -310,6 +459,18 @@ math[display="block"]{margin:0; font-size:1.15em;}
   .btn{padding:11px 13px; font-size:11px;} .btn.pri{min-width:96px;}
   .result{padding:24px 18px;}
   .panel-in{padding:16px 14px 18px;}
+  /* two chips and the wordmark do not share 390px; the home card and the
+     source line under each answer are the ways in on a phone */
+  #notes-btn{display:none;}
+  .shelf .sh{flex-wrap:wrap;}
+  .shelf .sh .n{width:100%; margin:5px 0 0;}
+  .libcard{padding:18px; gap:14px;}
+  .libcard .go{display:none;}
+  .docrow{padding:13px 15px; gap:12px; flex-wrap:wrap;}
+  .docrow .ref{width:auto;} .docrow .w{display:none;}
+  .doc{padding:28px 0 44px;}
+  .prose{font-size:16.5px;}
+  .cite .nm{display:none;}
 }
 @media (max-width:380px){ .mark{font-size:12.5px;} .btn{padding:10px 10px; letter-spacing:.05em;} }
 @media (prefers-reduced-motion:reduce){ *{transition:none !important; animation:none !important;} }
@@ -319,6 +480,7 @@ math[display="block"]{margin:0; font-size:1.15em;}
   <div class="wrap top-in">
     <button class="mark" id="home-btn"><span class="dot"></span>Shade the Appropriate Answer</button>
     <span class="top-spacer"></span>
+    <button class="chip" id="notes-btn">Materials</button>
     <button class="chip" id="theme-btn">Theme</button>
   </div>
 </header>

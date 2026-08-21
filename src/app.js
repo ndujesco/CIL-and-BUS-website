@@ -43,7 +43,10 @@ function route(){
   var h = (location.hash || "").replace(/^#\/?/, "");
   var parts = h.split("/");
   var id = parts[0];
-  if(BANKS[id]){
+  if(id === "notes"){
+    if(DOCS[parts[1]]) renderDoc(parts[1]);
+    else renderNotes();
+  } else if(BANKS[id]){
     if(state.bank !== id) enterBank(id);
     if(parts[1] === "results"){ state.view = "results"; renderResults(); }
     else { state.view = "quiz"; renderQuiz(); }
@@ -97,11 +100,17 @@ function renderHome(){
     + '<div class="tally"><span><b>'+total+'</b> questions</span><span><b>'+pq+'</b> from past papers</span>'
     + '<span><b>'+(total-pq)+'</b> newly written</span><span><b>2</b> courses</span></div></section>'
     + '<div class="deck">'+cards+'</div>'
+    + '<button class="libcard" data-go="notes">'
+    + '<span><h3>Read the materials</h3>'
+    + '<p>All ' + Object.keys(DOCS).length + ' documents the answers were worked from: the nine '
+    + 'CIL class notes and three decks, and the six BUS lecturer blocks. '
+    + 'Every question links straight to the one it rests on.</p></span>'
+    + '<span class="go">Open &rarr;</span></button>'
     + '<section class="legend">'
     + '<div><h3>Where the answers come from</h3><p>Every answer on both papers is worked from the '
     + '<b>2025/26 course materials</b>: Classes 1&ndash;9 and the slide decks for CIL, the six '
-    + 'lecturer blocks for BUS. Every CIL question carries the class or slide it rests on; the BUS '
-    + 'practice questions carry the lecturer block, and the BUS past questions the paper they came from.</p></div>'
+    + 'lecturer blocks for BUS. Every question carries the class, slide or block it rests on, '
+    + 'and that label opens the document itself.</p></div>'
     + '<div><h3>No marking scheme was used</h3><p>The CIL paper came with a marked student script. It is '
     + '<b>not</b> a source here and was not used at any point. Where it disagreed with the lecture '
     + 'notes, the notes win and the difference is spelt out.</p></div>'
@@ -186,13 +195,14 @@ function drawQuestion(){
       + '<p>'+mtxt(q.w)+'</p>'
       + (q.calc ? '<div class="calc">'+mtex(q.calc, true)+'</div>' : '')
       + (q.flag ? '<div class="flag"><b>Check this</b>'+mtxt(q.flag)+'</div>' : '')
+      + whenceHTML(q)
       + '</div>';
   }
 
   col.innerHTML = '<article class="qcard">'
     + '<div class="qhead"><span class="qnum">'+(qi+1)+'</span>'
     + '<span class="qtopic">'+esc(q.t)+'</span>'
-    + '<span class="qsrc">'+esc(q.s || "")+'</span></div>'
+    + '<span class="qsrc">'+srcHTML(q)+'</span></div>'
     + '<div class="stem">'+mtxt(q.q)+'</div>'
     + '<div class="opts" id="opts">'+opts+'</div>' + why + '</article>';
 
@@ -355,6 +365,162 @@ function renderResults(){
   window.scrollTo(0,0);
 }
 
+/* ── materials ─────────────────────────────────────────────────────
+   Every question names the class, deck or lecturer block its answer was
+   worked from. Those names are the keys of REF, so the label on the card
+   is also the way into the document itself. */
+function refsOf(q){
+  return String(q && q.s || "").split("·").map(function(s){ return s.trim(); })
+    .filter(function(s){ return s; });
+}
+function srcHTML(q){
+  return refsOf(q).map(function(label){
+    var id = REF[label];
+    return id ? '<button class="ref" data-doc="'+id+'">'+esc(label)+'</button>'
+              : esc(label);
+  }).join(" &middot; ");
+}
+/* The citation offered under a revealed answer. A paper the questions came
+   from ("Examination") is not a document, so it earns no line of its own. */
+function whenceHTML(q){
+  var refs = refsOf(q), any = false;
+  var cites = refs.map(function(label){
+    var d = DOCS[REF[label]];
+    if(!d) return '<span class="plain">'+esc(label)+'</span>';
+    any = true;
+    return '<button class="cite" data-doc="'+REF[label]+'">'
+      + '<span class="tag">'+esc(label)+'</span>'
+      + '<span class="nm">'+esc(d.title)+'</span></button>';
+  }).join("");
+  return any ? '<div class="whence"><span class="eyebrow">Source</span>'+cites+'</div>' : "";
+}
+
+function docOrder(){
+  var out = [];
+  SHELVES.forEach(function(s){ s.groups.forEach(function(g){ out = out.concat(g.ids); }); });
+  return out;
+}
+function partHTML(p){
+  var body = p.html.replace(/<table>/g, '<div class="tw"><table>')
+                   .replace(/<\/table>/g, "</table></div>");
+  var head = "";
+  if(p.label || p.note){
+    head = '<div class="phead">'
+      + (p.label ? "<h2>"+esc(p.label)+"</h2>" : "")
+      + (p.note ? "<p>"+esc(p.note)+"</p>" : "")
+      + '<span class="file">'+esc(p.src)+"</span></div>";
+  }
+  return '<section class="part">'+head+'<div class="prose">'+body+"</div></section>";
+}
+function tocHTML(d){
+  var items = [];
+  d.parts.forEach(function(p){
+    var top = p.toc.filter(function(t){ return t.lv === 2; });
+    items = items.concat(top.length ? top : p.toc);
+  });
+  if(items.length < 4 || items.length > 60) return "";
+  return '<nav class="toc"><span class="eyebrow">Contents</span><ul>'
+    + items.map(function(t){
+        return '<li><button data-scroll="'+t.id+'">'+esc(t.t)+"</button></li>"; }).join("")
+    + "</ul></nav>";
+}
+function docHTML(d){
+  return tocHTML(d) + d.parts.map(partHTML).join("");
+}
+
+function renderDoc(id){
+  closePanel();
+  var d = DOCS[id], order = docOrder(), at = order.indexOf(id);
+  state.view = "doc";
+  document.body.setAttribute("data-view", "notes");
+  document.documentElement.setAttribute("data-course", d.course);
+
+  var step = function(n, txt){
+    var o = order[n];
+    return o ? '<button class="btn" data-go="notes/'+o+'">'+txt+"</button>" : "";
+  };
+  app.innerHTML = '<div class="wrap"><article class="doc">'
+    + '<div class="dhead"><span class="eyebrow">'
+    + '<button class="ref" data-go="notes">Materials</button> &nbsp;/&nbsp; '
+    + esc(d.ref)+'</span><h1>'+esc(d.title)+"</h1>"
+    + '<div class="dmeta"><span>'+esc(d.kicker)+"</span>"
+    + "<span><b>"+d.words.toLocaleString()+"</b> words</span>"
+    + (d.parts.length > 1 ? "<span><b>"+d.parts.length+"</b> sources</span>" : "")
+    + "</div></div>"
+    + docHTML(d)
+    + '<div class="dfoot">'+step(at-1, "&larr; Previous")+'<span class="sp"></span>'
+    + step(at+1, "Next &rarr;")+"</div>"
+    + "</article></div>";
+  window.scrollTo(0, 0);
+}
+
+function renderNotes(){
+  closePanel();
+  state.view = "notes";
+  document.body.setAttribute("data-view", "notes");
+  document.documentElement.removeAttribute("data-course");
+  var n = Object.keys(DOCS).length, words = 0;
+  for(var k in DOCS) words += DOCS[k].words;
+
+  var shelves = SHELVES.map(function(s){
+    var count = 0;
+    var groups = s.groups.map(function(g){
+      count += g.ids.length;
+      var rows = g.ids.map(function(id){
+        var d = DOCS[id];
+        return '<button class="docrow" data-go="notes/'+id+'">'
+          + '<span class="ref">'+esc(d.ref)+"</span>"
+          + '<span class="nm">'+esc(d.title)+"<em>"+esc(d.kicker)+"</em></span>"
+          + '<span class="w">'+d.words.toLocaleString()+" w</span></button>";
+      }).join("");
+      return '<div class="group">'+esc(g.label)+'</div><div class="docs">'+rows+"</div>";
+    }).join("");
+    return '<section class="shelf" data-course="'+s.course+'">'
+      + '<div class="sh"><span class="code">'+esc(s.code)+"</span><h2>"+esc(s.name)+"</h2>"
+      + '<span class="n">'+count+" documents</span></div>"
+      + '<p class="blurb">'+esc(s.note)+"</p>"
+      + (s.course === "BUS" ? OUTLINE : "") + groups + "</section>";
+  }).join("");
+
+  app.innerHTML = '<div class="wrap"><section class="hero">'
+    + '<span class="eyebrow">2025/26 course materials</span>'
+    + "<h1>The notes the answers were worked from.</h1>"
+    + "<p>Every class, deck and lecturer block behind the four question banks, "
+    + "set as text you can read here. Nothing is summarised: this is what the "
+    + "lecturers handed out, with the duplicates dropped and the handwritten "
+    + "notes transcribed.</p>"
+    + '<div class="tally"><span><b>'+n+"</b> documents</span>"
+    + "<span><b>"+words.toLocaleString()+"</b> words</span>"
+    + "<span><b>2</b> courses</span></div></section>"
+    + '<div style="height:38px"></div>'+shelves+"</div>";
+
+  document.getElementById("foot-note").textContent =
+    "Transcribed and set as text from the 2025/26 CIL 524 and BUS 440 course folders. "
+    + "Wording follows the source; layout does not. Where a lecturer's notes were "
+    + "handwritten, what you are reading is a transcript of the photographs. "
+    + "Check anything that matters against the original.";
+  window.scrollTo(0, 0);
+}
+
+/* Reading a document without leaving the question you are on. */
+function openReader(id){
+  var d = DOCS[id];
+  if(!d) return;
+  closePanel(true);
+  state.panel = true;
+  var scrim = document.createElement("div"); scrim.className = "scrim"; scrim.id = "scrim";
+  var panel = document.createElement("div"); panel.className = "panel reader"; panel.id = "panel";
+  panel.innerHTML = '<div class="panel-in">'
+    + '<div class="rh"><span class="ref">'+esc(d.ref)+'</span>'
+    + '<span class="nm">'+esc(d.title)+"</span>"
+    + '<span class="acts"><a href="#notes/'+id+'">Full page &rarr;</a>'
+    + '<button class="x" id="p-close">Close &times;</button></span></div>'
+    + docHTML(d)+"</div>";
+  document.body.appendChild(scrim); document.body.appendChild(panel);
+  scrim.onclick = function(){ closePanel(); };
+  document.getElementById("p-close").onclick = function(){ closePanel(); };
+}
+
 /* ── theme ─────────────────────────────────────────────────────── */
 var THEMES = ["system","light","dark"];
 function applyTheme(t){
@@ -371,17 +537,34 @@ document.getElementById("theme-btn").onclick = function(){
 
 /* ── wiring ────────────────────────────────────────────────────── */
 document.getElementById("home-btn").onclick = function(){ go("#"); };
+document.getElementById("notes-btn").onclick = function(){ go("#notes"); window.scrollTo(0,0); };
 app.addEventListener("click", function(e){
+  var d = e.target.closest("[data-doc]");
+  /* From a question the material opens over the page, so the place you had
+     reached in the bank is still there behind it. */
+  if(d){ if(state.view === "quiz") openReader(d.dataset.doc);
+         else go("#notes/"+d.dataset.doc); return; }
   var g = e.target.closest("[data-go]");
   if(g){ go("#"+g.dataset.go); window.scrollTo(0,0); return; }
   if(e.target.closest("[data-home]")){ go("#"); window.scrollTo(0,0); }
+});
+document.addEventListener("click", function(e){
+  var s = e.target.closest("[data-scroll]");
+  if(!s) return;
+  var el = document.getElementById(s.dataset.scroll);
+  if(el && el.scrollIntoView) el.scrollIntoView({block:"start", behavior:"smooth"});
 });
 document.addEventListener("keydown", function(e){
   if(e.metaKey||e.ctrlKey||e.altKey) return;
   var tag = document.activeElement ? document.activeElement.tagName : "";
   if(/^(INPUT|SELECT|TEXTAREA)$/.test(tag)) return;
   var k = e.key.toLowerCase();
-  if(k==="escape"){ if(state.panel){ closePanel(); } else { go("#"); } return; }
+  if(k==="escape"){
+    if(state.panel) closePanel();
+    else if(state.view === "doc") go("#notes");
+    else go("#");
+    return;
+  }
   if(state.view !== "quiz") return;
   if(state.panel) return;
   var vis = visible(), q = vis.length ? BANKS[state.bank].q[vis[state.i]] : null;

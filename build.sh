@@ -5,12 +5,14 @@
 set -e
 cd "$(dirname "$0")"
 
-# fragment: page content + all four question banks + app logic in one <script>
+# fragment: page content + the four question banks + the materials + app logic,
+# all in one <script>
 {
   cat src/page.html
   echo '<script>'
   echo 'var BANKS = {};'
-  cat src/bank-cil-pq.js src/bank-bus-pq.js src/bank-cil-new.js src/bank-bus-new.js src/math.js src/app.js
+  cat src/bank-cil-pq.js src/bank-bus-pq.js src/bank-cil-new.js src/bank-bus-new.js \
+      src/materials.js src/math.js src/app.js
   echo '</script>'
 } > artifact.html
 
