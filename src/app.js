@@ -159,7 +159,7 @@ function renderQuiz(){
     + '<div class="qfoot"><div class="qfoot-in">'
     + '<button class="btn" id="prev">&larr; Prev</button>'
     + '<button class="btn pri" id="next">'+(state.i===vis.length-1?"Finish":"Next &rarr;")+'</button>'
-    + '<button class="btn" id="jump">Jump</button>'
+    + '<button class="btn" id="jump">Options</button>'
     + '<span class="pos">'+(vis.length?state.i+1:0)+' / '+vis.length+'</span>'
     + '</div></div></div>';
 
@@ -175,7 +175,7 @@ function drawQuestion(){
   if(!col) return;
   if(!vis.length){
     col.innerHTML = '<div class="qcard"><div class="stem">No questions match this topic. '
-      + 'Open <b>Jump</b> and choose another.</div></div>';
+      + 'Open <b>Options</b> and choose another.</div></div>';
     document.getElementById("prev").disabled = true;
     return;
   }
