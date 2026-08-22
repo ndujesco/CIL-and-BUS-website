@@ -123,6 +123,16 @@ GLOBAL_FIXES = [
 ]
 
 
+# ── where a citation should land ──────────────────────────────────────
+# The aimer matches a question to the line it was worked from and gets it right
+# most of the time. When it does not, pin it here by a phrase from the line it
+# should land on, keyed by bank and question number. The phrase is resolved at
+# build time and the build fails if it stops matching, so these cannot rot.
+AIM_FIX = {
+    ("cil-pq", 38): "A supervening event makes performance impossible",
+}
+
+
 # ── the worked examples, as TeX ───────────────────────────────────────
 def eq(*tex):
     """One display equation per line."""

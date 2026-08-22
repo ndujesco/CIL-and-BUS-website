@@ -158,12 +158,26 @@ the match runs in two stages:
    document* — a word that is all over the note counts for little, a word that appears in
    one section counts for a lot — with a hit in the section's own heading weighted heavily
    and length discounted so the longest section cannot win by sheer size.
-2. **Which line in it.** The same scoring, over the paragraphs of the winning section
-   only, with short lines held to a higher bar: landing on a three-word bullet says less
-   than landing on the sentence that explains it.
+2. **Which line in it.** A line that carries the answer itself wins outright: word
+   coverage rather than an exact phrase, lightly stemmed, so the paper's "Increased
+   customer satisfaction" finds the note's "Higher customer satisfaction". Failing that,
+   the section's lines are scored as above, with short ones held to a higher bar.
 
-Of 438 citations, **375 land on an exact line**, 40 on a section where no single line
-stood out, and 23 open at the top of the document. That last group is deliberate: when
+Two things the matching has to know about. A question whose answer is a **number**
+("2.06") needs digits to be words, so they are. And an **odd-one-out** question — "which
+of these is NOT…", "all except…" — is asking for the item the notes do *not* contain, so
+leading with the answer would aim at nothing: those skip step 2's shortcut and are held
+to a higher bar, landing on the section that lists the others.
+
+Of 438 citations, **380 land on an exact line**, 37 on a section where no single line
+stood out, and 21 open at the top of the document. Reading a random sample of 22 by hand,
+about three in four land on the exact sentence and nearly all the rest land in the right
+neighbourhood.
+
+When one is wrong, pin it: `AIM_FIX` in `tools/corrections.py` maps a bank and question
+number to a phrase from the line it should land on. The phrase is resolved to an anchor at
+build time and **the build fails if it stops matching**, so a pin cannot rot when a note
+is re-extracted. That last group is deliberate: when
 nothing in a note matches well, a citation pointing confidently at the wrong paragraph is
 worse than one pointing at the right document. The two floors in `aim.py` trade coverage
 against precision, and the build prints the split every run.

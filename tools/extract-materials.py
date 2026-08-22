@@ -112,7 +112,7 @@ def set_maths(kind, html):
 UNSET = []
 
 HEAD = re.compile(r"<(h[234])>(.*?)</\1>", re.S)
-BODY = re.compile(r'<(p|li)>|<div class="eqn">')
+BODY = re.compile(r'<(p|li|blockquote|pre)>|<div class="eqn">')
 
 
 def _number_headings(html, doc_id, start):
@@ -389,7 +389,7 @@ def main():
          ]},
     ]
 
-    targets, hit, total, exact = aiming.aim(ROOT, DOCS, REF)
+    targets, hit, total, exact, pins = aiming.aim(ROOT, DOCS, REF)
 
     out = os.path.join(ROOT, "src", "materials.js")
     with open(out, "w", encoding="utf-8") as f:
@@ -406,7 +406,8 @@ def main():
         for t in UNSET:
             print("   " + t[:110])
     print("citations aimed: %d of %d (%.0f%%) — %d at an exact line, %d at a section"
-          % (hit, total, 100.0 * hit / max(1, total), exact, hit - exact))
+          % (hit, total, 100.0 * hit / max(1, total), exact, hit - exact)
+          + (", %d pinned by hand" % pins if pins else ""))
     total = sum(d["words"] for d in DOCS.values())
     print("materials.js  %d documents, %s words, %d bytes"
           % (len(DOCS), format(total, ","), os.path.getsize(out)))
