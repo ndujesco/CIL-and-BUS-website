@@ -192,8 +192,8 @@ python3 tools/extract-materials.py [CIL folder] [BUS folder]
 ./build.sh
 ```
 
-It reads the two course folders (by default the ones beside this repo in `~/Downloads`)
-and writes `src/materials.js`. It needs PyMuPDF, python-pptx and python-docx:
+It reads the two course folders — passed on the command line, or found beside this repo,
+wherever the three of them happen to live — and writes `src/materials.js`. It needs PyMuPDF, python-pptx and python-docx:
 
 ```sh
 pip3 install pymupdf python-pptx python-docx
@@ -257,7 +257,7 @@ slide masters and layout do not.
 - **Maths set as maths**, in the notes as well as the answers: real fractions, radicals
   and bars, as MathML where the browser has it and a Unicode one-liner where it does not
 - **A way to report a correction**: a WhatsApp link in the footer, at the foot of every
-  document, and in the Jump panel, each prefilled with where the reader was
+  document, and in the Jump panel — it opens the chat and leaves the message to the reader
 - Light and dark themes, following the system by default
 
 ## Where the answers come from

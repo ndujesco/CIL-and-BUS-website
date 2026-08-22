@@ -9,6 +9,7 @@ out — the handwritten-note PDFs, for instance, are here as their transcripts.
     python3 tools/extract-materials.py [CIL folder] [BUS folder]
 """
 
+import glob
 import json
 import os
 import re
@@ -25,11 +26,33 @@ import from_pdf
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
-HOME = os.path.expanduser("~/Downloads")
-CIL = sys.argv[1] if len(sys.argv) > 1 else os.path.join(
-    HOME, "CIL 524 - Introduction to Engineering Contracts", "2526")
-BUS = sys.argv[2] if len(sys.argv) > 2 else os.path.join(
-    HOME, "BUS 440 - Management for Engineers", "2526")
+
+
+def course(prefix, full, given):
+    """The course folder: given on the command line, or found beside the repo.
+
+    The two folders sit next to this one, wherever "next to" happens to be —
+    they have moved once already, and an absolute path in here would only have
+    to be corrected again."""
+    if given:
+        return given if given.rstrip("/").endswith("2526") \
+            else os.path.join(given, "2526")
+    for base in (os.path.dirname(ROOT), os.path.expanduser("~/Downloads")):
+        named = os.path.join(base, full, "2526")
+        if os.path.isdir(named):              # no directory listing needed
+            return named
+        hits = sorted(glob.glob(os.path.join(base, prefix + "*", "2526")))
+        if hits:
+            return hits[0]
+    raise SystemExit(
+        "cannot find the %s folder. Pass it: python3 tools/extract-materials.py "
+        "<CIL folder> <BUS folder>" % prefix.strip(" -"))
+
+
+CIL = course("CIL 524", "CIL 524 - Introduction to Engineering Contracts",
+             sys.argv[1] if len(sys.argv) > 1 else None)
+BUS = course("BUS 440", "BUS 440 - Management for Engineers",
+             sys.argv[2] if len(sys.argv) > 2 else None)
 TRANS = os.path.join(BUS, "Transcripts")
 
 DOCS, REF = {}, {}

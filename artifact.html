@@ -2032,8 +2032,7 @@ function openPanel(){
     + '<button id="t-shuffle">Shuffle</button>'
     + '<button id="t-results">Results</button>'
     + '<button id="t-reset">Clear</button>'
-    + '<a href="'+esc(waLink(b.title+" · Q"+(vis.length ? vis[state.i]+1 : 1)))
-    + '" target="_blank" rel="noopener noreferrer">Report</a></div>'
+    + '<a href="'+WA+'" target="_blank" rel="noopener noreferrer">Report</a></div>'
     + '<div class="grid" id="grid">'+cells+'</div></div>';
   document.body.appendChild(scrim); document.body.appendChild(panel);
 
@@ -2132,12 +2131,9 @@ function renderResults(){
 
 /* ── corrections ───────────────────────────────────────────────────
    Everything here is worked from the course materials by hand, so some of
-   it will be wrong. The quickest way to hear about it is WhatsApp. */
+   it will be wrong. The quickest way to hear about it is WhatsApp: the link
+   opens the chat and leaves the message to the reader. */
 var WA = "https://wa.me/2347061217361";
-function waLink(about){
-  return WA + "?text=" + encodeURIComponent(
-    "Correction for Shade the Appropriate Answer" + (about ? " — " + about : "") + ": ");
-}
 
 /* ── materials ─────────────────────────────────────────────────────
    Every question names the class, deck or lecturer block its answer was
@@ -2258,8 +2254,8 @@ function renderDoc(id, aim){
     + "</div></div>"
     + docHTML(d)
     + '<div class="dfoot">'+step(at-1, "&larr; Previous")
-    + '<a class="btn" href="'+esc(waLink(d.ref+" · "+d.title))
-    + '" target="_blank" rel="noopener noreferrer">Report a correction</a>'
+    + '<a class="btn" href="'+WA+'" target="_blank" '
+    + 'rel="noopener noreferrer">Report a correction</a>'
     + '<span class="sp"></span>'+step(at+1, "Next &rarr;")+"</div>"
     + "</article></div>";
   window.scrollTo(0, 0);
@@ -2409,7 +2405,7 @@ document.addEventListener("keydown", function(e){
   else if(k==="j"){ e.preventDefault(); openPanel(); }
 });
 
-document.getElementById("foot-wa").href = waLink("");
+document.getElementById("foot-wa").href = WA;
 
 applyTheme(load("theme") || "system");
 route();
