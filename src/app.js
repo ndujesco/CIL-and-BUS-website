@@ -97,37 +97,31 @@ function renderHome(){
   app.innerHTML = '<div class="wrap"><section class="hero">'
     + '<span class="eyebrow">University of Lagos · 400 level engineering</span>'
     + '<h1>Two courses, four question banks, one answer sheet.</h1>'
-    + '<p>Every past question from the CIL 524 and BUS 440 papers, worked from the course materials '
-    + 'themselves, plus fresh questions written in the same style from the 2025/26 lectures, '
-    + 'slides and class notes. Shade an answer and the reasoning appears underneath.</p>'
+    + '<p>Both past papers plus fresh questions in the same style, all worked from the 2025/26 '
+    + 'materials. Shade an answer and the reasoning appears underneath. The notes and slides are '
+    + 'here too, and every question links to the one it rests on.</p>'
     + '<div class="tally"><span><b>'+total+'</b> questions</span><span><b>'+pq+'</b> from past papers</span>'
     + '<span><b>'+(total-pq)+'</b> newly written</span><span><b>2</b> courses</span></div></section>'
     + '<div class="deck">'+cards+'</div>'
     + '<button class="libcard" data-go="notes">'
     + '<span><h3>Read the materials</h3>'
-    + '<p>All ' + Object.keys(DOCS).length + ' documents the answers were worked from: the nine '
-    + 'CIL class notes and three decks, and the six BUS lecturer blocks. '
-    + 'Every question links straight to the one it rests on.</p></span>'
+    + '<p>All ' + Object.keys(DOCS).length + ' documents behind the answers: nine CIL class notes, '
+    + 'three slide decks, six BUS lecturer blocks.</p></span>'
     + '<span class="go">Open &rarr;</span></button>'
     + '<section class="legend">'
-    + '<div><h3>Where the answers come from</h3><p>Every answer on both papers is worked from the '
-    + '<b>2025/26 course materials</b>: Classes 1&ndash;9 and the slide decks for CIL, the six '
-    + 'lecturer blocks for BUS. Every question carries the class, slide or block it rests on, '
-    + 'and that label opens the document itself. Where the 2024/25 BUS paper strayed outside '
-    + 'them, the label links out to the web instead.</p></div>'
-    + '<div><h3>No marking scheme was used</h3><p>The CIL paper came with a marked student script. It is '
-    + '<b>not</b> a source here and was not used at any point. Where it disagreed with the lecture '
-    + 'notes, the notes win and the difference is spelt out.</p></div>'
-    + '<div><h3>Where a question is broken</h3><p>Eight questions across the two past papers are '
-    + 'defective as printed: duplicated '
-    + 'options, a stem that contradicts its own choices, an answer no option supports. Those carry a '
-    + '<b>check this</b> note setting out the conflict rather than quietly picking a side.</p></div>'
-    + '<div><h3>Working</h3><p>Answers save as you go. Shuffle to break the order you have memorised, filter '
-    + 'to one topic, or switch to <b>exam mode</b> to sit a bank straight through with no feedback until '
-    + 'you finish.</p></div></section></div>';
+    + '<div><h3>Sources</h3><p>The <b>2025/26 course materials</b>: CIL Classes 1&ndash;9 and the '
+    + 'slide decks, the six BUS lecturer blocks. Each question\'s label opens the document it rests '
+    + 'on. Where the 2024/25 BUS paper strayed outside them, the label links out to the web.</p></div>'
+    + '<div><h3>No marking scheme</h3><p>The marked student script that came with the CIL paper was '
+    + 'never used. Where it disagreed with the notes, the notes win.</p></div>'
+    + '<div><h3>Broken questions</h3><p>Eight past questions are defective as printed &mdash; '
+    + 'duplicated options, a stem that contradicts its choices. Each carries a <b>check this</b> note '
+    + 'instead of a quiet guess.</p></div>'
+    + '<div><h3>Working</h3><p>Answers save as you go. Shuffle, filter to one topic, or switch to '
+    + '<b>exam mode</b> for no feedback until you finish.</p></div></section></div>';
 
   document.getElementById("foot-note").textContent =
-    "Built from the CIL 524 and BUS 440 course folders. Past questions are transcribed as printed, including their typographical errors. Answers and explanations are study aids derived from the lecture materials, not an official marking scheme. Check anything that matters against your lecturer.";
+    "Built from the CIL 524 and BUS 440 course folders. Past questions are transcribed as printed, typos and all. Answers are study aids drawn from the lecture materials, not an official marking scheme \u2014 check anything that matters with your lecturer.";
 }
 
 function tallyHTML(done, right, wrong){
