@@ -199,6 +199,15 @@ footer .contact a:hover{border-color:var(--accent);}
   letter-spacing:.12em; text-transform:uppercase;}
 .opt[data-st="ok"] .tag{color:var(--ok);} .opt[data-st="no"] .tag{color:var(--no);}
 
+/* a way out when you simply do not know — deliberately quiet, so shading an
+   answer stays the easier thing to do */
+.showans{display:block; width:100%; text-align:center; padding:13px 20px;
+  border-top:1px solid var(--rule); background:var(--sunk);
+  font-family:"Spline Sans Mono",ui-monospace,Menlo,monospace; font-size:10.5px;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--ink3);
+  transition:color .14s, background .14s;}
+.showans:hover{color:var(--ink); background:var(--rule2);}
+
 .why{border-top:1px solid var(--rule); padding:19px 28px 21px; background:var(--sunk);}
 .why p{margin:8px 0 0; color:var(--ink2); font-size:16px; line-height:1.6;}
 .why .calc{margin-top:13px; padding:11px 14px; background:var(--paper); border:1px solid var(--rule);
@@ -281,6 +290,7 @@ math[display="block"]{margin:0; font-size:1.15em;}
 .cell[data-st="ok"]{background:var(--ok); border-color:var(--ok); color:var(--paper); font-weight:600;}
 .cell[data-st="no"]{background:var(--no); border-color:var(--no); color:var(--paper); font-weight:600;}
 .cell[data-st="done"]{background:var(--accent); border-color:var(--accent); color:var(--paper); font-weight:600;}
+.cell[data-st="shown"]{background:var(--accent-bg); border-color:var(--accent-edge); color:var(--accent);}
 .cell[aria-current="true"]{outline:2px solid var(--ink); outline-offset:1px;}
 
 /* ─── results ────────────────────────────────────────────────────── */
@@ -404,6 +414,18 @@ table.outline td.who{white-space:nowrap; color:var(--ink); font-size:14.5px;}
 .prose h4{font-family:"Spline Sans Mono",ui-monospace,Menlo,monospace; font-size:11px;
   letter-spacing:.13em; text-transform:uppercase; color:var(--ink3); margin:22px 0 7px;}
 .prose > :first-child{margin-top:0; border-top:none; padding-top:0;}
+/* where a question sent you: a mark that fades rather than a highlight that stays */
+.prose .aimed{animation:land 2.6s ease-out 1;}
+@keyframes land{
+  0%{background:var(--accent-bg); box-shadow:-10px 0 0 var(--accent-bg), 10px 0 0 var(--accent-bg);}
+  70%{background:var(--accent-bg); box-shadow:-10px 0 0 var(--accent-bg), 10px 0 0 var(--accent-bg);}
+  100%{background:transparent; box-shadow:none;}
+}
+.prose .aimed::after{content:"the answer was worked from here"; display:block;
+  font-family:"Spline Sans Mono",ui-monospace,Menlo,monospace; font-size:9.5px;
+  letter-spacing:.13em; text-transform:uppercase; color:var(--accent);
+  margin-top:4px; opacity:0; animation:landtag 2.6s ease-out 1;}
+@keyframes landtag{ 0%{opacity:1;} 70%{opacity:1;} 100%{opacity:0;} }
 .prose p{margin:0 0 13px; text-wrap:pretty;}
 .prose b{color:var(--ink); font-weight:600;}
 .prose ul,.prose ol{margin:0 0 15px; padding-left:24px;}

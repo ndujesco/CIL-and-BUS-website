@@ -111,8 +111,9 @@ than as files to download. Eighteen documents, about 50,000 words:
 
 **Every question's source line is a link, and all 418 are sourced.** Answer a question
 and what the answer was worked from is offered underneath it by name; clicking opens
-the document over the question, so the place you had reached in the bank is still there
-behind it. The same documents have their own URLs (`#notes/cil-class-3`,
+the document over the question, **scrolled to the exact line the answer came from**,
+with that line marked for a couple of seconds. The place you had reached in the bank is
+still there behind it. The same documents have their own URLs (`#notes/cil-class-3`,
 `#notes/bus-block-6`) for reading straight through, and the misses listed on the results
 page carry the same citation.
 
@@ -144,6 +145,31 @@ Nothing that only repeats another source is included:
   from the inventory lecture, so they are left out rather than shipped as 30 page images.
 - The **marked student script** and the second copy of the CIL paper are not sources at
   all and never were.
+
+### Aiming a citation at a section
+
+`tools/aim.py` matches every question against the document it cites and ships the winning
+anchor with the banks, so the reader opens where the answer is rather than at the top of
+a 10,000-word note. Every heading, paragraph, list item and equation carries an id, and
+the match runs in two stages:
+
+1. **Which section.** Plain retrieval: the words of the stem, its correct option and its
+   explanation, scored against each section by inverse document frequency *within that
+   document* — a word that is all over the note counts for little, a word that appears in
+   one section counts for a lot — with a hit in the section's own heading weighted heavily
+   and length discounted so the longest section cannot win by sheer size.
+2. **Which line in it.** The same scoring, over the paragraphs of the winning section
+   only, with short lines held to a higher bar: landing on a three-word bullet says less
+   than landing on the sentence that explains it.
+
+Of 438 citations, **375 land on an exact line**, 40 on a section where no single line
+stood out, and 23 open at the top of the document. That last group is deliberate: when
+nothing in a note matches well, a citation pointing confidently at the wrong paragraph is
+worse than one pointing at the right document. The two floors in `aim.py` trade coverage
+against precision, and the build prints the split every run.
+
+Anchors are real URLs — `#notes/bus-block-1/bus-block-1-p0-25` — so a line can be linked
+or bookmarked directly.
 
 ### Regenerating `src/materials.js`
 
@@ -208,8 +234,12 @@ slide masters and layout do not.
   sheet rather than a sidebar competing with the question
 - **Per-topic score breakdown**, weakest first, plus a review of everything you missed
 - **Progress saves** to `localStorage`, with an in-memory fallback if storage is blocked
-- **Keyboard**: `A`–`E` to shade, `←` `→` to move, `Enter` for next, `J` for the jump
-  panel, `Esc` to close it or go home
+- **Show the answer** when you simply do not know: a quiet row under the options in
+  study mode. It is remembered separately from an answer — such a question scores
+  neither right nor wrong, is marked apart in the answer sheet, and is counted as
+  **looked up** on the results page
+- **Keyboard**: `A`–`E` to shade, `S` to show the answer, `←` `→` to move, `Enter` for
+  next, `J` for the jump panel, `Esc` to close it or go home
 - **Maths set as maths**, in the notes as well as the answers: real fractions, radicals
   and bars, as MathML where the browser has it and a Unicode one-liner where it does not
 - **A way to report a correction**: a WhatsApp link in the footer, at the foot of every

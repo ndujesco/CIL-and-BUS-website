@@ -3,7 +3,8 @@
 var LET = ["A","B","C","D","E","F"];
 var ORDER = ["cil-pq","bus-pq","cil-new","bus-new"];
 var app = document.getElementById("app");
-var state = { view:"home", bank:null, i:0, order:[], picks:{}, mode:"study", topic:"*", panel:false };
+var state = { view:"home", bank:null, i:0, order:[], picks:{}, shown:{},
+              mode:"study", topic:"*", panel:false };
 
 /* ── storage ───────────────────────────────────────────────────────
    localStorage can be unavailable in a sandboxed frame, so an in-memory
@@ -29,7 +30,8 @@ function esc(s){ return String(s).replace(/[&<>"]/g,function(c){
   return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
 function topicsOf(b){ var seen={}, out=[]; b.q.forEach(function(q){ if(!seen[q.t]){seen[q.t]=1;out.push(q.t);} }); return out; }
 function shuffle(a){ for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i];a[i]=a[j];a[j]=t; } }
-function persist(){ save(state.bank, {picks:state.picks, mode:state.mode}); }
+function persist(){ save(state.bank,
+  {picks:state.picks, shown:state.shown, mode:state.mode}); }
 function visible(){
   if(state.topic === "*") return state.order;
   var b = BANKS[state.bank];
@@ -44,7 +46,7 @@ function route(){
   var parts = h.split("/");
   var id = parts[0];
   if(id === "notes"){
-    if(DOCS[parts[1]]) renderDoc(parts[1]);
+    if(DOCS[parts[1]]) renderDoc(parts[1], parts[2]);
     else renderNotes();
   } else if(BANKS[id]){
     if(state.bank !== id) enterBank(id);
@@ -61,6 +63,7 @@ function enterBank(id){
   var b = BANKS[id], saved = load(id) || {};
   state.bank = id;
   state.picks = saved.picks || {};
+  state.shown = saved.shown || {};
   state.mode = saved.mode || "study";
   state.topic = "*"; state.panel = false;
   state.order = b.q.map(function(_,i){ return i; });
@@ -177,13 +180,16 @@ function drawQuestion(){
     return;
   }
   var qi = vis[state.i], q = b.q[qi], pick = state.picks[qi];
-  var reveal = pick !== undefined && state.mode === "study";
+  /* Study mode reveals an answer two ways: you shade one, or you give up and
+     ask. Asking is remembered, so the answer sheet shows what you looked up. */
+  var asked = !!state.shown[qi];
+  var reveal = (pick !== undefined || asked) && state.mode === "study";
 
   var opts = q.o.map(function(text, oi){
     var st = "";
     if(reveal){ if(oi===q.a) st="ok"; else if(oi===pick) st="no"; }
     else if(pick===oi) st="pick";
-    var tag = st==="ok" ? '<span class="tag">Correct</span>'
+    var tag = st==="ok" ? '<span class="tag">'+(pick===undefined ? "Answer" : "Correct")+'</span>'
             : st==="no" ? '<span class="tag">Your answer</span>' : '';
     return '<button class="opt" data-st="'+st+'" data-pick="'+oi+'"'+(reveal?' disabled':'')+'>'
       + '<span class="bub">'+LET[oi]+'</span><span class="txt">'+mtxt(text)+'</span>'+tag+'</button>';
@@ -192,23 +198,31 @@ function drawQuestion(){
   var why = "";
   if(reveal){
     why = '<div class="why"><span class="eyebrow">'
-      + (pick===q.a ? "Correct" : "The answer is "+LET[q.a]) + '</span>'
+      + (pick===undefined ? "Looked up &middot; the answer is "+LET[q.a]
+         : pick===q.a ? "Correct" : "The answer is "+LET[q.a]) + '</span>'
       + '<p>'+mtxt(q.w)+'</p>'
       + (q.calc ? '<div class="calc">'+mtex(q.calc, true)+'</div>' : '')
       + (q.flag ? '<div class="flag"><b>Check this</b>'+mtxt(q.flag)+'</div>' : '')
-      + whenceHTML(q)
+      + whenceHTML(q, qi)
       + '</div>';
   }
 
   col.innerHTML = '<article class="qcard">'
     + '<div class="qhead"><span class="qnum">'+(qi+1)+'</span>'
     + '<span class="qtopic">'+esc(q.t)+'</span>'
-    + '<span class="qsrc">'+srcHTML(q)+'</span></div>'
+    /* Exam mode withholds the source with the marks: a label like
+       "Eight dimensions of quality" answers the question on its own. */
+    + '<span class="qsrc">'+(state.mode === "exam" ? "" : srcHTML(q, qi))+'</span></div>'
     + '<div class="stem">'+mtxt(q.q)+'</div>'
-    + '<div class="opts" id="opts">'+opts+'</div>' + why + '</article>';
+    + '<div class="opts" id="opts">'+opts+'</div>'
+    + (reveal || state.mode === "exam" ? ""
+       : '<button class="showans" id="show">Show the answer</button>')
+    + why + '</article>';
 
   document.getElementById("opts").onclick = function(e){
     var o = e.target.closest("[data-pick]"); if(!o || o.disabled) return; choose(+o.dataset.pick); };
+  var sh = document.getElementById("show");
+  if(sh) sh.onclick = reveal_it;
   document.getElementById("prev").disabled = state.i === 0;
 }
 
@@ -236,6 +250,14 @@ function choose(oi){
   drawQuestion(); refreshChrome();
   if(state.mode === "exam") setTimeout(advance, 130);
 }
+function reveal_it(){
+  var vis = visible();
+  if(!vis.length || state.mode === "exam") return;
+  var qi = vis[state.i];
+  if(state.picks[qi] !== undefined || state.shown[qi]) return;
+  state.shown[qi] = 1; persist();
+  drawQuestion(); refreshChrome();
+}
 function advance(){
   var vis = visible();
   if(state.i < vis.length-1){ state.i++; drawQuestion(); refreshChrome(); toTop(); }
@@ -255,6 +277,7 @@ function openPanel(){
   var cells = vis.map(function(qi,n){
     var p = state.picks[qi], st = "";
     if(p!==undefined) st = state.mode==="exam" ? "done" : (p===b.q[qi].a ? "ok" : "no");
+    else if(state.shown[qi] && state.mode!=="exam") st = "shown";
     return '<button class="cell" data-st="'+st+'" data-jump="'+n+'"'
       + (n===state.i?' aria-current="true"':'')+'>'+(qi+1)+'</button>';
   }).join("");
@@ -289,7 +312,8 @@ function openPanel(){
     closePanel(); go("#"+state.bank+"/results"); };
   document.getElementById("t-reset").onclick = function(){
     if(confirm("Clear every answer in this bank?")){
-      state.picks={}; drop(state.bank); persist(); state.i=0; closePanel(); renderQuiz(); } };
+      state.picks={}; state.shown={}; drop(state.bank); persist();
+      state.i=0; closePanel(); renderQuiz(); } };
   document.getElementById("grid").onclick = function(e){
     var c = e.target.closest("[data-jump]"); if(!c) return;
     state.i = +c.dataset.jump; closePanel(); drawQuestion(); refreshChrome(); window.scrollTo(0,0); };
@@ -309,11 +333,11 @@ function renderResults(){
   document.body.setAttribute("data-view","quiz");
   document.documentElement.setAttribute("data-course", b.course);
 
-  var right=0, wrong=0, skipped=0, byTopic={}, misses=[];
+  var right=0, wrong=0, skipped=0, asked=0, byTopic={}, misses=[];
   vis.forEach(function(i){
     var q=b.q[i], p=state.picks[i];
     if(!byTopic[q.t]) byTopic[q.t]={r:0,n:0};
-    if(p===undefined){ skipped++; return; }
+    if(p===undefined){ if(state.shown[i]) asked++; else skipped++; return; }
     byTopic[q.t].n++;
     if(p===q.a){ right++; byTopic[q.t].r++; } else { wrong++; misses.push({q:q,p:p,i:i}); }
   });
@@ -335,7 +359,7 @@ function renderResults(){
       + '<div class="a yours"><span class="m">You</span><span>'+LET[m.p]+' &middot; '+mtxt(m.q.o[m.p])+'</span></div>'
       + '<div class="a right"><span class="m">Answer</span><span>'+LET[m.q.a]+' &middot; '+mtxt(m.q.o[m.q.a])+'</span></div>'
       + '<div class="a"><span class="m">Why</span><span>'+mtxt(m.q.w)+'</span></div>'
-      + whenceHTML(m.q)+'</div>'; }).join("");
+      + whenceHTML(m.q, m.i)+'</div>'; }).join("");
 
   app.innerHTML = '<div class="qpage">'
     + '<div class="qbar"><div class="qbar-in">'
@@ -364,7 +388,7 @@ function renderResults(){
 
   document.getElementById("r-back").onclick = function(){ go("#"+state.bank); };
   document.getElementById("r-retry").onclick = function(){
-    state.picks={}; drop(state.bank); persist();
+    state.picks={}; state.shown={}; drop(state.bank); persist();
     shuffle(state.order); state.i=0; state.topic="*"; go("#"+state.bank); window.scrollTo(0,0); };
   window.scrollTo(0,0);
 }
@@ -391,9 +415,15 @@ function siteOf(url){
   var host = String(url).split("/")[2].replace(/^www\./, "").split(".");
   return host.length > 2 ? host.slice(1).join(".") : host.join(".");
 }
-function srcHTML(q){
+function aimOf(qi, doc){
+  var b = AIM[state.bank];
+  var at = b && b[qi] && b[qi][doc];
+  return at ? ' data-aim="'+at+'"' : "";
+}
+function srcHTML(q, qi){
   return refsOf(q).map(function(label){
-    if(REF[label]) return '<button class="ref" data-doc="'+REF[label]+'">'+esc(label)+'</button>';
+    if(REF[label]) return '<button class="ref" data-doc="'+REF[label]+'"'
+      + aimOf(qi, REF[label])+'>'+esc(label)+'</button>';
     if(LINKS[label]) return '<a class="ref" href="'+esc(LINKS[label])
       + '" target="_blank" rel="noopener noreferrer">'+esc(label)+'</a>';
     return esc(label);
@@ -402,13 +432,13 @@ function srcHTML(q){
 /* The citation offered under a revealed answer: the document it was worked
    from, or a page on the web where the materials do not cover the point. The
    paper a question came from ("Examination") is neither, and stays as text. */
-function whenceHTML(q){
+function whenceHTML(q, qi){
   var any = false;
   var cites = refsOf(q).map(function(label){
     var id = REF[label], url = LINKS[label];
     if(id){
       any = true;
-      return '<button class="cite" data-doc="'+id+'">'
+      return '<button class="cite" data-doc="'+id+'"'+aimOf(qi, id)+'>'
         + '<span class="tag">'+esc(label)+'</span>'
         + '<span class="nm">'+esc(DOCS[id].title)+'</span></button>';
     }
@@ -457,7 +487,8 @@ function tocHTML(d){
   var items = [];
   d.parts.forEach(function(p){
     var top = p.toc.filter(function(t){ return t.lv === 2; });
-    items = items.concat(top.length ? top : p.toc);
+    items = items.concat(top.length ? top
+      : p.toc.filter(function(t){ return t.lv <= 3; }));
   });
   if(items.length < 4 || items.length > 60) return "";
   return '<nav class="toc"><span class="eyebrow">Contents</span><ul>'
@@ -469,7 +500,7 @@ function docHTML(d){
   return tocHTML(d) + d.parts.map(partHTML).join("");
 }
 
-function renderDoc(id){
+function renderDoc(id, aim){
   closePanel();
   var d = DOCS[id], order = docOrder(), at = order.indexOf(id);
   state.view = "doc";
@@ -495,6 +526,22 @@ function renderDoc(id){
     + '<span class="sp"></span>'+step(at+1, "Next &rarr;")+"</div>"
     + "</article></div>";
   window.scrollTo(0, 0);
+  if(aim) land(document.getElementById(aim), null);
+}
+
+/* Land on the passage the question was worked from, and say so quietly:
+   a mark that fades, not a permanent highlight on someone else's words. */
+function land(el, box){
+  if(!el) return;
+  var run = function(){
+    var top = el.getBoundingClientRect().top;
+    if(box) box.scrollTop += top - box.getBoundingClientRect().top - 58;
+    else window.scrollTo(0, Math.max(0, top + window.pageYOffset - 84));
+    el.classList.remove("aimed");
+    void el.offsetWidth;
+    el.classList.add("aimed");
+  };
+  if(window.requestAnimationFrame) requestAnimationFrame(run); else setTimeout(run, 30);
 }
 
 function renderNotes(){
@@ -546,7 +593,7 @@ function renderNotes(){
 }
 
 /* Reading a document without leaving the question you are on. */
-function openReader(id){
+function openReader(id, aim){
   var d = DOCS[id];
   if(!d) return;
   closePanel(true);
@@ -556,12 +603,13 @@ function openReader(id){
   panel.innerHTML = '<div class="panel-in">'
     + '<div class="rh"><span class="ref">'+esc(d.ref)+'</span>'
     + '<span class="nm">'+esc(d.title)+"</span>"
-    + '<span class="acts"><a href="#notes/'+id+'">Full page &rarr;</a>'
+    + '<span class="acts"><a href="#notes/'+id+(aim ? "/"+aim : "")+'">Full page &rarr;</a>'
     + '<button class="x" id="p-close">Close &times;</button></span></div>'
     + docHTML(d)+"</div>";
   document.body.appendChild(scrim); document.body.appendChild(panel);
   scrim.onclick = function(){ closePanel(); };
   document.getElementById("p-close").onclick = function(){ closePanel(); };
+  if(aim) land(document.getElementById(aim), panel.querySelector(".panel-in"));
 }
 
 /* ── theme ─────────────────────────────────────────────────────── */
@@ -585,8 +633,12 @@ app.addEventListener("click", function(e){
   var d = e.target.closest("[data-doc]");
   /* From a question the material opens over the page, so the place you had
      reached in the bank is still there behind it. */
-  if(d){ if(state.view === "quiz") openReader(d.dataset.doc);
-         else go("#notes/"+d.dataset.doc); return; }
+  if(d){
+    var at = d.dataset.aim || "";
+    if(state.view === "quiz") openReader(d.dataset.doc, at);
+    else go("#notes/"+d.dataset.doc+(at ? "/"+at : ""));
+    return;
+  }
   var g = e.target.closest("[data-go]");
   if(g){ go("#"+g.dataset.go); window.scrollTo(0,0); return; }
   if(e.target.closest("[data-home]")){ go("#"); window.scrollTo(0,0); }
@@ -614,6 +666,7 @@ document.addEventListener("keydown", function(e){
   var li = LET.map(function(l){return l.toLowerCase();}).indexOf(k);
   if(li===-1 && k>="1" && k<="6") li = +k-1;
   if(li>-1 && q && li<q.o.length){ e.preventDefault(); choose(li); return; }
+  if(k==="s"){ e.preventDefault(); reveal_it(); return; }
   if(k==="arrowright"||k==="enter"){ e.preventDefault(); advance(); }
   else if(k==="arrowleft"){ e.preventDefault(); prev(); }
   else if(k==="j"){ e.preventDefault(); openPanel(); }
