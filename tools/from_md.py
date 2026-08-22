@@ -100,7 +100,9 @@ def blocks(text, demote=0):
         m = re.match(r"^(\d+)[\.\)]\s+(.*)$", line)
         if m:
             flush()
-            out.append(("oli", _inline(_wrapped(lines, i, m.group(2)))))
+            # keep the number the source gave it: a list interrupted by a
+            # paragraph has to pick up where it left off, not restart at 1
+            out.append(("oli", _inline(_wrapped(lines, i, m.group(2))), int(m.group(1))))
             i = _skip(lines, i)
             continue
 

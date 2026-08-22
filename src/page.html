@@ -131,6 +131,10 @@ body[data-view="quiz"] header.top, body[data-view="quiz"] footer{display:none;}
 
 footer{border-top:1px solid var(--rule); padding:24px 0 38px; color:var(--ink3); font-size:13.5px;}
 footer p{margin:0; max-width:74ch; line-height:1.6;}
+footer .contact{margin-top:14px; padding-top:14px; border-top:1px solid var(--rule2);}
+footer .contact a{color:var(--accent); text-decoration:none;
+  border-bottom:1px solid var(--accent-edge);}
+footer .contact a:hover{border-color:var(--accent);}
 
 /* ─── quiz page ──────────────────────────────────────────────────── */
 .qpage{min-height:100vh; display:flex; flex-direction:column; background:var(--ground);}
@@ -262,11 +266,12 @@ math[display="block"]{margin:0; font-size:1.15em;}
   font-size:11px; letter-spacing:.07em; text-transform:uppercase; color:var(--ink3);}
 .panel .ph .x:hover{color:var(--ink);}
 .pset{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px;}
-.pset select,.pset button{font-family:"Spline Sans Mono",ui-monospace,Menlo,monospace;
+.pset select,.pset button,.pset a{font-family:"Spline Sans Mono",ui-monospace,Menlo,monospace;
   font-size:11px; letter-spacing:.05em; padding:9px 12px; border:1px solid var(--rule);
   background:var(--paper); color:var(--ink2); border-radius:3px; cursor:pointer;}
 .pset select{max-width:100%;}
-.pset button:hover,.pset select:hover{border-color:var(--ink3); color:var(--ink);}
+.pset a{text-decoration:none; display:inline-flex; align-items:center;}
+.pset button:hover,.pset select:hover,.pset a:hover{border-color:var(--ink3); color:var(--ink);}
 .pset button[aria-pressed="true"]{background:var(--ink); color:var(--ground); border-color:var(--ink);}
 .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(34px,1fr)); gap:5px;}
 .cell{aspect-ratio:1; display:grid; place-items:center; border:1px solid var(--rule);
@@ -416,6 +421,11 @@ table.outline td.who{white-space:nowrap; color:var(--ink); font-size:14.5px;}
 .prose pre{font-family:"Spline Sans Mono",ui-monospace,Menlo,monospace; font-size:12.5px;
   line-height:1.45; background:var(--paper); border:1px solid var(--rule); border-radius:3px;
   padding:14px 16px; margin:0 0 16px; overflow-x:auto; color:var(--ink);}
+.prose .eqn{margin:18px 0; text-align:center; overflow-x:auto; overflow-y:hidden;
+  padding:2px 0;}
+.prose .eqn math{font-size:1.18em;}
+.prose li .eqn{margin:10px 0; text-align:left;}
+.prose .eqn .eqtxt{font-size:1em;}
 .prose .tw{overflow-x:auto; margin:0 0 16px;}
 .prose table{border-collapse:collapse; font-size:14.5px; min-width:100%;}
 .prose th,.prose td{border:1px solid var(--rule); padding:8px 12px; text-align:left;
@@ -423,9 +433,11 @@ table.outline td.who{white-space:nowrap; color:var(--ink); font-size:14.5px;}
 .prose th{background:var(--sunk); color:var(--ink); font-weight:600;
   font-family:"Familjen Grotesk",Helvetica,Arial,sans-serif; white-space:nowrap;}
 
-.dfoot{display:flex; gap:12px; align-items:center; border-top:1px solid var(--rule);
-  padding-top:20px; margin-top:8px;}
+.dfoot{display:flex; gap:10px; align-items:center; flex-wrap:wrap;
+  border-top:1px solid var(--rule); padding-top:20px; margin-top:8px;}
 .dfoot .sp{flex:1;}
+.dfoot .btn{text-decoration:none;}
+@media (max-width:480px){ .dfoot .sp{display:none;} }
 
 /* ─── the reader, opened from a question ─────────────────────────── */
 .panel.reader{max-height:90vh;}
@@ -495,4 +507,7 @@ table.outline td.who{white-space:nowrap; color:var(--ink); font-size:14.5px;}
 
 <main id="app"></main>
 
-<footer><div class="wrap"><p id="foot-note"></p></div></footer>
+<footer><div class="wrap"><p id="foot-note"></p>
+  <p class="contact">Found a typo, a wrong answer or a link that does not work?
+  <a id="foot-wa" href="#" target="_blank" rel="noopener noreferrer">Message the developer on WhatsApp &rarr;</a></p>
+</div></footer>

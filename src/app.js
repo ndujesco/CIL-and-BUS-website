@@ -271,7 +271,9 @@ function openPanel(){
     + '<button id="t-mode" aria-pressed="'+(state.mode==="exam")+'">Exam mode</button>'
     + '<button id="t-shuffle">Shuffle</button>'
     + '<button id="t-results">Results</button>'
-    + '<button id="t-reset">Clear</button></div>'
+    + '<button id="t-reset">Clear</button>'
+    + '<a href="'+esc(waLink(b.title+" · Q"+(vis.length ? vis[state.i]+1 : 1)))
+    + '" target="_blank" rel="noopener noreferrer">Report</a></div>'
     + '<div class="grid" id="grid">'+cells+'</div></div>';
   document.body.appendChild(scrim); document.body.appendChild(panel);
 
@@ -367,6 +369,15 @@ function renderResults(){
   window.scrollTo(0,0);
 }
 
+/* ── corrections ───────────────────────────────────────────────────
+   Everything here is worked from the course materials by hand, so some of
+   it will be wrong. The quickest way to hear about it is WhatsApp. */
+var WA = "https://wa.me/2347061217361";
+function waLink(about){
+  return WA + "?text=" + encodeURIComponent(
+    "Correction for Shade the Appropriate Answer" + (about ? " — " + about : "") + ": ");
+}
+
 /* ── materials ─────────────────────────────────────────────────────
    Every question names the class, deck or lecturer block its answer was
    worked from. Those names are the keys of REF, so the label on the card
@@ -417,8 +428,21 @@ function docOrder(){
   SHELVES.forEach(function(s){ s.groups.forEach(function(g){ out = out.concat(g.ids); }); });
   return out;
 }
+/* The notes carry their worked examples as TeX, set by the same renderer the
+   answer explanations use, so a formula looks the same wherever it appears. */
+function unesc(s){
+  return String(s).replace(/&lt;/g,"<").replace(/&gt;/g,">")
+    .replace(/&quot;/g,'"').replace(/&amp;/g,"&");
+}
+function setMaths(html){
+  return html
+    .replace(/<span class="tex">([\s\S]*?)<\/span>/g, function(_, t){
+      return mtex(unesc(t), true); })
+    .replace(/<span class="tex-i">([\s\S]*?)<\/span>/g, function(_, t){
+      return mtex(unesc(t), false); });
+}
 function partHTML(p){
-  var body = p.html.replace(/<table>/g, '<div class="tw"><table>')
+  var body = setMaths(p.html).replace(/<table>/g, '<div class="tw"><table>')
                    .replace(/<\/table>/g, "</table></div>");
   var head = "";
   if(p.label || p.note){
@@ -465,8 +489,10 @@ function renderDoc(id){
     + (d.parts.length > 1 ? "<span><b>"+d.parts.length+"</b> sources</span>" : "")
     + "</div></div>"
     + docHTML(d)
-    + '<div class="dfoot">'+step(at-1, "&larr; Previous")+'<span class="sp"></span>'
-    + step(at+1, "Next &rarr;")+"</div>"
+    + '<div class="dfoot">'+step(at-1, "&larr; Previous")
+    + '<a class="btn" href="'+esc(waLink(d.ref+" · "+d.title))
+    + '" target="_blank" rel="noopener noreferrer">Report a correction</a>'
+    + '<span class="sp"></span>'+step(at+1, "Next &rarr;")+"</div>"
     + "</article></div>";
   window.scrollTo(0, 0);
 }
@@ -592,6 +618,8 @@ document.addEventListener("keydown", function(e){
   else if(k==="arrowleft"){ e.preventDefault(); prev(); }
   else if(k==="j"){ e.preventDefault(); openPanel(); }
 });
+
+document.getElementById("foot-wa").href = waLink("");
 
 applyTheme(load("theme") || "system");
 route();

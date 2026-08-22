@@ -17,6 +17,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from common import blocks_html, esc, plain, tidy, words_in
+import corrections
 import from_md
 import from_office
 import from_pdf
@@ -34,12 +35,22 @@ DOCS, REF = {}, {}
 
 
 # ── assembling a document ─────────────────────────────────────────────
+USED = set()
+
+
 def add(doc_id, course, ref, title, kicker, parts, also=()):
     """parts: [{label, src, note, blocks}] — one per source file."""
     made = []
     n = 0
     for part in parts:
-        html, toc = _number_headings(blocks_html(part["blocks"]), doc_id, n)
+        blocks = part["blocks"]
+        if part["src"].endswith(".md"):        # the handwritten-note transcripts
+            blocks = [(b[0], corrections.shorthand(b[1])) + tuple(b[2:])
+                      for b in blocks]
+        blocks = [set_maths(b[0], b[1]) + tuple(b[2:]) for b in blocks]
+        body = corrections.wording(
+            corrections.typography(blocks_html(blocks)), doc_id, USED)
+        html, toc = _number_headings(body, doc_id, n)
         n += len(toc)
         made.append({
             "label": part.get("label", ""),
@@ -56,6 +67,47 @@ def add(doc_id, course, ref, title, kicker, parts, also=()):
     for label in (ref,) + tuple(also):
         REF[label] = doc_id
 
+
+NUMBERED = re.compile(r"^(?:<[^>]+>)*\s*(\d{1,2})\s*[\.\)]\s*")
+
+
+def list_blocks(paras):
+    """Slides often carry their own numbering inside the bullet text. Where they
+    do, set them as a numbered list instead of a bullet with a number in it."""
+    hits = [p for p in paras if NUMBERED.match(p)]
+    if len(hits) < 2:
+        return [("p", paras[0])] if len(paras) == 1 else [("li", p) for p in paras]
+    out, started = [], False
+    for html in paras:
+        m = NUMBERED.match(html)
+        if m:
+            started = True
+            out.append(("oli", NUMBERED.sub("", html, count=1), int(m.group(1))))
+        else:
+            out.append(("li" if started else "p", html))
+    return out
+
+
+MATH_USED = set()
+EQ_LIKE = re.compile("[=\u221a\u00d7\u00f7\u2248\u00b1\u20a6\u03c3]")
+
+
+def set_maths(kind, html):
+    """A paragraph that is really an equation is replaced by its TeX setting."""
+    if kind not in ("p", "li", "oli"):
+        return kind, html
+    text = re.sub(r"\s+", " ", plain(html)).strip()
+    if text in corrections.MATHS:
+        MATH_USED.add(text)
+        # a numbered step keeps its number; anything else stands on its own
+        return ("oli" if kind == "oli" else "raw"), corrections.MATHS[text]
+    if "=" in text and len(EQ_LIKE.findall(text)) >= 2 \
+            and len(re.findall(r"[A-Za-z]{4,}", text)) <= 5:
+        UNSET.append(text)
+    return kind, html
+
+
+UNSET = []
 
 HEAD = re.compile(r"<(h[23])>(.*?)</\1>", re.S)
 
@@ -111,10 +163,7 @@ def do_cil():
             if head and not same_head(plain(head), last):
                 last = CTD.sub("", plain(head)).strip()
                 blocks.append(("h3", head))
-            if len(paras) == 1:
-                blocks.append(("p", paras[0]))
-            else:
-                blocks += [("li", p) for p in paras]
+            blocks += list_blocks(paras)
         add(doc_id, "CIL", ref, title,
             "Lecture deck · " + (who or "Faculty of Law") + " · "
             + str(len(slides) + 1) + " slides",
@@ -144,7 +193,7 @@ def transcript(fname):
     blocks = from_md.blocks(raw)
     label, note = "", ""
     while blocks and blocks[0][0] in ("h2", "p"):
-        kind, html = blocks[0]
+        kind, html = blocks[0][0], blocks[0][1]
         text = plain(html)
         if kind == "h2" and not label:
             label = re.sub(r"^BUS 440\s*[—–-]\s*", "", text)
@@ -155,7 +204,7 @@ def transcript(fname):
         else:
             break
         blocks.pop(0)
-    blocks = [("h4", h) if k == "h2" else (k, h) for k, h in blocks]
+    blocks = [("h4",) + tuple(b[1:]) if b[0] == "h2" else b for b in blocks]
     return {"label": label, "note": note, "src": fname, "blocks": blocks}
 
 
@@ -186,10 +235,8 @@ def pptx_part(fname, label="", note="", cover=True):
         paras = [h for _, h in body]
         tables = [p for p in paras if p.startswith("<table")]
         paras = [p for p in paras if not p.startswith("<table")]
-        if len(paras) == 1:
-            blocks.append(("p", paras[0]))
-        else:
-            blocks += [("li", p) for p in paras]
+        if paras:
+            blocks += list_blocks(paras)
         blocks += [("table", t) for t in tables]
     return {"label": label, "note": note, "src": fname, "blocks": blocks}
 
@@ -302,6 +349,11 @@ def js(value):
 def main():
     do_cil()
     do_bus()
+    corrections.check(USED)
+    spare = set(corrections.MATHS) - MATH_USED
+    if spare:
+        raise corrections.Miss("equations that no longer match:\n  "
+                               + "\n  ".join(sorted(spare)))
 
     shelves = [
         {"course": "CIL", "code": "CIL 524", "name": "Law of Engineering Contracts",
@@ -329,6 +381,10 @@ def main():
         f.write("var REF = " + js(REF) + ";\n")
         f.write("var OUTLINE = " + js(outline_html()) + ";\n")
 
+    if UNSET:
+        print("equation-like lines left as text:")
+        for t in UNSET:
+            print("   " + t[:110])
     total = sum(d["words"] for d in DOCS.values())
     print("materials.js  %d documents, %s words, %d bytes"
           % (len(DOCS), format(total, ","), os.path.getsize(out)))

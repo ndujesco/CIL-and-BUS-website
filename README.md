@@ -159,6 +159,35 @@ and writes `src/materials.js`. It needs PyMuPDF, python-pptx and python-docx:
 pip3 install pymupdf python-pptx python-docx
 ```
 
+### What the extractor corrects
+
+`tools/corrections.py` is applied on the way out, so a re-run keeps every fix:
+
+- **Typography** every document gets: the space a bold run leaves in front of its comma,
+  `ﬁ`/`ﬂ` ligatures, `E.g` without its stop, `N5000` → `₦5,000`.
+- **Shorthand** in the handwritten transcripts, expanded so the notes read as prose:
+  `dd` → demand, `gds` → goods, `qty` → quantity, `b/w` → between, `mgt` → management,
+  `r.m` → raw materials.
+- **Wording**, per document: slips of the pen in the transcripts and slips of the keyboard
+  in the lecturers' own decks — *sole* → *soul* in "the soul and life wire of any
+  manufacturing organisation", *Carlil v Carbolic Smokeball* → *Carlill v Carbolic Smoke
+  Ball*, MINTBERG → MINTZBERG, *mangers* → *managers*, *corective* → *corrective*, a
+  numbered list that restarts at 1 because a paragraph interrupted it. Every entry is
+  checked at build time: one that stops matching fails the build rather than passing
+  silently.
+- **The worked examples**, set as TeX and rendered by the same engine the answer
+  explanations use, so a formula looks the same wherever it appears:
+
+  ```
+  EOQ = √(2DO / H)            →   \mathrm{EOQ} = \sqrt{\frac{2DO}{H}}
+  UCL = D₄R̄                   →   \mathrm{UCL} = D_4\bar{R}
+  ```
+
+  46 equations across the three transcribed blocks. The extractor fails if one of them
+  stops matching its paragraph, and reports any equation-like line it left as text.
+
+None of this changes what a note says. It corrects how it says it.
+
 `tools/` holds one reader per shape of source file — `from_pdf.py` for the typeset class
 notes, the decks and plain prose PDFs, `from_office.py` for `.pptx` and `.docx`,
 `from_md.py` for the transcripts — each turning its input into the same list of blocks.
@@ -181,6 +210,10 @@ slide masters and layout do not.
 - **Progress saves** to `localStorage`, with an in-memory fallback if storage is blocked
 - **Keyboard**: `A`–`E` to shade, `←` `→` to move, `Enter` for next, `J` for the jump
   panel, `Esc` to close it or go home
+- **Maths set as maths**, in the notes as well as the answers: real fractions, radicals
+  and bars, as MathML where the browser has it and a Unicode one-liner where it does not
+- **A way to report a correction**: a WhatsApp link in the footer, at the foot of every
+  document, and in the Jump panel, each prefilled with where the reader was
 - Light and dark themes, following the system by default
 
 ## Where the answers come from

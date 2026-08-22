@@ -61,18 +61,20 @@ def blocks_html(blocks):
     """Turn the flat block list into HTML, gathering runs of list items."""
     out, i = [], 0
     while i < len(blocks):
-        kind, html = blocks[i]
+        kind, html = blocks[i][0], blocks[i][1]
         if kind[:1] == "h":                 # a heading is already bold
             html = re.sub(r"</?b>", "", html)
         if kind in ("li", "oli"):
             tag = "ul" if kind == "li" else "ol"
+            first = blocks[i][2] if len(blocks[i]) > 2 else None
             items = []
             while i < len(blocks) and blocks[i][0] == kind:
                 items.append("<li>" + blocks[i][1] + "</li>")
                 i += 1
-            out.append("<" + tag + ">" + "".join(items) + "</" + tag + ">")
+            start = ' start="' + str(first) + '"' if first and first > 1 else ""
+            out.append("<" + tag + start + ">" + "".join(items) + "</" + tag + ">")
             continue
-        if kind in ("pre", "table"):
+        if kind in ("pre", "table", "raw"):
             out.append(html)
         elif kind == "quote":
             out.append("<blockquote>" + html + "</blockquote>")
