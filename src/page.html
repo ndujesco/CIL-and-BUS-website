@@ -101,7 +101,8 @@ body[data-view="quiz"] header.top, body[data-view="quiz"] footer{display:none;}
 .deck{display:grid; grid-template-columns:repeat(2,1fr); gap:1px;
   background:var(--rule); border:1px solid var(--rule); margin:42px 0 68px;}
 @media (max-width:720px){ .deck{grid-template-columns:1fr;} }
-.card{background:var(--paper); padding:28px 26px 24px; text-align:left; display:block;
+.card{background:var(--paper); padding:28px 26px 24px; text-align:left;
+  display:flex; flex-direction:column;
   width:100%; transition:background .16s;}
 .card:hover{background:var(--sunk);}
 .card .row1{display:flex; align-items:center; gap:10px; margin-bottom:14px;}
@@ -111,15 +112,17 @@ body[data-view="quiz"] header.top, body[data-view="quiz"] footer{display:none;}
   letter-spacing:.13em; text-transform:uppercase; color:var(--ink3); margin-left:auto;
   border:1px solid var(--rule); padding:3px 7px; border-radius:3px;}
 .card h2{font-size:25px; line-height:1.15; letter-spacing:-.02em;}
-.card .sub{color:var(--ink2); font-size:15.5px; margin-top:8px; line-height:1.5;}
+.card .sub{color:var(--ink2); font-size:15.5px; margin-top:8px; line-height:1.5; flex-grow:1;}
 .card .foot{margin-top:20px; padding-top:15px; border-top:1px solid var(--rule2);
   display:flex; align-items:center; gap:10px; flex-wrap:wrap;
   font-family:"Spline Sans Mono",ui-monospace,Menlo,monospace; font-size:11.5px;
   color:var(--ink3); letter-spacing:.04em;}
 .card .foot .n{color:var(--ink); font-weight:600; font-variant-numeric:tabular-nums;}
 .card .go{margin-left:auto; color:var(--accent); font-weight:500;}
-.card .bar{height:3px; background:var(--rule2); margin-top:13px;}
-.card .bar i{display:block; height:100%; background:var(--accent);}
+.card .bar{display:block; height:3px; border-radius:2px; overflow:hidden;
+  background:var(--rule2); margin-top:13px;}
+.card .bar i{display:block; height:100%; border-radius:2px; background:var(--accent);
+  transition:width .35s ease;}
 
 .legend{margin:0 0 66px; padding:26px 28px; border:1px solid var(--rule);
   background:var(--paper); display:grid;
