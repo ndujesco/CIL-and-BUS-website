@@ -198,7 +198,7 @@ BANKS["bus-new"] = {
 {t:"SPC · Control charts",s:"Block 5",q:"Using the same $\\bar{R} = 2.6$ with $D_4 = 2.11$ and $D_3 = 0$, the range chart without mean gives",o:["UCL 5.486 and LCL 0","UCL 9.108 and LCL 6.092","UCL 2.60 and LCL 0","UCL 2.11 and LCL 0.58"],a:0,
  w:"$\\mathrm{UCL} = D_4\\bar{R} = 2.11 \\times 2.6 = 5.486$ and $\\mathrm{LCL} = D_3\\bar{R} = 0 \\times 2.6 = 0$.",
  calc:"\\mathrm{UCL} = D_4\\bar{R} = 5.486 \\qquad \\mathrm{LCL} = D_3\\bar{R} = 0"},
-{t:"SPC · Control charts",s:"Block 5",q:"Twenty-five components are sampled daily, averaging 4 mm with a standard deviation of 0.5 mm. What is the upper control limit?",o:["4.30","5.50","4.06","4.15"],a:0,
+{t:"SPC · Control charts",s:"Block 6",q:"Twenty-five components are sampled daily, averaging 4 mm with a standard deviation of 0.5 mm. What is the upper control limit?",o:["4.30","5.50","4.06","4.15"],a:0,
  w:"$\\mathrm{UCL} = \\bar{X} + 3\\left(\\frac{\\sigma}{\\sqrt{n}}\\right) = 4 + 3\\left(\\frac{0.5}{5}\\right) = 4 + 0.30 = 4.30$.",
  calc:"\\mathrm{UCL} = 4 + 3\\left(\\frac{0.5}{\\sqrt{25}}\\right) = 4 + 0.30 = 4.30"},
 {t:"Quality control",s:"Block 5",q:"Which is NOT a listed benefit of quality control?",o:["Improving the quality of products and services","Reducing manufacturing and corporate costs","Reducing customer prices","Increasing the number of inspectors employed","Assuring on-time deliveries and availability"],a:3,

@@ -130,6 +130,16 @@ GLOBAL_FIXES = [
 # build time and the build fails if it stops matching, so these cannot rot.
 AIM_FIX = {
     ("cil-pq", 38): "A supervening event makes performance impossible",
+    ("cil-new", 14): "reward offer",
+    ("cil-new", 26): "Adams v Lindsay",
+    ("cil-new", 28): "Afolabi v",
+    ("cil-new", 32): "Currie v Misa",
+    ("bus-pq", 18): "Quality assurance in TQM involves systematic processes and procedures",
+    ("bus-new", 42): "used for visualizing process steps",
+    ("bus-new", 50): "Higher customer satisfaction",
+    ("bus-new", 84): "10.71 + 3(2.12)",
+    ("bus-new", 89): r"\left(\frac{0.1}{\sqrt{2.5}}\right) = 2.06",
+    ("bus-new", 97): "Steps involved in project planning",
 }
 
 
