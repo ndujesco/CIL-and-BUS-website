@@ -26,6 +26,10 @@ var LINKS = {
   /* CIL 524: the cases and the Act the classes name */
   "Stilk v Myrick": "https://en.wikipedia.org/wiki/Stilk_v_Myrick",
   "Pinnel's case":  "https://en.wikipedia.org/wiki/Pinnel%27s_Case",
+  /* Not in the 2025/26 materials — this case is named only in a past-question
+     answer (cil-pq Q65), not in any class or slide deck. Linked here so the
+     citation resolves instead of reading as an uncited claim. */
+  "Lloyd’s Bank Ltd v. Bundy": "https://en.wikipedia.org/wiki/Lloyds_Bank_Ltd_v_Bundy",
   "S.12": "https://en.wikipedia.org/wiki/Sale_of_Goods_Act_1893",
   "S.13": "https://en.wikipedia.org/wiki/Sale_of_Goods_Act_1893",
   "S.14": "https://en.wikipedia.org/wiki/Sale_of_Goods_Act_1893",
